@@ -59,8 +59,7 @@
                     android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@."
                     android:gravity="center_vertical"
                     android:hint="请输入邮箱地址"
-                    android:text="@={authModel.username}"
-                    android:textSize="14sp"/>
+                    android:text="@={authModel.username}"/>
 
                 <EditText
                     android:id="@+id/passwordView"

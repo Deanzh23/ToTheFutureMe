@@ -11,6 +11,7 @@ import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.auth.model.AuthModel;
 import com.dean.tothefutureme.databinding.ActivityLoginBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
 
@@ -27,7 +28,10 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
+        AuthModel authModel = TTFMApplication.getAuthModel();
+        authModel.setUsername("username");
+        authModel.setPassword("password");
+        viewDataBinding.setAuthModel(authModel);
     }
 
     @OnClick(R.id.loginButton)
