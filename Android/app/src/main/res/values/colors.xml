@@ -6,5 +6,8 @@
 
     <!-- 主题色 -->
     <!-- 天蓝 -->
-    <color name="colorSkyBlue">#25ADEF</color>
+    <color name="colorThemeSkyBlue">#9AD0FD</color>
+
+    <!-- 浅灰背景色 -->
+    <color name="colorBackgroundLightGrey">#E6E4E6</color>
 </resources>

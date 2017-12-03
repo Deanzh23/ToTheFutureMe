@@ -9,6 +9,19 @@ import com.dean.android.framework.convenient.application.ConvenientApplication;
  */
 public class TTFMApplication extends ConvenientApplication {
 
+    private static TTFMApplication instance;
+
+    public static TTFMApplication getInstance() {
+        return instance;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        instance = this;
+    }
+
     @Override
     protected void initConfigAndData() {
         try {

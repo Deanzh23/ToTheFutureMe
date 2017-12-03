@@ -7,8 +7,8 @@ import com.dean.android.framework.convenient.file.download.listener.FileDownload
 import com.dean.android.framework.convenient.version.VersionUpdate;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.auth.LoginActivity;
 import com.dean.tothefutureme.databinding.ActivityMainBinding;
-import com.dean.tothefutureme.home.HomeActivity;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends ConvenientMainActivity<ActivityMainBinding> {
@@ -30,6 +30,6 @@ public class MainActivity extends ConvenientMainActivity<ActivityMainBinding> {
 
     @Override
     protected void closeMainToHomeActivity() {
-        startActivity(new Intent(this, HomeActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

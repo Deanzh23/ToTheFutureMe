@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- HomeActivity bottom footer -->
+    <style name="RadioButtonTheme">
+        <item name="android:button">@null</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- 文本样式 -->
+    <style name="TextTheme">
+        <item name="android:textSize">@dimen/text_size</item>
+    </style>
+
 </resources>

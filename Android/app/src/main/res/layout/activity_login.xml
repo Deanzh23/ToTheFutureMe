@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="authModel"
+            type="com.dean.tothefutureme.auth.model.AuthModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorThemeSkyBlue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_bg_login"
+            android:padding="16dp">
+
+            <View
+                android:id="@+id/centerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/centerView"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="100dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/ic_launcher_round"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/centerView"
+                android:layout_marginTop="-32dp">
+
+                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                    android:id="@+id/usernameView"
+                    style="@style/TextTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/ic_username_bg"
+                    android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@."
+                    android:gravity="center_vertical"
+                    android:hint="请输入邮箱地址"
+                    android:text="@={authModel.username}"
+                    android:textSize="14sp"/>
+
+                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                    android:id="@+id/passwordView"
+                    style="@style/TextTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/usernameView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_password_bg"
+                    android:hint="请输入密码"
+                    android:inputType="textPassword"
+                    android:maxLength="8"
+                    android:text="@={authModel.password}"/>
+
+                <Button
+                    android:id="@+id/loginButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/passwordView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/ic_button_login_bg"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:id="@+id/registerTextView"
+                    style="@style/TextTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="用户注册"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/findPasswordTextView"
+                    style="@style/TextTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="4dp"
+                    android:text="密码找回"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</layout>

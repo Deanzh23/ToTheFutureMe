@@ -4,16 +4,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorSkyBlue"
+        android:background="@color/colorThemeSkyBlue"
         android:clipToPadding="true"
         android:fitsSystemWindows="true">
 
-        <RelativeLayout
+        <!-- 内容layout -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/black">
-
-        </RelativeLayout>
+            android:background="@color/colorBackgroundLightGrey"/>
 
     </RelativeLayout>
 </layout>
