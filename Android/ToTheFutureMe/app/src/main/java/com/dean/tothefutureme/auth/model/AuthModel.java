@@ -5,6 +5,7 @@ import android.databinding.Bindable;
 
 import com.dean.android.framework.convenient.database.annotation.Column;
 import com.dean.android.framework.convenient.database.annotation.PrimaryKey;
+import com.dean.tothefutureme.BR;
 
 import java.io.Serializable;
 
@@ -37,6 +38,7 @@ public class AuthModel extends BaseObservable implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+        notifyPropertyChanged(BR.username);
     }
 
     @Bindable
@@ -46,6 +48,7 @@ public class AuthModel extends BaseObservable implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+        notifyPropertyChanged(BR.password);
     }
 
     @Bindable
@@ -55,5 +58,6 @@ public class AuthModel extends BaseObservable implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+        notifyPropertyChanged(BR.token);
     }
 }

@@ -31,5 +31,6 @@ public class MainActivity extends ConvenientMainActivity<ActivityMainBinding> {
     @Override
     protected void closeMainToHomeActivity() {
         startActivity(new Intent(this, LoginActivity.class));
+        MainActivity.this.finish();
     }
 }
