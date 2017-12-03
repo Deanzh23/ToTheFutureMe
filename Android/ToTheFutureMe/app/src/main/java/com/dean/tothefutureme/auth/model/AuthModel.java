@@ -6,12 +6,14 @@ import android.databinding.Bindable;
 import com.dean.android.framework.convenient.database.annotation.Column;
 import com.dean.android.framework.convenient.database.annotation.PrimaryKey;
 
+import java.io.Serializable;
+
 /**
  * 用户基本信息Model
  * <p>
  * Created by dean on 2017/12/3.
  */
-public class AuthModel extends BaseObservable {
+public class AuthModel extends BaseObservable implements Serializable {
 
     @PrimaryKey
     private String username;

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.permission.annotations.Permission;
+import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.tothefutureme.R;
@@ -27,6 +28,11 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
         super.onCreate(savedInstanceState);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
+    }
+
+    @OnClick(R.id.loginButton)
+    public void login() {
+        ToastUtil.showToast(LoginActivity.this, TTFMApplication.getAuthModel().getUsername());
     }
 
     /**

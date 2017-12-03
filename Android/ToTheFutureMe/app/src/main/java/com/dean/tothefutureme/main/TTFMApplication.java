@@ -23,6 +23,9 @@ public class TTFMApplication extends ConvenientApplication {
         super.onCreate();
 
         instance = this;
+
+        if (authModel == null)
+            authModel = new AuthModel();
     }
 
     @Override
