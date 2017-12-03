@@ -4,6 +4,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
 import com.dean.android.framework.convenient.database.annotation.Column;
+import com.dean.android.framework.convenient.database.annotation.PrimaryKey;
 
 /**
  * 用户基本信息Model
@@ -12,7 +13,7 @@ import com.dean.android.framework.convenient.database.annotation.Column;
  */
 public class AuthModel extends BaseObservable {
 
-    @Column
+    @PrimaryKey
     private String username;
     @Column
     private String password;

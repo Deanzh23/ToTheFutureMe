@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="ttfm_db@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="ttfm_db">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="most_campus_db"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="smh_db"/>
+    <schema id="8" parent="1" name="springmvc_hibernate_db"/>
+    <schema id="9" parent="1" name="sys"/>
+    <table id="10" parent="2" name="auth"/>
+    <column id="11" parent="10" name="username">
+      <Position>1</Position>
+      <Comment>主键；e-mail形式</Comment>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="12" parent="10" name="password">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="13" parent="10" name="token">
+      <Position>3</Position>
+      <Comment>用户操作验证token</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="14" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>username</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

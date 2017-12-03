@@ -16,7 +16,6 @@
 
         <activity
             android:name=".main.MainActivity"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -26,13 +25,15 @@
         </activity>
 
         <activity
-            android:name=".auth.LoginActivity"
-            android:launchMode="singleInstance"
+            android:name=".auth.activity.RegisterActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".auth.activity.LoginActivity"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".home.HomeActivity"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="authModel"
+            type="com.dean.tothefutureme.auth.model.AuthModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorThemeSkyBlue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundLightGrey"
+            android:padding="16dp">
+
+            <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                android:id="@+id/usernameView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="请输入您的邮箱地址"
+                android:textSize="14sp"/>
+
+            <TextView
+                style="@style/TextTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:drawablePadding="4dp"
+                android:drawableRight="@drawable/ic_next_step"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="下一步"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

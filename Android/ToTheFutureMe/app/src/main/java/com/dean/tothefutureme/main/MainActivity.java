@@ -7,7 +7,7 @@ import com.dean.android.framework.convenient.file.download.listener.FileDownload
 import com.dean.android.framework.convenient.version.VersionUpdate;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
-import com.dean.tothefutureme.auth.LoginActivity;
+import com.dean.tothefutureme.auth.activity.LoginActivity;
 import com.dean.tothefutureme.databinding.ActivityMainBinding;
 
 @ContentView(R.layout.activity_main)
