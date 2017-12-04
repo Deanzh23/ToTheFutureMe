@@ -1,6 +1,7 @@
 package com.dean.tothefutureme.main;
 
 import com.dean.android.framework.convenient.application.ConvenientApplication;
+import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.tothefutureme.auth.model.AuthModel;
 
 /**
@@ -30,6 +31,8 @@ public class TTFMApplication extends ConvenientApplication {
 
     @Override
     protected void initConfigAndData() {
+        DatabaseUtil.init(this, "ttfm_db", 1, null);
+
         try {
             Thread.sleep(2300);
         } catch (InterruptedException e) {

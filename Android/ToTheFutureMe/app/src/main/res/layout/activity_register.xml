@@ -21,7 +21,7 @@
             android:background="@color/colorBackgroundLightGrey"
             android:padding="16dp">
 
-            <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+            <EditText
                 android:id="@+id/usernameView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

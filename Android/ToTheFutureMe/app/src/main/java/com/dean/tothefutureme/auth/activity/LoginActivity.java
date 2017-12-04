@@ -29,14 +29,14 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
         super.onCreate(savedInstanceState);
 
         AuthModel authModel = TTFMApplication.getAuthModel();
-        authModel.setUsername("username");
-        authModel.setPassword("password");
+//        authModel.setUsername("username");
+//        authModel.setPassword("password");
         viewDataBinding.setAuthModel(authModel);
     }
 
     @OnClick(R.id.loginButton)
     public void login() {
-        ToastUtil.showToast(LoginActivity.this, TTFMApplication.getAuthModel().getUsername());
+        ToastUtil.showToast(LoginActivity.this, TTFMApplication.getAuthModel().getUsername().toString());
     }
 
     /**
