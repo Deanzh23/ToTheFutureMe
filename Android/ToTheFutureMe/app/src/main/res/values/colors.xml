@@ -9,5 +9,8 @@
     <color name="colorThemeSkyBlue">#9AD0FD</color>
 
     <!-- 浅灰背景色 -->
-    <color name="colorBackgroundLightGrey">#E6E4E6</color>
+    <color name="colorBackgroundLightGrey">#F3F7F9</color>
+
+    <color name="colorTitle">#434954</color>
+    <color name="colorContent">#6F737B</color>
 </resources>

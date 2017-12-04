@@ -25,6 +25,10 @@
         </activity>
 
         <activity
+            android:name=".auth.activity.CheckUsernameActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".auth.activity.RegisterActivity"
             android:screenOrientation="portrait"/>
 

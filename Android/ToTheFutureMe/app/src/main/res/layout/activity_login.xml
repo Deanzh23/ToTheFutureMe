@@ -49,7 +49,7 @@
                 android:layout_below="@id/centerView"
                 android:layout_marginTop="-32dp">
 
-                <EditText
+                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
                     android:id="@+id/usernameView"
                     style="@style/TextTheme"
                     android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                     android:hint="请输入邮箱地址"
                     android:text="@={authModel.username}"/>
 
-                <EditText
+                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
                     android:id="@+id/passwordView"
                     style="@style/TextTheme"
                     android:layout_width="wrap_content"

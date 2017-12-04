@@ -22,4 +22,23 @@
         <item name="android:textSize">@dimen/text_size</item>
     </style>
 
+    <style name="ItemStyle">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="ListItemTitleTheme">
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center_vertical|left</item>
+    </style>
+
+    <style name="ListItemContentTheme" parent="ListItemTitleTheme">
+        <item name="android:textColor">@color/colorContent</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginLeft">24dp</item>
+    </style>
+
 </resources>

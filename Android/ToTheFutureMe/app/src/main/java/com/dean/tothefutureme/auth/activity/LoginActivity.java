@@ -40,6 +40,6 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
      */
     @OnClick(R.id.registerTextView)
     public void toRegister() {
-        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+        startActivity(new Intent(LoginActivity.this, CheckUsernameActivity.class));
     }
 }

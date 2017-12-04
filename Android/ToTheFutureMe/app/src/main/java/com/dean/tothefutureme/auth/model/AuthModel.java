@@ -20,6 +20,11 @@ public class AuthModel extends BaseObservable implements Serializable {
     private String username;
     @Column
     private String password;
+    /**
+     * 昵称
+     */
+    @Column
+    private String nickname;
     @Column
     private String token;
 
@@ -49,6 +54,16 @@ public class AuthModel extends BaseObservable implements Serializable {
     public void setPassword(String password) {
         this.password = password;
         notifyPropertyChanged(BR.password);
+    }
+
+    @Bindable
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+        notifyPropertyChanged(BR.nickname);
     }
 
     public String getToken() {

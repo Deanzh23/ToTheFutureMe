@@ -11,6 +11,8 @@ import com.dean.tothefutureme.auth.model.AuthModel;
  */
 public class TTFMApplication extends ConvenientApplication {
 
+    public static final String BASE_URL = "";
+
     private static AuthModel authModel;
 
     private static TTFMApplication instance;
