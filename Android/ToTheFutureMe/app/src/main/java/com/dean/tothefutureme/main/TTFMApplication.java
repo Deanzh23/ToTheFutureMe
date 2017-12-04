@@ -51,6 +51,9 @@ public class TTFMApplication extends ConvenientApplication {
     }
 
     public static AuthModel getAuthModel() {
+        if (authModel == null)
+            authModel = new AuthModel();
+
         return authModel;
     }
 
