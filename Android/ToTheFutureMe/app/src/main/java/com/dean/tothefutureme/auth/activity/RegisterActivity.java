@@ -1,5 +1,7 @@
 package com.dean.tothefutureme.auth.activity;
 
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +13,12 @@ import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
+import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.ActivityRegisterBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
+
+import java.util.Date;
 
 /**
  * 用户注册Activity
@@ -23,7 +28,7 @@ import com.dean.tothefutureme.main.TTFMApplication;
 @ContentView(R.layout.activity_register)
 public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterBinding> {
 
-    private AlertDialog selectImageDialog;
+    private ProgressDialog waitDialog;
 
     private String avatarImagePath;
 
@@ -47,8 +52,44 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
         builder.setNeutralButton("相册", (dialog, which) -> {
             BitmapUtil.openSystemPhotoAlbum(this);
         });
-        selectImageDialog = builder.create();
-        selectImageDialog.show();
+        builder.create().show();
+    }
+
+    /**
+     * 设置性别
+     */
+    @OnClick(R.id.genderTextView)
+    public void setGender() {
+        String[] genders = new String[]{"女", "男"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("您的性别是？");
+        builder.setItems(genders, (dialog, which) -> {
+            TTFMApplication.getAuthModel().setGenderCode(which);
+        });
+        builder.create().show();
+    }
+
+    /**
+     * 设置生日
+     */
+    @OnClick(R.id.birthdayTextView)
+    public void setBirthday() {
+        Date date = new Date();
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+            viewDataBinding.birthdayTextView.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
+        }, 1900 + date.getYear(), date.getMonth(), date.getDate());
+        datePickerDialog.show();
+    }
+
+    /**
+     * 注册
+     */
+    @OnClick(R.id.registerButton)
+    public void register() {
+        waitDialog = ConvenientProgressDialog.getInstance(this, "正在注册用户，请稍后...", false);
+        waitDialog.show();
     }
 
     @Override

@@ -59,6 +59,7 @@
                     android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@."
                     android:gravity="center_vertical"
                     android:hint="请输入邮箱地址"
+                    android:singleLine="true"
                     android:text="@={authModel.username}"/>
 
                 <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
@@ -73,6 +74,7 @@
                     android:hint="请输入密码"
                     android:inputType="textPassword"
                     android:maxLength="8"
+                    android:singleLine="true"
                     android:text="@={authModel.password}"/>
 
                 <Button

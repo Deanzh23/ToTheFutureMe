@@ -19,7 +19,7 @@ import com.dean.tothefutureme.main.TTFMApplication;
  * <p>
  * Created by dean on 2017/12/3.
  */
-@Permission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+@Permission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA})
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
 

@@ -29,7 +29,9 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/ic_dean_text_blue_bg"
                 android:hint="请输入您的邮箱地址"
+                android:inputType="textEmailAddress"
                 android:padding="8dp"
+                android:singleLine="true"
                 android:text="@={authModel.username}"/>
 
             <TextView

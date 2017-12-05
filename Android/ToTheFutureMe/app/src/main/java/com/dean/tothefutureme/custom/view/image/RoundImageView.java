@@ -1,4 +1,4 @@
-package com.dean.tothefutureme.custom;
+package com.dean.tothefutureme.custom.view.image;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
