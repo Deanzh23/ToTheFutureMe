@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">给未来的自己</string>
 
-    <string name="app_info_email">信息将在到达日期时发送到您的APP和指定邮箱中.</string>
+    <string name="app_info_email">（信息将在到达日期时发送到您的APP和指定邮箱中.）</string>
 
     <string name="user_info_gender_1">男</string>
     <string name="user_info_gender_0">女</string>

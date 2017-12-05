@@ -30,9 +30,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/ic_dean_button_blue_bg"
                 android:text="注册"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size"/>
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -71,7 +73,8 @@
                                 style="@style/ListItemTitleTheme"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="邮箱"/>
+                                android:text="邮箱"
+                                android:textSize="@dimen/text_size"/>
 
                             <TextView
                                 android:id="@+id/usernameTextView"
@@ -79,7 +82,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toRightOf="@id/usernameTitleView"
-                                android:text="@{authModel.username}"/>
+                                android:text="@{authModel.username}"
+                                android:textSize="@dimen/text_size"/>
                         </RelativeLayout>
 
                         <!-- 填写邮箱的好处 -->
@@ -88,7 +92,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/usernameLayout"
+                            android:background="@android:color/white"
                             android:hint="@string/app_info_email"
+                            android:paddingBottom="8dp"
                             android:paddingLeft="12dp"
                             android:paddingRight="12dp"
                             android:textSize="13sp"/>
@@ -107,7 +113,8 @@
                                 style="@style/ListItemTitleTheme"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="验证码"/>
+                                android:text="验证码"
+                                android:textSize="@dimen/text_size"/>
 
                             <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
                                 android:id="@+id/verificationCodeEditText"
@@ -122,7 +129,8 @@
                                 android:maxLength="6"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="@={authModel.verificationCode}"/>
+                                android:text="@={authModel.verificationCode}"
+                                android:textSize="@dimen/text_size"/>
                         </RelativeLayout>
 
                         <!-- 密码 -->
@@ -139,7 +147,8 @@
                                 style="@style/ListItemTitleTheme"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="密码"/>
+                                android:text="密码"
+                                android:textSize="@dimen/text_size"/>
 
                             <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
                                 android:id="@+id/passwordEditText"
@@ -154,7 +163,8 @@
                                 android:maxLength="8"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="@={authModel.password}"/>
+                                android:text="@={authModel.password}"
+                                android:textSize="@dimen/text_size"/>
                         </RelativeLayout>
 
                         <!-- 昵称 -->
@@ -171,7 +181,8 @@
                                 style="@style/ListItemTitleTheme"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="昵称"/>
+                                android:text="昵称"
+                                android:textSize="@dimen/text_size"/>
 
                             <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
                                 android:id="@+id/nicknameEditText"
@@ -185,7 +196,8 @@
                                 android:maxLength="16"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="@={authModel.nickname}"/>
+                                android:text="@={authModel.nickname}"
+                                android:textSize="@dimen/text_size"/>
                         </RelativeLayout>
 
                         <!-- 性别 -->
@@ -202,7 +214,8 @@
                                 style="@style/ListItemTitleTheme"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="性别"/>
+                                android:text="性别"
+                                android:textSize="@dimen/text_size"/>
 
                             <TextView
                                 android:id="@+id/genderTextView"
@@ -215,7 +228,8 @@
                                 android:hint="请选择性别（选填）"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="@{authModel.gender}"/>
+                                android:text="@{authModel.gender}"
+                                android:textSize="@dimen/text_size"/>
                         </RelativeLayout>
 
                         <!-- 出生日期 -->
@@ -232,7 +246,8 @@
                                 style="@style/ListItemTitleTheme"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="生日"/>
+                                android:text="生日"
+                                android:textSize="@dimen/text_size"/>
 
                             <TextView
                                 android:id="@+id/birthdayTextView"
@@ -245,7 +260,8 @@
                                 android:hint="请选择出生日期（选填）"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="@={authModel.birthdayContent}"/>
+                                android:text="@={authModel.birthdayContent}"
+                                android:textSize="@dimen/text_size"/>
                         </RelativeLayout>
 
                     </RelativeLayout>
