@@ -15,7 +15,7 @@ import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.ActivityHomeBinding;
 import com.dean.tothefutureme.me.MeFragment;
-import com.dean.tothefutureme.timeline.TimeLineFragment;
+import com.dean.tothefutureme.timeline.view.TimeLineFragment;
 
 import java.util.ArrayList;
 import java.util.List;

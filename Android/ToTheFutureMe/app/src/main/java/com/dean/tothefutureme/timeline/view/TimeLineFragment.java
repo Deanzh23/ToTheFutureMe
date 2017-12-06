@@ -1,4 +1,4 @@
-package com.dean.tothefutureme.timeline;
+package com.dean.tothefutureme.timeline.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
+import com.dean.tothefutureme.timeline.model.LetterModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 时间轴Fragment
@@ -20,6 +24,9 @@ import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
 public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding> {
 
     private AppCompatActivity activity;
+
+    private TimeLineAdapter timeLineAdapter;
+    private List<LetterModel> letterModels;
 
     private static TimeLineFragment instance;
 
@@ -48,5 +55,22 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
 
         viewDataBinding.toolbar.setTitle("时间轴");
         activity.setSupportActionBar(viewDataBinding.toolbar);
+
+        loadData();
     }
+
+    private void loadData() {
+        /**
+         * debug
+         */
+        letterModels = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            LetterModel letterModel = new LetterModel();
+            letterModels.add(letterModel);
+        }
+
+        timeLineAdapter = new TimeLineAdapter(activity, letterModels);
+        viewDataBinding.timeLineListView.setAdapter(timeLineAdapter);
+    }
+
 }

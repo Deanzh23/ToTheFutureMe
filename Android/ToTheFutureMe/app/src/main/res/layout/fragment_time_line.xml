@@ -20,12 +20,14 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay"/>
         </android.support.design.widget.AppBarLayout>
 
-        <TextView
+        <ListView
+            android:id="@+id/timeLineListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/appBarLayout"
-            android:gravity="center"
-            android:text="Time Line Fragment"/>
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="12dp"
+            android:divider="@null"/>
 
     </RelativeLayout>
 
