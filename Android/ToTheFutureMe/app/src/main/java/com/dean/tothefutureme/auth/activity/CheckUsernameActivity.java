@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
+import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
 import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
@@ -36,6 +37,12 @@ public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsern
         super.onCreate(savedInstanceState);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        KeyboardUtil.hideSoftKeyboard(this);
     }
 
     /**

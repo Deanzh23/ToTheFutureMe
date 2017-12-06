@@ -1,13 +1,15 @@
 package com.dean.tothefutureme.timeline;
 
-import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 import com.dean.android.framework.convenient.fragment.ConvenientFragment;
+import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
-import com.dean.tothefutureme.me.MeFragment;
 
 /**
  * 时间轴Fragment
@@ -17,7 +19,7 @@ import com.dean.tothefutureme.me.MeFragment;
 @ContentView(R.layout.fragment_time_line)
 public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding> {
 
-    private Activity activity;
+    private AppCompatActivity activity;
 
     private static TimeLineFragment instance;
 
@@ -31,7 +33,20 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (Activity) context;
+        activity = (AppCompatActivity) context;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        KeyboardUtil.hideSoftKeyboard(activity);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        viewDataBinding.toolbar.setTitle("时间轴");
+        activity.setSupportActionBar(viewDataBinding.toolbar);
+    }
 }

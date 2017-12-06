@@ -31,20 +31,25 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:drawableTop="@drawable/selector_tab_time_line"
                     android:text="时间轴"
-                    android:textSize="@dimen/text_size"/>
+                    android:textColor="@drawable/selector_bottom_text_color"
+                    android:textSize="@dimen/text_size_small"/>
 
                 <RadioButton
                     android:id="@+id/meRadioButton"
                     style="@style/RadioButtonTheme"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/selector_tab_me"
                     android:text="我的"
-                    android:textSize="@dimen/text_size"/>
+                    android:textColor="@drawable/selector_bottom_text_color"
+                    android:textSize="@dimen/text_size_small"/>
             </RadioGroup>
 
             <!-- 内容layout -->
             <FrameLayout
+                android:id="@+id/contentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/bottomTabLayout"

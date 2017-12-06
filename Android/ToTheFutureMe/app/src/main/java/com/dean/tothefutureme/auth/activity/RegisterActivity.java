@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import com.dean.android.framework.convenient.activity.ConvenientCameraActivity;
 import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
+import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
@@ -42,6 +43,12 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
         super.onCreate(savedInstanceState);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        KeyboardUtil.hideSoftKeyboard(this);
     }
 
     /**
@@ -93,6 +100,21 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
      */
     @OnClick(R.id.registerButton)
     public void register() {
+        // 必填项检查
+        if (TextUtils.isEmpty(TTFMApplication.getAuthModel().getVerificationCode())) {
+            ToastUtil.showToast(this, "请填写验证码");
+            return;
+        }
+        if (TextUtils.isEmpty(TTFMApplication.getAuthModel().getPassword())) {
+            ToastUtil.showToast(this, "请填写密码");
+            return;
+        }
+        if (TextUtils.isEmpty(TTFMApplication.getAuthModel().getNickname())) {
+            ToastUtil.showToast(this, "请填写昵称");
+            return;
+        }
+
+        // 开始提交
         waitDialog = ConvenientProgressDialog.getInstance(this, "正在注册用户，请稍后...", false);
         waitDialog.show();
 
