@@ -55,7 +55,7 @@
                         app:civ_border_color="@android:color/white"
                         app:civ_border_width="2dp"/>
 
-                    <RelativeLayout
+                    <com.dean.tothefutureme.custom.layout.NeatRelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/avatarImageView"
@@ -264,7 +264,7 @@
                                 android:textSize="@dimen/text_size"/>
                         </RelativeLayout>
 
-                    </RelativeLayout>
+                    </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
 
                 </RelativeLayout>
             </ScrollView>

@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class NeatRelativeLayout extends RelativeLayout {
 
+    private Context context;
+
     /**
      * 调整的View集合
      */
@@ -30,10 +32,12 @@ public class NeatRelativeLayout extends RelativeLayout {
 
     public NeatRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(NeatRelativeLayout.class.getSimpleName(), "[onLayout]");
         super.onLayout(changed, l, t, r, b);
 
         if (isAdjustmented)
@@ -69,7 +73,7 @@ public class NeatRelativeLayout extends RelativeLayout {
         View adjustmentView = null;
 
         try {
-            adjustmentView = layout.getChildAt(1);
+            adjustmentView = layout.getChildAt(0);
         } catch (Exception e) {
         }
 
@@ -87,17 +91,18 @@ public class NeatRelativeLayout extends RelativeLayout {
         if (SetUtil.isEmpty(adjustmentViews))
             return;
 
-        int minWidth = -1;
+        int maxWidth = -1;
 
         // 获得最小宽度值
         int size = adjustmentViews == null ? 0 : adjustmentViews.size();
         for (int i = 0; i < size; i++) {
             View view = adjustmentViews.get(i);
             int tempWidth = view.getWidth();
-            minWidth = (minWidth == -1 || minWidth > tempWidth) ? tempWidth : minWidth;
+
+            maxWidth = (maxWidth == -1 || maxWidth < tempWidth) ? tempWidth : maxWidth;
         }
 
-        if (minWidth < 0)
+        if (maxWidth < 0)
             return;
 
         // 重新设置控件宽度为前面的最小宽度值
@@ -105,16 +110,12 @@ public class NeatRelativeLayout extends RelativeLayout {
             View view = adjustmentViews.get(i);
             int tempWidth = view.getWidth();
 
-            if (minWidth < tempWidth) {
-                Log.d(NeatRelativeLayout.class.getSimpleName(), "minWidth = " + minWidth + " ; tempWidth = " + tempWidth);
-
+            if (maxWidth > tempWidth) {
                 RelativeLayout.LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
-                layoutParams.leftMargin = tempWidth - minWidth;
+                layoutParams.width = maxWidth;
                 view.setLayoutParams(layoutParams);
             }
         }
-
-        this.invalidate();
     }
 
 }
