@@ -11,6 +11,8 @@ import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.ActivityHomeBinding;
+import com.dean.tothefutureme.me.MeFragment;
+import com.dean.tothefutureme.timeline.TimeLineFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +30,19 @@ public class HomeActivity extends ConvenientActivity<ActivityHomeBinding> {
     private FragmentManager fragmentManager;
 
     private List<ConvenientFragment> fragments = new ArrayList<>();
+    private TimeLineFragment timeLineFragment;
+    private MeFragment meFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         fragmentManager = getSupportFragmentManager();
+
+        timeLineFragment = TimeLineFragment.getInstance();
+        meFragment = MeFragment.getInstance();
+        fragments.add(timeLineFragment);
+        fragments.add(meFragment);
     }
 
     @Override

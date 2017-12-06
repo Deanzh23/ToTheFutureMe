@@ -8,11 +8,48 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true">
 
-        <!-- 内容layout -->
-        <FrameLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackgroundLightGrey"/>
+            android:background="@color/colorBackgroundLightGrey">
 
+            <!-- 底部tab -->
+            <RadioGroup
+                android:id="@+id/bottomTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/timeLineRadioButton"
+                    style="@style/RadioButtonTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="时间轴"
+                    android:textSize="@dimen/text_size"/>
+
+                <RadioButton
+                    android:id="@+id/meRadioButton"
+                    style="@style/RadioButtonTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="我的"
+                    android:textSize="@dimen/text_size"/>
+            </RadioGroup>
+
+            <!-- 内容layout -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/bottomTabLayout"
+                android:background="@color/colorBackgroundLightGrey"/>
+
+        </RelativeLayout>
     </RelativeLayout>
 </layout>

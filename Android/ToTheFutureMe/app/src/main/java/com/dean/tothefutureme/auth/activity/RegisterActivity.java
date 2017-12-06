@@ -4,10 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import com.dean.android.framework.convenient.activity.ConvenientCameraActivity;
+import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
@@ -16,6 +18,7 @@ import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.ActivityRegisterBinding;
+import com.dean.tothefutureme.home.HomeActivity;
 import com.dean.tothefutureme.main.TTFMApplication;
 
 import java.util.Date;
@@ -31,6 +34,8 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     private ProgressDialog waitDialog;
 
     private String avatarImagePath;
+
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,6 +95,14 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     public void register() {
         waitDialog = ConvenientProgressDialog.getInstance(this, "正在注册用户，请稍后...", false);
         waitDialog.show();
+
+        /**
+         * debug
+         */
+        handler.postDelayed(() -> {
+            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+            ConvenientApplication.killHistoryActivity(HomeActivity.class.getSimpleName());
+        }, 3000);
     }
 
     @Override

@@ -25,7 +25,6 @@ public class MainActivity extends ConvenientMainActivity<ActivityMainBinding> {
 
     @Override
     protected void showUpdateDownload(VersionUpdate versionUpdate) {
-
     }
 
     @Override
