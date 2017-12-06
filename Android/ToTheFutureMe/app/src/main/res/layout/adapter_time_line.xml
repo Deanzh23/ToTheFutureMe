@@ -83,8 +83,9 @@
                     <!-- 发件人头像 -->
                     <com.dean.tothefutureme.custom.view.image.RoundImageView
                         android:id="@+id/senderAvatarImageView"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="8dp"
                         android:background="@mipmap/ic_launcher_round"/>
 
                     <!-- 发件日期时间 -->
@@ -92,10 +93,10 @@
                         android:id="@+id/sendDateTimeTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_alignBottom="@id/senderAvatarImageView"
                         android:layout_marginLeft="16dp"
                         android:layout_toRightOf="@id/senderAvatarImageView"
-                        android:paddingBottom="4dp"
+                        android:paddingBottom="8dp"
                         android:text="2016/12/04 23:59"
                         android:textSize="@dimen/text_size_small"/>
                 </RelativeLayout>
