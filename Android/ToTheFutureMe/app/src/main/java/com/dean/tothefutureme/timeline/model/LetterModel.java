@@ -33,6 +33,11 @@ public class LetterModel extends BaseObservable implements Serializable {
     @PrimaryKey
     private String letterId;
     /**
+     * 信件类型（0：文字；1：语音）
+     */
+    @Column
+    private int type = LEETER_TYPE_TEXT;
+    /**
      * 收件人ID -> username
      */
     @PrimaryKey
@@ -71,10 +76,13 @@ public class LetterModel extends BaseObservable implements Serializable {
      */
     private String receiveDateTimeName;
     /**
-     * 信件类型（0：文字；1：语音）
+     * 收件日期表示
      */
-    @Column
-    private int type = LEETER_TYPE_TEXT;
+    private String receiveDateName;
+    /**
+     * 收件时间表示
+     */
+    private String receiveTimeName;
     /**
      * 信件内容
      */
@@ -169,11 +177,33 @@ public class LetterModel extends BaseObservable implements Serializable {
 
         try {
             setReceiveDateTime(DateTimeUtils.getDateMillisecond(receiveDateTimeName));
+
+            String[] dateTimeArray = receiveDateTimeName.split(" ");
+            setReceiveDateName(dateTimeArray[0]);
+            setReceiveTimeName(dateTimeArray[1]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         notifyPropertyChanged(BR.receiveDateTimeName);
+    }
+
+    @Bindable
+    public String getReceiveDateName() {
+        return receiveDateName;
+    }
+
+    public void setReceiveDateName(String receiveDateName) {
+        this.receiveDateName = receiveDateName;
+    }
+
+    @Bindable
+    public String getReceiveTimeName() {
+        return receiveTimeName;
+    }
+
+    public void setReceiveTimeName(String receiveTimeName) {
+        this.receiveTimeName = receiveTimeName;
     }
 
     public int getType() {
