@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.dean.android.framework.convenient.fragment.ConvenientFragment;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
@@ -44,9 +46,21 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         KeyboardUtil.hideSoftKeyboard(activity);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_time_line, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
