@@ -33,7 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/registerButton"
             android:layout_below="@id/appBarLayout"
-            android:layout_marginTop="12dp">
+            android:layout_marginTop="12dp"
+            android:scrollbars="none">
 
             <RelativeLayout
                 android:layout_width="match_parent"
