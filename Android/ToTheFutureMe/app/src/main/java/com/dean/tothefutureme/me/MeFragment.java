@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.dean.android.framework.convenient.fragment.ConvenientFragment;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
@@ -37,9 +39,21 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         KeyboardUtil.hideSoftKeyboard(activity);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_me_user_info_edit, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -48,6 +62,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> {
 
         viewDataBinding.toolbar.setTitle("我的");
         activity.setSupportActionBar(viewDataBinding.toolbar);
+        viewDataBinding.toolbar.inflateMenu(R.menu.menu_me_user_info_edit);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.dean.tothefutureme.timeline.model;
+package com.dean.tothefutureme.letter.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

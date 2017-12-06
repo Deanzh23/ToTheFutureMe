@@ -12,7 +12,7 @@ import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
-import com.dean.tothefutureme.timeline.model.LetterModel;
+import com.dean.tothefutureme.letter.model.LetterModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +69,9 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
 
         viewDataBinding.toolbar.setTitle("时间轴");
         activity.setSupportActionBar(viewDataBinding.toolbar);
+        viewDataBinding.toolbar.setOnMenuItemClickListener(item -> true);
+        /** 这里解决Fragment切换后，menu消失问题 **/
+        viewDataBinding.toolbar.inflateMenu(R.menu.menu_time_line);
 
         loadData();
     }

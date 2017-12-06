@@ -5,7 +5,7 @@
 
         <variable
             name="letterModel"
-            type="com.dean.tothefutureme.timeline.model.LetterModel"/>
+            type="com.dean.tothefutureme.letter.model.LetterModel"/>
     </data>
 
     <LinearLayout

@@ -5,7 +5,7 @@ import android.content.Context;
 import com.dean.android.framework.convenient.adapter.ConvenientAdapter;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.AdapterTimeLineBinding;
-import com.dean.tothefutureme.timeline.model.LetterModel;
+import com.dean.tothefutureme.letter.model.LetterModel;
 
 import java.util.List;
 
