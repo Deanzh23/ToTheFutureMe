@@ -4,10 +4,7 @@ import com.dean.j2ee.framework.controller.ConvenientController;
 import com.dean.j2ee.ttfm.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 账号控制器
@@ -22,13 +19,13 @@ public class AuthController extends ConvenientController {
     /**
      * 检查用户名是否可用
      *
-     * @param username
+     * @param body
      * @return
      */
-    @RequestMapping(value = "/check/{username}")
+    @RequestMapping(value = "/check", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object checkUsername(@PathVariable String username) {
-        return authService.checkUsername(username);
+    public Object checkUsername(@RequestBody String body) {
+        return authService.checkUsername(body);
     }
 
     /**
@@ -41,7 +38,8 @@ public class AuthController extends ConvenientController {
      * @param birthday
      * @return
      */
-    @RequestMapping(value = "/register/{username}/{password}/{avatarUrl}/{nickname}/{genderCode}/{birthday}", method = RequestMethod.POST)
+    @RequestMapping(value = "/register/{username}/{password}/{avatarUrl}/{nickname}/{genderCode}/{birthday}", method = RequestMethod.POST,
+            produces = "application/json; charset=utf-8")
     @ResponseBody
     public Object register(@PathVariable String username, @PathVariable String password, @PathVariable String avatarUrl, @PathVariable String nickname,
                            @PathVariable int genderCode, @PathVariable long birthday) {
@@ -55,7 +53,7 @@ public class AuthController extends ConvenientController {
      * @param password
      * @return
      */
-    @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.POST)
+    @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public Object login(@PathVariable String username, @PathVariable String password) {
         return authService.login(username, password);

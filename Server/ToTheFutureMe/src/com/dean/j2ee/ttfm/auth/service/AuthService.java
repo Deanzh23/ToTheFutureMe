@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 /**
  * 账号Service
@@ -34,43 +36,67 @@ public class AuthService extends ConvenientService {
     /**
      * 检查用户名是否可用
      *
+     * @param body
+     * @return
+     */
+    public Object checkUsername(String body) {
+        JSONObject request = new JSONObject(body);
+
+        try {
+            String username = URLDecoder.decode(request.getString("username"), "utf-8");
+
+            boolean isEmpty = authDao.isEmpty(username);
+            if (isEmpty)
+                // 邮箱可以使用
+                return sendVerificationCode(username);
+            else
+                // 邮箱已被占用
+                return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
+        }
+    }
+
+    /**
+     * 重新发送验证码
+     */
+    public Object sendVerificationCodeAgain(String username) {
+        return sendVerificationCode(username);
+    }
+
+    /**
+     * 发送验证码
+     *
      * @param username
      * @return
      */
-    public Object checkUsername(String username) {
-        boolean isEmpty = authDao.isEmpty(username);
+    private Object sendVerificationCode(String username) {
+        // 查找此用户的验证码
+        VerificationCodeEntity verificationCodeEntity = authDao.findVerificationCodeEntity(username);
+        if ((verificationCodeEntity != null && EMailUtils.getDiffer(verificationCodeEntity.getTime(), System.currentTimeMillis()) > 2 * 60) ||
+                verificationCodeEntity == null) {
+            // 获取6位数字验证码
+            String verificationCode = EMailUtils.getVerificationCode();
+            // 发送验证码到指定邮箱
+            try {
+                EMailUtils.sendEMail("给未来的自己", username, Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD,
+                        "您本次的注册验证码为：" + verificationCode);
 
-        // 邮箱可以使用
-        if (isEmpty) {
-            // 查找此用户的验证码
-            VerificationCodeEntity verificationCodeEntity = authDao.findVerificationCodeEntity(username);
-            if ((verificationCodeEntity != null && EMailUtils.getDiffer(verificationCodeEntity.getTime(), System.currentTimeMillis()) > 2 * 60)) {
-                // 获取6位数字验证码
-                String verificationCode = EMailUtils.getVerificationCode();
-                // 发送验证码到指定邮箱
-                try {
-                    EMailUtils.sendEMail("给未来的自己", username, Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD,
-                            "您本次的注册验证码为：" + verificationCode);
+                // 这里需要将验证码跟username关联，并存储到临时表里，注册后将其从临时表中删除
+                verificationCodeEntity = new VerificationCodeEntity();
+                verificationCodeEntity.setUsername(username);
+                verificationCodeEntity.setVerificationCode(verificationCode);
+                verificationCodeEntity.setTime(System.currentTimeMillis());
 
-                    // 这里需要将验证码跟username关联，并存储到临时表里，注册后将其从临时表中删除
-                    verificationCodeEntity = new VerificationCodeEntity();
-                    verificationCodeEntity.setUsername(username);
-                    verificationCodeEntity.setVerificationCode(verificationCode);
-                    verificationCodeEntity.setTime(new Long(System.currentTimeMillis()));
-
-                    authDao.saveOrUpdate(verificationCodeEntity);
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                    return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
-                }
+                authDao.saveOrUpdate(verificationCodeEntity);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+                return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
             }
+        }
 
-            return getResponseJSON(RESPONSE_SUCCESS).toString();
-        }
-        // 邮箱已被占用
-        else {
-            return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
-        }
+        return getResponseJSON(RESPONSE_SUCCESS).toString();
     }
 
     /**
@@ -86,13 +112,14 @@ public class AuthService extends ConvenientService {
     public Object register(String username, String password, String avatarUrl, String nickname, int genderCode, long birthday) {
         // 查找此用户的验证码
         VerificationCodeEntity verificationCodeEntity = authDao.findVerificationCodeEntity(username);
-        if (verificationCodeEntity == null || EMailUtils.getDiffer(verificationCodeEntity.getTime(), System.currentTimeMillis()) > 2 * 60)
+        if (verificationCodeEntity == null || EMailUtils.getDiffer(verificationCodeEntity.getTime(), System.currentTimeMillis()) > 60 * 30)
             return getResponseJSON(LOGIN_FAILURE_VERIFICATION_CODE_TIMEOUT).toString();
 
         // 保存用户信息->db
         AuthEntity authEntity = new AuthEntity();
         authEntity.setUsername(username);
         authEntity.setPassword(password);
+        authEntity.setAvatarUrl(avatarUrl);
         authEntity.setNickname(nickname);
         authEntity.setGenderCode(genderCode);
         authEntity.setBirthday(birthday);

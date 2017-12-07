@@ -26,7 +26,7 @@ public class EMailUtils {
         // 指定协议
         properties.put("mail.transport.protocol", "smtp");
         // 主机 smtp.qq.com
-        properties.put("mail.smtp.host", "smtp.qiye.163.com");
+        properties.put("mail.smtp.host", "smtp.163.com");
         // 端口
         properties.put("mail.smtp.port", 25);
         // 用户密码认证
@@ -43,7 +43,7 @@ public class EMailUtils {
         // 设置邮件收件人
         msg.setRecipients(Message.RecipientType.TO, receiveEMail);
         // 标题
-        msg.setSubject("[ " + AppName + " ]");
+        msg.setSubject("[" + AppName + "]");
         // 发送时间
         msg.setSentDate(new Date());
         // 发送内容
@@ -73,7 +73,7 @@ public class EMailUtils {
      * @return
      */
     public static int getDiffer(long startTime, long endTime) {
-        return (int) ((endTime - startTime) * 1.0 / 1000.0);
+        return (int) (endTime / 1000 - startTime / 1000);
     }
 
 }

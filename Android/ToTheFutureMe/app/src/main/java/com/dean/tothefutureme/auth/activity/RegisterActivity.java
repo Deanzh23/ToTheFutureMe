@@ -77,6 +77,14 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     }
 
     /**
+     * 重新发送验证码
+     */
+    @OnClick(R.id.sendVerificationCodeAgainButton)
+    public void sendVerificationCodeAgain() {
+
+    }
+
+    /**
      * 设置性别
      */
     @OnClick(R.id.genderTextView)
@@ -137,13 +145,10 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                 connection.sendFile(AppConfig.BASE_URL + AppConfig.FILE, urlParams, new File(avatarImagePath), new HttpConnectionListener() {
                     @Override
                     public void success(String s) {
-//                        TTFMApplication.getAuthModel().setAvatarUrl();
-                        handler.post(() -> ToastUtil.showToast(RegisterActivity.this, s));
-
                         try {
                             JSONObject response = new JSONObject(s);
                             String code = response.getString("code");
-                            if ("10200".equals(code)) {
+                            if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
                                 // 设置头像
                                 String url = response.getJSONObject("data").getString("url");
                                 TTFMApplication.getAuthModel().setAvatarUrl(url);
@@ -219,7 +224,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
 
                     @Override
                     public void error(int i) {
-                        handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "注册失败"));
+                        handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "注册失败 " + i));
                     }
 
                     @Override

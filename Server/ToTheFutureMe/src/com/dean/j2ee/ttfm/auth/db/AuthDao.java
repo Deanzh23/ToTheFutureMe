@@ -61,7 +61,7 @@ public class AuthDao extends ConvenientDao {
      * @param authEntity
      */
     public void saveOrUpdate(AuthEntity authEntity) {
-        saveOrUpdate(authEntity);
+        saveOrUpdate(sessionFactory, authEntity);
     }
 
     /**

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
@@ -20,8 +21,7 @@ import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityCheckUsernameBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -65,13 +65,14 @@ public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsern
 
         new Thread(() -> {
             ConvenientHttpConnection connection = new ConvenientHttpConnection();
-            List<Object> urlParams = new ArrayList<>();
-            urlParams.add(username);
-            connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_CHECK_USERNAME, null, urlParams, (Map<String, String>) null,
+            Map<String, String> bodyParams = new LinkedHashMap<>();
+            bodyParams.put("username", username);
+            connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_CHECK_USERNAME, null, null, bodyParams,
                     new HttpConnectionListener() {
                         @Override
                         public void success(String s) {
                             handler.post(() -> {
+                                ToastUtil.showToast(CheckUsernameActivity.this, "验证码邮件已发送您的邮箱", Toast.LENGTH_LONG);
                                 startActivity(new Intent(CheckUsernameActivity.this, RegisterActivity.class));
                                 CheckUsernameActivity.this.finish();
                             });
