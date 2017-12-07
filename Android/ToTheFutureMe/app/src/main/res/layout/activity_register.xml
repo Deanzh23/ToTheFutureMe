@@ -117,21 +117,43 @@
                                 android:text="验证码"
                                 android:textSize="@dimen/text_size"/>
 
-                            <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
-                                android:id="@+id/verificationCodeEditText"
-                                style="@style/ListItemContentTheme"
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/verificationCodeLabelView"
-                                android:background="@drawable/ic_dean_text_blue_bg"
-                                android:gravity="right|center_vertical"
-                                android:hint="请输入6位数字验证码（必填）"
-                                android:inputType="number"
-                                android:maxLength="6"
-                                android:padding="8dp"
-                                android:singleLine="true"
-                                android:text="@={authModel.verificationCode}"
-                                android:textSize="@dimen/text_size"/>
+                                android:layout_toRightOf="@id/verificationCodeLabelView">
+
+                                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                                    android:id="@+id/verificationCodeEditText"
+                                    style="@style/ListItemContentTheme"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="false"
+                                    android:layout_toLeftOf="@+id/sendVerificationCodeAgainButton"
+                                    android:background="@drawable/ic_dean_text_blue_bg"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="请输入验证码（必填）"
+                                    android:inputType="number"
+                                    android:maxLength="6"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@={authModel.verificationCode}"
+                                    android:textSize="@dimen/text_size"/>
+
+                                <TextView
+                                    android:id="@+id/sendVerificationCodeAgainButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignBottom="@id/verificationCodeEditText"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_alignTop="@id/verificationCodeEditText"
+                                    android:background="@drawable/ic_dean_button_blue_bg"
+                                    android:gravity="center"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="8dp"
+                                    android:text="重新发送(60s)"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="12sp"/>
+                            </RelativeLayout>
                         </RelativeLayout>
 
                         <!-- 密码 -->
