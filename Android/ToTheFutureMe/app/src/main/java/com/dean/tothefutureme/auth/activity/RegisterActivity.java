@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import com.dean.android.framework.convenient.activity.ConvenientCameraActivity;
-import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
+import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
+import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
@@ -20,10 +22,16 @@ import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgres
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityRegisterBinding;
-import com.dean.tothefutureme.home.HomeActivity;
 import com.dean.tothefutureme.main.TTFMApplication;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户注册Activity
@@ -119,13 +127,106 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
         waitDialog = ConvenientProgressDialog.getInstance(this, "正在注册用户，请稍后...", false);
         waitDialog.show();
 
+        new Thread(() -> {
+            // 上传头像
+            if (!TextUtils.isEmpty(avatarImagePath)) {
+                List<Object> urlParams = new ArrayList<>();
+                urlParams.add(AppConfig.IMAGE_TYPE_AVATAR);
+
+                ConvenientHttpConnection connection = new ConvenientHttpConnection();
+                connection.sendFile(AppConfig.BASE_URL + AppConfig.FILE, urlParams, new File(avatarImagePath), new HttpConnectionListener() {
+                    @Override
+                    public void success(String s) {
+//                        TTFMApplication.getAuthModel().setAvatarUrl();
+                        handler.post(() -> ToastUtil.showToast(RegisterActivity.this, s));
+
+                        try {
+                            JSONObject response = new JSONObject(s);
+                            String code = response.getString("code");
+                            if ("10200".equals(code)) {
+                                // 设置头像
+                                String url = response.getJSONObject("data").getString("url");
+                                TTFMApplication.getAuthModel().setAvatarUrl(url);
+                            }
+                        } catch (JSONException e) {
+                            handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "上传头像失败"));
+                        }
+
+                        // 注册用户信息
+                        registerUserInfo();
+                    }
+
+                    @Override
+                    public void error(int i) {
+                        handler.post(() -> {
+                            waitDialog.dismiss();
+                            ToastUtil.showToast(RegisterActivity.this, i + "", Toast.LENGTH_LONG);
+                        });
+                    }
+
+                    @Override
+                    public void end() {
+                    }
+                });
+            } else {
+                // 正式注册用户
+                registerUserInfo();
+            }
+        }).start();
+
         /**
          * debug
          */
-        handler.postDelayed(() -> {
-            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-            ConvenientApplication.killHistoryActivity(HomeActivity.class.getSimpleName());
-        }, 3000);
+//        handler.postDelayed(() -> {
+//            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+//            ConvenientApplication.killHistoryActivity(HomeActivity.class.getSimpleName());
+//        }, 3000);
+    }
+
+    /**
+     * 注册用户信息
+     */
+    private void registerUserInfo() {
+        List<Object> urlParams = new ArrayList<>();
+        urlParams.add(TTFMApplication.getAuthModel().getUsername());
+        urlParams.add(TTFMApplication.getAuthModel().getPassword());
+        urlParams.add(TTFMApplication.getAuthModel().getAvatarUrl());
+        urlParams.add(TTFMApplication.getAuthModel().getNickname());
+        urlParams.add(TTFMApplication.getAuthModel().getGenderCode());
+        urlParams.add(TTFMApplication.getAuthModel().getBirthday());
+        ConvenientHttpConnection registerConnection = new ConvenientHttpConnection();
+        registerConnection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_REGISTER, null, urlParams, (Map<String, String>) null,
+                new HttpConnectionListener() {
+                    @Override
+                    public void success(String s) {
+                        handler.post(() -> {
+                            try {
+                                JSONObject response = new JSONObject(s);
+                                String code = response.getString("code");
+                                if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
+                                    // 注册成功
+                                    ToastUtil.showToast(RegisterActivity.this, "注册成功");
+                                    RegisterActivity.this.finish();
+                                } else if ("402".equals(code)) {
+                                    // 验证码失效
+                                    ToastUtil.showToast(RegisterActivity.this, "验证码失效");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void error(int i) {
+                        handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "注册失败"));
+                    }
+
+                    @Override
+                    public void end() {
+                        handler.post(() -> waitDialog.dismiss());
+                    }
+                });
     }
 
     @Override

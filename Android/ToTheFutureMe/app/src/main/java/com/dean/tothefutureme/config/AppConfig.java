@@ -18,14 +18,29 @@ public class AppConfig {
      */
     public static final String AUTH_CHECK_USERNAME = "auth/check";
     /**
+     * 用户注册
+     */
+    public static final String AUTH_REGISTER = "auth/register";
+    /**
      * 用户登陆
      */
     public static final String AUTH_LOGIN = "auth/login";
+
+    public static final String FILE = "file/upload";
+
+    // 应答"成功"
+    public static final String RESPONSE_SUCCESS = "200";
 
     /**
      * app基础SD卡路径
      */
     public static final String APP_BASE_PATH = Environment.getExternalStorageDirectory().getPath() + "/ttfm/";
     public static final String APP_IMAGE_PAT = APP_BASE_PATH + "image/";
+
+    /**
+     * 图片类型
+     */
+    // 头像
+    public static final int IMAGE_TYPE_AVATAR = 0;
 
 }

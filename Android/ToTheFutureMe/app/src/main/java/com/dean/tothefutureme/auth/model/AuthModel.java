@@ -23,6 +23,11 @@ public class AuthModel extends BaseObservable implements Serializable {
     @Column
     private String password;
     /**
+     * 头像URL
+     */
+    @Column
+    private String avatarUrl = " ";
+    /**
      * 昵称
      */
     @Column
@@ -31,7 +36,7 @@ public class AuthModel extends BaseObservable implements Serializable {
      * 性别：1->男；0->女
      */
     @Column
-    private int genderCode;
+    private int genderCode = 9;
     /**
      * 性别表示
      */
@@ -40,7 +45,7 @@ public class AuthModel extends BaseObservable implements Serializable {
      * 出生日期
      */
     @Column
-    private long birthday;
+    private long birthday = 0;
     /**
      * 出生日期文本
      */
@@ -58,6 +63,14 @@ public class AuthModel extends BaseObservable implements Serializable {
     public AuthModel(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     @Bindable

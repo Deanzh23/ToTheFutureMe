@@ -3,6 +3,7 @@ package com.dean.tothefutureme.auth.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
@@ -32,6 +33,8 @@ import java.util.Map;
 public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsernameBinding> {
 
     private ProgressDialog progressDialog;
+
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,24 +71,20 @@ public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsern
                     new HttpConnectionListener() {
                         @Override
                         public void success(String s) {
-                            ToastUtil.showToast(CheckUsernameActivity.this, "邮箱可以使用");
+                            handler.post(() -> {
+                                startActivity(new Intent(CheckUsernameActivity.this, RegisterActivity.class));
+                                CheckUsernameActivity.this.finish();
+                            });
                         }
 
                         @Override
                         public void error(int i) {
-                            ToastUtil.showToast(CheckUsernameActivity.this, "邮箱已被使用");
-
-                            /**
-                             * debug code
-                             */
-                            startActivity(new Intent(CheckUsernameActivity.this, RegisterActivity.class));
-                            CheckUsernameActivity.this.finish();
+                            handler.post(() -> ToastUtil.showToast(CheckUsernameActivity.this, "检测账号可用性失败"));
                         }
 
                         @Override
                         public void end() {
-                            progressDialog.dismiss();
-                            ToastUtil.showToast(CheckUsernameActivity.this, "end");
+                            handler.post(() -> progressDialog.dismiss());
                         }
                     });
         }).start();
