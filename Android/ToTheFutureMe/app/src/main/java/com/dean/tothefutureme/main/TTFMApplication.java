@@ -1,7 +1,5 @@
 package com.dean.tothefutureme.main;
 
-import android.os.Environment;
-
 import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.tothefutureme.auth.model.AuthModel;
@@ -12,13 +10,6 @@ import com.dean.tothefutureme.auth.model.AuthModel;
  * Created by dean on 2017/12/3.
  */
 public class TTFMApplication extends ConvenientApplication {
-
-    public static final String BASE_URL = "";
-    /**
-     * app基础SD卡路径
-     */
-    public static final String APP_BASE_PATH = Environment.getExternalStorageDirectory().getPath() + "/ttfm/";
-    public static final String APP_IMAGE_PAT = APP_BASE_PATH + "image/";
 
     private static AuthModel authModel;
 
@@ -40,7 +31,10 @@ public class TTFMApplication extends ConvenientApplication {
 
     @Override
     protected void initConfigAndData() {
+        // 初始化数据库
         DatabaseUtil.init(this, "ttfm_db", 1, null);
+        // 查找之前的登陆用户
+        DatabaseUtil.find(getAuthModel());
 
         try {
             Thread.sleep(2300);

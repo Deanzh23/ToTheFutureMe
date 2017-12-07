@@ -15,6 +15,7 @@ import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityCheckUsernameBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
 
@@ -59,31 +60,35 @@ public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsern
         progressDialog = ConvenientProgressDialog.getInstance(CheckUsernameActivity.this, "正在检测，请稍后...", false);
         progressDialog.show();
 
-        ConvenientHttpConnection connection = new ConvenientHttpConnection();
-        List<Object> urlParams = new ArrayList<>();
-        urlParams.add(username);
-        connection.sendHttpPost(TTFMApplication.BASE_URL + "", null, urlParams, (Map<String, String>) null, new HttpConnectionListener() {
-            @Override
-            public void success(String s) {
-                ToastUtil.showToast(CheckUsernameActivity.this, "邮箱可以使用");
-            }
+        new Thread(() -> {
+            ConvenientHttpConnection connection = new ConvenientHttpConnection();
+            List<Object> urlParams = new ArrayList<>();
+            urlParams.add(username);
+            connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_CHECK_USERNAME, null, urlParams, (Map<String, String>) null,
+                    new HttpConnectionListener() {
+                        @Override
+                        public void success(String s) {
+                            ToastUtil.showToast(CheckUsernameActivity.this, "邮箱可以使用");
+                        }
 
-            @Override
-            public void error(int i) {
-                ToastUtil.showToast(CheckUsernameActivity.this, "邮箱已被使用");
+                        @Override
+                        public void error(int i) {
+                            ToastUtil.showToast(CheckUsernameActivity.this, "邮箱已被使用");
 
-                /**
-                 * debug code
-                 */
-                startActivity(new Intent(CheckUsernameActivity.this, RegisterActivity.class));
-                CheckUsernameActivity.this.finish();
-            }
+                            /**
+                             * debug code
+                             */
+                            startActivity(new Intent(CheckUsernameActivity.this, RegisterActivity.class));
+                            CheckUsernameActivity.this.finish();
+                        }
 
-            @Override
-            public void end() {
-                progressDialog.dismiss();
-            }
-        });
+                        @Override
+                        public void end() {
+                            progressDialog.dismiss();
+                            ToastUtil.showToast(CheckUsernameActivity.this, "end");
+                        }
+                    });
+        }).start();
     }
 
 }

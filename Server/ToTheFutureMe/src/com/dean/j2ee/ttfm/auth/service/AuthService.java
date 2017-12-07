@@ -17,6 +17,8 @@ public class AuthService extends ConvenientService {
     private static final String REGISTER_USERNAME_FAILURE_EXIST = "400";
     // 登陆失败-->账号或密码错误
     private static final String LOGIN_FAILURE_NOT_CONFORM = "400";
+    // 登陆失败-->账号不存在
+    private static final String LOGIN_FAILURE_ACCOUNT_DOES_NOT_EXIST = "401";
 
     @Autowired
     private AuthDao authDao;
@@ -48,12 +50,16 @@ public class AuthService extends ConvenientService {
         if (TextUils.isEmpty(username) || TextUils.isEmpty(password))
             return getResponseJSON(RESPONSE_PARAMETER_ERROR).toString();
 
-        AuthEntity authEntity = authDao.find(username, password);
+        // 检查账号是否存在
+        boolean isEmpty = authDao.isEmpty(username);
+        if (!isEmpty)
+            return getResponseJSON(LOGIN_FAILURE_ACCOUNT_DOES_NOT_EXIST).toString();
 
+        // 检查账号密码
+        AuthEntity authEntity = authDao.find(username, password);
         // 用户名或密码错误
         if (authEntity == null)
             return getResponseJSON(LOGIN_FAILURE_NOT_CONFORM).toString();
-
         // 登陆成功
         return getResponseJSON(RESPONSE_SUCCESS).toString();
     }

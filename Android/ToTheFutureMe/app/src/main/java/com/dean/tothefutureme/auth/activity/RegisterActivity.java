@@ -18,6 +18,7 @@ import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityRegisterBinding;
 import com.dean.tothefutureme.home.HomeActivity;
 import com.dean.tothefutureme.main.TTFMApplication;
@@ -59,7 +60,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("选取方式");
         builder.setNegativeButton("相机", (dialog, which) -> {
-            BitmapUtil.openSystemCamera(this, TTFMApplication.APP_IMAGE_PAT, "temp.png");
+            BitmapUtil.openSystemCamera(this, AppConfig.APP_IMAGE_PAT, "temp.png");
         });
         builder.setNeutralButton("相册", (dialog, which) -> {
             BitmapUtil.openSystemPhotoAlbum(this);
