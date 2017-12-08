@@ -310,7 +310,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
             ToastUtil.showToast(this, "图片未找到");
     }
 
-    private Timer timer = new Timer(true);
+    private Timer timer;
 
     /**
      * 开始计时器
@@ -325,18 +325,20 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
             @Override
             public void run() {
                 runOnUiThread(() -> {
-                    viewDataBinding.sendVerificationCodeAgainButton.setText("重新发送(" + time-- + "秒)");
+                    viewDataBinding.sendVerificationCodeAgainButton.setText("重新发送(" + (time < 10 ? "0" : "") + time + "秒)");
 
-                    if (time < 0) {
+                    if (time-- <= 0) {
                         viewDataBinding.sendVerificationCodeAgainButton.setText("重新发送(60秒)");
                         viewDataBinding.sendVerificationCodeAgainButton.setTag(true);
 
-                        timer.cancel();
+                        if (timer != null)
+                            timer.cancel();
                     }
                 });
             }
         };
 
+        timer = new Timer(true);
         timer.schedule(task, 1000, 1000);
     }
 
