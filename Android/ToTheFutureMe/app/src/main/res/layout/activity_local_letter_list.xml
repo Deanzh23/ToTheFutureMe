@@ -1,10 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorThemeSkyBlue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundLightGrey">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorThemeSkyBlue"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            </android.support.design.widget.AppBarLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/appBarLayout">
+
+                <!-- 加载动画View -->
+                <com.dean.android.fw.convenient.ui.view.loading.elasticity.ConvenientElasticityLoadingView
+                    android:id="@+id/elasticityLoadingView"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_centerInParent="true"/>
+
+                <RelativeLayout
+                    android:id="@+id/contentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/messageLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/messageLine1TextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="您没有本地信件"
+                            android:textColor="@color/colorThemeSkyBlue"
+                            android:textSize="@dimen/text_size_big"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/messageLine2TextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/messageLine1TextView"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="4dp"
+                            android:text="点击右上角 + 号"
+                            android:textColor="@color/colorThemeSkyBlue"
+                            android:textSize="@dimen/text_size_big"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/messageLine3TextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/messageLine2TextView"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="4dp"
+                            android:text="开始写下给传送给未来的留言吧"
+                            android:textColor="@color/colorThemeSkyBlue"
+                            android:textSize="@dimen/text_size_big"
+                            android:textStyle="bold"/>
+                    </RelativeLayout>
+
+                    <!-- 本地信件列表 -->
+                    <ListView
+                        android:id="@+id/localLetterListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:divider="@null"
+                        android:visibility="gone"/>
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </FrameLayout>
 
 </layout>

@@ -52,7 +52,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_me_user_info_edit, menu);
+        inflater.inflate(R.menu.menu_edit, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -62,7 +62,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> {
 
         viewDataBinding.toolbar.setTitle("我的");
         activity.setSupportActionBar(viewDataBinding.toolbar);
-        viewDataBinding.toolbar.inflateMenu(R.menu.menu_me_user_info_edit);
+        viewDataBinding.toolbar.inflateMenu(R.menu.menu_edit);
     }
 
 }

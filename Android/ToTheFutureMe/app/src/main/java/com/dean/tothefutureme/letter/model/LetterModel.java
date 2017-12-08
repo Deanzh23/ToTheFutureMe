@@ -88,6 +88,11 @@ public class LetterModel extends BaseObservable implements Serializable {
      */
     @Column
     private String content;
+    /**
+     * 是否是为上传到服务器的本地信件
+     */
+    @Column
+    private boolean isLocal = false;
 
     public String getLetterId() {
         return letterId;
@@ -222,5 +227,13 @@ public class LetterModel extends BaseObservable implements Serializable {
     public void setContent(String content) {
         this.content = content;
         notifyPropertyChanged(BR.content);
+    }
+
+    public boolean isLocal() {
+        return isLocal;
+    }
+
+    public void setLocal(boolean local) {
+        isLocal = local;
     }
 }
