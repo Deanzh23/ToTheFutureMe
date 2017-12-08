@@ -21,6 +21,9 @@ import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityCheckUsernameBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -72,9 +75,22 @@ public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsern
                         @Override
                         public void success(String s) {
                             handler.post(() -> {
-                                ToastUtil.showToast(CheckUsernameActivity.this, "验证码邮件已发送您的邮箱", Toast.LENGTH_LONG);
-                                startActivity(new Intent(CheckUsernameActivity.this, RegisterActivity.class));
-                                CheckUsernameActivity.this.finish();
+                                try {
+                                    JSONObject response = new JSONObject(s);
+                                    String code = response.getString("code");
+
+                                    if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
+                                        ToastUtil.showToast(CheckUsernameActivity.this, "验证码邮件已发送您的邮箱", Toast.LENGTH_LONG);
+                                        startActivity(new Intent(CheckUsernameActivity.this, RegisterActivity.class));
+                                        CheckUsernameActivity.this.finish();
+                                    } else if ("400".equals(code))
+                                        ToastUtil.showToast(CheckUsernameActivity.this, "邮箱用户名已被占用，请更换邮箱用户名", Toast.LENGTH_LONG);
+                                    else
+                                        error(-2);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    error(-1);
+                                }
                             });
                         }
 

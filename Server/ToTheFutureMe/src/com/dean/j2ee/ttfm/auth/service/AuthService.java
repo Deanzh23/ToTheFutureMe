@@ -60,9 +60,21 @@ public class AuthService extends ConvenientService {
 
     /**
      * 重新发送验证码
+     *
+     * @param body
+     * @return
      */
-    public Object sendVerificationCodeAgain(String username) {
-        return sendVerificationCode(username);
+    public Object sendVerificationCodeAgain(String body) {
+        JSONObject request = new JSONObject(body);
+
+        try {
+            String username = URLDecoder.decode(request.getString("username"), "utf-8");
+
+            return sendVerificationCode(username);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return getResponseJSON(RESPONSE_PARAMETER_ERROR).toString();
+        }
     }
 
     /**
@@ -73,27 +85,23 @@ public class AuthService extends ConvenientService {
      */
     private Object sendVerificationCode(String username) {
         // 查找此用户的验证码
-        VerificationCodeEntity verificationCodeEntity = authDao.findVerificationCodeEntity(username);
-        if ((verificationCodeEntity != null && EMailUtils.getDiffer(verificationCodeEntity.getTime(), System.currentTimeMillis()) > 2 * 60) ||
-                verificationCodeEntity == null) {
-            // 获取6位数字验证码
-            String verificationCode = EMailUtils.getVerificationCode();
-            // 发送验证码到指定邮箱
-            try {
-                EMailUtils.sendEMail("给未来的自己", username, Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD,
-                        "您本次的注册验证码为：" + verificationCode);
+        VerificationCodeEntity verificationCodeEntity;
+        // 获取6位数字验证码
+        String verificationCode = EMailUtils.getVerificationCode();
+        // 发送验证码到指定邮箱
+        try {
+            EMailUtils.sendEMail("给未来的自己", username, Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD, "您本次的注册验证码为：" + verificationCode);
 
-                // 这里需要将验证码跟username关联，并存储到临时表里，注册后将其从临时表中删除
-                verificationCodeEntity = new VerificationCodeEntity();
-                verificationCodeEntity.setUsername(username);
-                verificationCodeEntity.setVerificationCode(verificationCode);
-                verificationCodeEntity.setTime(System.currentTimeMillis());
+            // 这里需要将验证码跟username关联，并存储到临时表里，注册后将其从临时表中删除
+            verificationCodeEntity = new VerificationCodeEntity();
+            verificationCodeEntity.setUsername(username);
+            verificationCodeEntity.setVerificationCode(verificationCode);
+            verificationCodeEntity.setTime(System.currentTimeMillis());
 
-                authDao.saveOrUpdate(verificationCodeEntity);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-                return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
-            }
+            authDao.saveOrUpdate(verificationCodeEntity);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
         }
 
         return getResponseJSON(RESPONSE_SUCCESS).toString();
@@ -125,8 +133,11 @@ public class AuthService extends ConvenientService {
         authEntity.setBirthday(birthday);
         authDao.saveOrUpdate(authEntity);
 
-        JSONObject response = new JSONObject(RESPONSE_SUCCESS);
-        return response.toString();
+        // 删除用户注册验证码
+        authDao.deleteVerificationCodeEntityByUsername(username);
+
+        // 应答
+        return getResponseJSON(RESPONSE_SUCCESS).toString();
     }
 
     /**
@@ -144,7 +155,7 @@ public class AuthService extends ConvenientService {
 
         // 检查账号是否存在
         boolean isEmpty = authDao.isEmpty(username);
-        if (!isEmpty)
+        if (isEmpty)
             return getResponseJSON(LOGIN_FAILURE_ACCOUNT_DOES_NOT_EXIST).toString();
 
         // 检查账号密码

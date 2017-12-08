@@ -30,8 +30,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 用户注册Activity
@@ -60,6 +63,14 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
         KeyboardUtil.hideSoftKeyboard(this);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // 开始验证码计时器
+        startTimerTask();
+    }
+
     /**
      * 选取图片作为头像
      */
@@ -81,7 +92,48 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
      */
     @OnClick(R.id.sendVerificationCodeAgainButton)
     public void sendVerificationCodeAgain() {
+        if (!(Boolean) viewDataBinding.sendVerificationCodeAgainButton.getTag())
+            return;
 
+        // 开始计时器
+        startTimerTask();
+
+        new Thread(() -> {
+            Map<String, String> bodyParams = new LinkedHashMap<>();
+            bodyParams.put("username", TTFMApplication.getAuthModel().getUsername());
+
+            ConvenientHttpConnection connection = new ConvenientHttpConnection();
+            connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_SEND_VERIFICATION_CODE_AGAIN, null, null, bodyParams,
+                    new HttpConnectionListener() {
+                        @Override
+                        public void success(String s) {
+                            try {
+                                JSONObject response = new JSONObject(s);
+                                String code = response.getString("code");
+
+                                // 重新发送验证码成功
+                                if (AppConfig.RESPONSE_SUCCESS.equals(code))
+                                    ToastUtil.showToast(RegisterActivity.this, "验证码已发送到您的邮箱", Toast.LENGTH_LONG);
+                                else
+                                    error(-2);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                error(-1);
+                            }
+                        }
+
+                        @Override
+                        public void error(int i) {
+                            handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "发送验证码失败"));
+                        }
+
+                        @Override
+                        public void end() {
+                            // 重新计时
+
+                        }
+                    });
+        }).start();
     }
 
     /**
@@ -256,6 +308,36 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
             BitmapUtil.setBitmap2ViewOnImageBitmap(this, viewDataBinding.avatarImageView, avatarImagePath, false, null);
         else
             ToastUtil.showToast(this, "图片未找到");
+    }
+
+    private Timer timer = new Timer(true);
+
+    /**
+     * 开始计时器
+     */
+    private void startTimerTask() {
+        viewDataBinding.sendVerificationCodeAgainButton.setTag(false);
+
+        TimerTask task = new TimerTask() {
+
+            int time = 60;
+
+            @Override
+            public void run() {
+                runOnUiThread(() -> {
+                    viewDataBinding.sendVerificationCodeAgainButton.setText("重新发送(" + time-- + "秒)");
+
+                    if (time < 0) {
+                        viewDataBinding.sendVerificationCodeAgainButton.setText("重新发送(60秒)");
+                        viewDataBinding.sendVerificationCodeAgainButton.setTag(true);
+
+                        timer.cancel();
+                    }
+                });
+            }
+        };
+
+        timer.schedule(task, 1000, 1000);
     }
 
 }

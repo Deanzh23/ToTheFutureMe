@@ -12,11 +12,15 @@ public class AppConfig {
     /**
      * 域名
      */
-    public static final String BASE_URL = "http://192.168.0.105:8444/ttfm/";
+    public static final String BASE_URL = "http://10.88.52.229:8444/ttfm/";
     /**
      * 验证账号可用性（邮箱）
      */
     public static final String AUTH_CHECK_USERNAME = "auth/check";
+    /**
+     * 重新发送验证码
+     */
+    public static final String AUTH_SEND_VERIFICATION_CODE_AGAIN = "verification";
     /**
      * 用户注册
      */

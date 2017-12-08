@@ -47,6 +47,18 @@ public class AuthDao extends ConvenientDao {
     }
 
     /**
+     * 删除指定用户的注册验证码
+     *
+     * @param username
+     */
+    public void deleteVerificationCodeEntityByUsername(String username) {
+        Map<String, Object> params = getParamMap();
+        params.put("username", username);
+
+        super.delete(sessionFactory, VerificationCodeEntity.class, params);
+    }
+
+    /**
      * 保存／更新 验证码信息
      *
      * @param verificationCodeEntity

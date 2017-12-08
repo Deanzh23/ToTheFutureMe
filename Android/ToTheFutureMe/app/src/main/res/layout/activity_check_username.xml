@@ -46,7 +46,7 @@
                 android:drawableRight="@drawable/ic_next_step"
                 android:gravity="center_vertical"
                 android:padding="8dp"
-                android:text="验证邮箱是否可用"
+                android:text="发送验证码"
                 android:textSize="@dimen/text_size"/>
         </RelativeLayout>
     </RelativeLayout>

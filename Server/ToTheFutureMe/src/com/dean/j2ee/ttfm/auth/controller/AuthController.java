@@ -29,6 +29,18 @@ public class AuthController extends ConvenientController {
     }
 
     /**
+     * 重新发送验证码
+     *
+     * @param body
+     * @return
+     */
+    @RequestMapping(value = "/verification", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Object sendVerificationCodeAgain(@RequestBody String body) {
+        return authService.sendVerificationCodeAgain(body);
+    }
+
+    /**
      * 用户注册
      *
      * @param username
