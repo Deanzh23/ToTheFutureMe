@@ -2,7 +2,10 @@ package com.dean.tothefutureme.main;
 
 import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
+import com.dean.android.framework.convenient.util.SetUtil;
 import com.dean.tothefutureme.auth.model.AuthModel;
+
+import java.util.List;
 
 /**
  * 给未来的自己Application
@@ -34,7 +37,8 @@ public class TTFMApplication extends ConvenientApplication {
         // 初始化数据库
         DatabaseUtil.init(this, "ttfm_db", 1, null);
         // 查找之前的登陆用户
-        DatabaseUtil.find(getAuthModel());
+        List<AuthModel> authModels = DatabaseUtil.findAll(AuthModel.class, null);
+        authModel = SetUtil.isEmpty(authModels) ? getAuthModel() : authModels.get(0);
 
         try {
             Thread.sleep(2300);

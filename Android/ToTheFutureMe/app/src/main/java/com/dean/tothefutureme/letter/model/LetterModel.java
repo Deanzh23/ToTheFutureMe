@@ -33,15 +33,15 @@ public class LetterModel extends BaseObservable implements Serializable {
     @PrimaryKey
     private String letterId;
     /**
-     * 信件类型（0：文字；1：语音）
-     */
-    @Column
-    private int type = LEETER_TYPE_TEXT;
-    /**
      * 收件人ID -> username
      */
     @PrimaryKey
     private String userId;
+    /**
+     * 信件类型（0：文字；1：语音）
+     */
+    @Column
+    private int type = LEETER_TYPE_TEXT;
     /**
      * 发件人ID -> username
      */
@@ -83,6 +83,15 @@ public class LetterModel extends BaseObservable implements Serializable {
      * 收件时间表示
      */
     private String receiveTimeName;
+    /**
+     * 本地保存日期时间毫秒值
+     */
+    @Column
+    private long localSaveDateTime;
+    /**
+     * 本地保存日期时间表示
+     */
+    private String localSaveDateTimeName;
     /**
      * 信件内容
      */
@@ -235,5 +244,23 @@ public class LetterModel extends BaseObservable implements Serializable {
 
     public void setLocal(boolean local) {
         isLocal = local;
+    }
+
+    public long getLocalSaveDateTime() {
+        return localSaveDateTime;
+    }
+
+    public void setLocalSaveDateTime(long localSaveDateTime) {
+        this.localSaveDateTime = localSaveDateTime;
+
+        setLocalSaveDateTimeName(DateTimeUtils.getDateTimeMillisecond2String(localSaveDateTime));
+    }
+
+    public String getLocalSaveDateTimeName() {
+        return localSaveDateTimeName;
+    }
+
+    public void setLocalSaveDateTimeName(String localSaveDateTimeName) {
+        this.localSaveDateTimeName = localSaveDateTimeName;
     }
 }

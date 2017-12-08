@@ -1,9 +1,11 @@
 package com.dean.tothefutureme.letter.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,17 +39,14 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        viewDataBinding.toolbar.setNavigationIcon(R.drawable.ic_menu_back);
         viewDataBinding.toolbar.setTitle("本地信件列表");
         setSupportActionBar(viewDataBinding.toolbar);
+        viewDataBinding.toolbar.setNavigationOnClickListener(v -> LocalLetterListActivity.this.finish());
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         localLetterAdapter = new LocalLetterAdapter(this, letterModels);
         viewDataBinding.localLetterListView.setAdapter(localLetterAdapter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         loadDataFromDB();
     }
@@ -60,7 +59,8 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        // TODO 跳转信件编写界面
+        // 跳转信件编写界面
+        startActivity(new Intent(LocalLetterListActivity.this, LetterEditActivity.class));
         return true;
     }
 
@@ -68,15 +68,21 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
      * 从本地数据库中读取信件数据
      */
     private void loadDataFromDB() {
-        // 开始读取数据动画
+        // 开始读取数据动画并隐藏数据界面
         viewDataBinding.elasticityLoadingView.startAndHideView(viewDataBinding.contentLayout);
 
-        new Thread(() -> {
+        /**
+         * debug
+         */
+        handler.postDelayed(() -> new Thread(() -> {
             Selector selector = new Selector();
             selector.and("isLocal", "=", true);
             letterModels = DatabaseUtil.findAll(LetterModel.class, selector);
 
+            Log.d(LocalLetterListActivity.class.getSimpleName(), "读取本地数据有<信件> " + (letterModels == null ? 0 : letterModels.size()) + "  条");
+
             handler.post(() -> {
+                // 停止读取数据动画并显示数据界面
                 viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.contentLayout);
 
                 // 本地没有数据
@@ -92,7 +98,7 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
                     localLetterAdapter.update(letterModels);
                 }
             });
-        }).start();
+        }).start(), 4000);
     }
 
 }

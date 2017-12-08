@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="letterModel"
+            type="com.dean.tothefutureme.letter.model.LetterModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorThemeSkyBlue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundLightGrey">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorThemeSkyBlue"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            </android.support.design.widget.AppBarLayout>
+
+            <EditText
+                android:id="@+id/contentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/appBarLayout"
+                android:layout_marginBottom="4dp"
+                android:enabled="false"
+                android:gravity="left|top"
+                android:hint="从此开始"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:text="@={letterModel.content}"
+                android:textSize="@dimen/text_size_medium"/>
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</layout>
