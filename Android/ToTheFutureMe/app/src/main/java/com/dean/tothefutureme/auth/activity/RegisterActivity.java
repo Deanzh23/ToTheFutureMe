@@ -48,6 +48,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
 
     private String avatarImagePath;
 
+    private Timer timer;
     private Handler handler = new Handler();
 
     @Override
@@ -310,13 +311,12 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
             ToastUtil.showToast(this, "图片未找到");
     }
 
-    private Timer timer;
-
     /**
      * 开始计时器
      */
     private void startTimerTask() {
         viewDataBinding.sendVerificationCodeAgainButton.setTag(false);
+        viewDataBinding.sendVerificationCodeAgainButton.setBackgroundResource(R.drawable.ic_dean_button_gray_bg);
 
         TimerTask task = new TimerTask() {
 
@@ -329,6 +329,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
 
                     if (time-- <= 0) {
                         viewDataBinding.sendVerificationCodeAgainButton.setText("重新发送(60秒)");
+                        viewDataBinding.sendVerificationCodeAgainButton.setBackgroundResource(R.drawable.ic_dean_button_blue_bg);
                         viewDataBinding.sendVerificationCodeAgainButton.setTag(true);
 
                         if (timer != null)

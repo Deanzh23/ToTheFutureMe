@@ -148,8 +148,8 @@
                                     android:layout_alignTop="@id/verificationCodeEditText"
                                     android:background="@drawable/ic_dean_button_blue_bg"
                                     android:gravity="center"
-                                    android:paddingLeft="8dp"
-                                    android:paddingRight="8dp"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
                                     android:text="重新发送(60秒)"
                                     android:textColor="@android:color/white"
                                     android:textSize="12sp"/>
