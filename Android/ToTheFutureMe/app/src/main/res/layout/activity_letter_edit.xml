@@ -35,20 +35,26 @@
                     app:popupTheme="@style/AppTheme.PopupOverlay"/>
             </android.support.design.widget.AppBarLayout>
 
-            <EditText
-                android:id="@+id/contentEditText"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/appBarLayout"
-                android:layout_marginBottom="4dp"
-                android:enabled="false"
-                android:gravity="left|top"
-                android:hint="从此开始"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp"
-                android:text="@={letterModel.content}"
-                android:textSize="@dimen/text_size_medium"/>
+                android:background="@drawable/letter_1_bg"
+                android:padding="16dp">
+
+                <com.dean.tothefutureme.custom.view.edittext.LetterEditText
+                    android:id="@+id/contentEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="left|top"
+                    android:hint="点击[铅笔]开始编辑"
+                    android:lineSpacingExtra="6dp"
+                    android:scrollbars="vertical"
+                    android:text="@={letterModel.content}"
+                    android:textSize="@dimen/text_size"/>
+            </RelativeLayout>
         </RelativeLayout>
 
     </FrameLayout>

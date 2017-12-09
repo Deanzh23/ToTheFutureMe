@@ -12,7 +12,7 @@ public class AppConfig {
     /**
      * 域名
      */
-    public static final String BASE_URL = "http://192.168.43.187:8444/ttfm/";
+    public static final String BASE_URL = "http://192.168.0.105:8444/ttfm/";
     /**
      * 验证账号可用性（邮箱）
      */

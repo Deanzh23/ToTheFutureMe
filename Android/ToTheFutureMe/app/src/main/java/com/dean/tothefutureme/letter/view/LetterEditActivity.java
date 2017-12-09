@@ -49,11 +49,29 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         viewDataBinding.toolbar.setNavigationOnClickListener(v -> exitLetterEditActivity());
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
+        // 设置信件EditText的高度值给信件EditText
+        viewDataBinding.contentEditText.post(() ->
+                viewDataBinding.contentEditText.setHeightAndWidth(viewDataBinding.contentEditText.getHeight(), viewDataBinding.contentEditText.getWidth()));
+
         letterModel = (LetterModel) getIntent().getSerializableExtra(LetterModel.class.getSimpleName());
         if (letterModel == null)
             letterModel = new LetterModel();
 
+        /**
+         * debug
+         */
+        test();
+
         viewDataBinding.setLetterModel(letterModel);
+    }
+
+    private void test() {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < 100; i++)
+            builder.append("刷卡来得及发阿拉山口的卷发； 啊上了打开肌肤啊上了；都快放假啊上来的反馈就仨离开对方离开撒娇地方阿斯利康的风景卡洛斯地方将啊上来的风景看啊上来的反馈就啊上了");
+
+        letterModel.setContent(builder.toString());
     }
 
     @Override
