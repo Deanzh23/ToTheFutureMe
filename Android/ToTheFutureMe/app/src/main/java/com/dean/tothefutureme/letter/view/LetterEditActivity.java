@@ -1,11 +1,13 @@
 package com.dean.tothefutureme.letter.view;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.custom.view.edittext.LetterEditText;
 import com.dean.tothefutureme.databinding.ActivityLetterEditBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.main.TTFMApplication;
@@ -39,6 +42,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
 
     private Handler handler = new Handler();
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +54,10 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         // 设置信件EditText的高度值给信件EditText
-        viewDataBinding.contentEditText.post(() ->
-                viewDataBinding.contentEditText.setHeightAndWidth(viewDataBinding.contentEditText.getHeight(), viewDataBinding.contentEditText.getWidth()));
+        viewDataBinding.contentEditText.post(() -> {
+            Log.d(LetterEditText.class.getSimpleName(), "[ post ]");
+            viewDataBinding.contentEditText.setHeightAndWidth(viewDataBinding.scrollView.getHeight(), viewDataBinding.contentEditText.getWidth());
+        });
 
         letterModel = (LetterModel) getIntent().getSerializableExtra(LetterModel.class.getSimpleName());
         if (letterModel == null)

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
@@ -18,8 +20,8 @@ import android.widget.EditText;
  * </p>
  * Created by dean on 2017/12/9.
  */
-@SuppressLint("AppCompatCustomView")
-public class LetterEditText extends EditText {
+@SuppressLint({"AppCompatCustomView", "NewApi"})
+public class LetterEditText extends EditText implements TextWatcher {
 
     private Paint linePaint;
 
@@ -36,6 +38,8 @@ public class LetterEditText extends EditText {
         super(context, attrs);
 
         initPaint();
+        // 设置文本变更监听器
+        addTextChangedListener(this);
     }
 
     /**
@@ -64,11 +68,18 @@ public class LetterEditText extends EditText {
     protected void onDraw(Canvas canvas) {
         // 行高度
         int lineHeight = getLineHeight();
-        Log.d(LetterEditText.class.getSimpleName(), "lineHeight == " + lineHeight);
         // 共有多少行
-        int lineCount = height / lineHeight;
+        // 当前文本行数
+        int contentLineCount = getLineCount() + 1;
+        // 屏幕能显示的行数
+        int screenLineCount = height / lineHeight;
+        // 真实的行数
+        int lineCount = contentLineCount > screenLineCount ? contentLineCount : screenLineCount;
+        Log.d(LetterEditText.class.getSimpleName(), "lineCount == " + lineCount);
         // 画行线
         drawLines(canvas, lineHeight, lineCount);
+        // 保存画板
+        canvas.save();
 
         super.onDraw(canvas);
     }
@@ -95,6 +106,19 @@ public class LetterEditText extends EditText {
     public void setHeightAndWidth(int height, int width) {
         this.height = height;
         this.width = width;
+        postInvalidate();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
         postInvalidate();
     }
 
