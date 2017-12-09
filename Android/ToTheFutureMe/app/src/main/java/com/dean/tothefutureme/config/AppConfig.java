@@ -47,4 +47,9 @@ public class AppConfig {
     // 头像
     public static final int IMAGE_TYPE_AVATAR = 0;
 
+    /**
+     * 数据更新广播表示
+     */
+    public static final String BROADCAST_RECEIVER_DATA_UPDATE = "broadcast_receiver_data_update";
+
 }

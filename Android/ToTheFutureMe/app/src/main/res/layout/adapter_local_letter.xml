@@ -12,6 +12,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/letterSaveDateTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@{@string/app_letter_message_save_date_time_label+letterModel.localSaveDateTimeName}"
+                android:textSize="@dimen/text_size_small"/>
+
+            <RelativeLayout
+                android:id="@+id/letterContentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/letterSaveDateTimeTextView"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorThemeSkyBlue"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/letterContentTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    android:minLines="4"
+                    android:text="@{letterModel.content}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </layout>

@@ -1,6 +1,9 @@
 package com.dean.tothefutureme.letter.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,6 +19,7 @@ import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.util.SetUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityLocalLetterListBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 
@@ -35,6 +39,13 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
 
     private Handler handler = new Handler();
 
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            loadDataFromDB();
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +57,15 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         localLetterAdapter = new LocalLetterAdapter(this, letterModels);
+        localLetterAdapter.setOnDataChangeUpdateListener(() -> loadDataFromDB());
         viewDataBinding.localLetterListView.setAdapter(localLetterAdapter);
 
+        // 从数据库中读取数据
         loadDataFromDB();
+
+        // 注册广播
+        IntentFilter intentFilter = new IntentFilter(AppConfig.BROADCAST_RECEIVER_DATA_UPDATE);
+        registerReceiver(broadcastReceiver, intentFilter);
     }
 
     @Override
@@ -64,6 +81,12 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
         return true;
     }
 
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
+    }
+
     /**
      * 从本地数据库中读取信件数据
      */
@@ -76,7 +99,7 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
          */
         handler.postDelayed(() -> new Thread(() -> {
             Selector selector = new Selector();
-            selector.and("isLocal", "=", true);
+            selector.and("isLocal", "=", true).orderBy("localSaveDateTime", true);
             letterModels = DatabaseUtil.findAll(LetterModel.class, selector);
 
             Log.d(LocalLetterListActivity.class.getSimpleName(), "读取本地数据有<信件> " + (letterModels == null ? 0 : letterModels.size()) + "  条");

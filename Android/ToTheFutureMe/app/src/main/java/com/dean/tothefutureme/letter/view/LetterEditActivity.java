@@ -3,6 +3,7 @@ package com.dean.tothefutureme.letter.view;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.custom.view.edittext.LetterEditText;
 import com.dean.tothefutureme.databinding.ActivityLetterEditBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
@@ -63,21 +65,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         if (letterModel == null)
             letterModel = new LetterModel();
 
-        /**
-         * debug
-         */
-        test();
-
         viewDataBinding.setLetterModel(letterModel);
-    }
-
-    private void test() {
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < 100; i++)
-            builder.append("刷卡来得及发阿拉山口的卷发； 啊上了打开肌肤啊上了；都快放假啊上来的反馈就仨离开对方离开撒娇地方阿斯利康的风景卡洛斯地方将啊上来的风景看啊上来的反馈就啊上了");
-
-        letterModel.setContent(builder.toString());
     }
 
     @Override
@@ -153,6 +141,9 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         // 保存完成后是否提示
         if (tagEnd && waitDialog != null) {
             handler.post(() -> {
+                // 发送消息更新广播->更新本地信件列表
+                LetterEditActivity.this.sendBroadcast(new Intent(AppConfig.BROADCAST_RECEIVER_DATA_UPDATE));
+
                 waitDialog.dismiss();
                 ToastUtil.showToast(LetterEditActivity.this, "保存成功");
             });
@@ -170,6 +161,9 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
             // 先在本地保存一下，以防上传途中意外丢失内存中的数据
             save2DB(false);
             // TODO 上传到服务器
+
+            // 发送消息更新广播->更新本地信件列表
+            LetterEditActivity.this.sendBroadcast(new Intent(AppConfig.BROADCAST_RECEIVER_DATA_UPDATE));
         }).start();
     }
 
