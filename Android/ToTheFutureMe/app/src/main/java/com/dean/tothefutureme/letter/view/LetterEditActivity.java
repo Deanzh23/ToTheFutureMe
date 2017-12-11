@@ -127,6 +127,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         waitDialog = ConvenientProgressDialog.getInstance(this, "正在保存...", false);
         waitDialog.show();
 
+        // 保存到数据库
         new Thread(() -> save2DB(true)).start();
     }
 
