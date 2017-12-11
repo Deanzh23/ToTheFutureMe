@@ -79,12 +79,9 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     public void selectImage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("选取方式");
-        builder.setNegativeButton("相机", (dialog, which) -> {
-            BitmapUtil.openSystemCamera(this, AppConfig.APP_IMAGE_PAT, "temp.png");
-        });
-        builder.setNeutralButton("相册", (dialog, which) -> {
-            BitmapUtil.openSystemPhotoAlbum(this);
-        });
+//        BitmapUtil.openSystemCamera(this, AppConfig.APP_IMAGE_PAT, "temp.png")
+        builder.setNegativeButton("相机", (dialog, which) -> BitmapUtil.openSystemCamera(this, AppConfig.APP_IMAGE_PAT, "temp.png"));
+        builder.setNeutralButton("相册", (dialog, which) -> BitmapUtil.openSystemPhotoAlbum(this));
         builder.create().show();
     }
 
@@ -231,14 +228,6 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                 registerUserInfo();
             }
         }).start();
-
-        /**
-         * debug
-         */
-//        handler.postDelayed(() -> {
-//            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-//            ConvenientApplication.killHistoryActivity(HomeActivity.class.getSimpleName());
-//        }, 3000);
     }
 
     /**
@@ -289,22 +278,19 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
 
     @Override
     protected void albumResult(Intent intent) {
-        setImage2Avatar(intent);
+        avatarImagePath = BitmapUtil.intent2ImagePath(this, intent);
+        setImage2Avatar();
     }
 
     @Override
     protected void cameraResult(Intent intent) {
-        setImage2Avatar(intent);
+        avatarImagePath = AppConfig.APP_IMAGE_PAT + "/temp.png";
     }
 
     /**
      * 设置图片到头像控件
-     *
-     * @param intent
      */
-    private void setImage2Avatar(Intent intent) {
-        avatarImagePath = BitmapUtil.intent2ImagePath(this, intent);
-
+    private void setImage2Avatar() {
         if (!TextUtils.isEmpty(avatarImagePath))
             BitmapUtil.setBitmap2ViewOnImageBitmap(this, viewDataBinding.avatarImageView, avatarImagePath, false, null);
         else

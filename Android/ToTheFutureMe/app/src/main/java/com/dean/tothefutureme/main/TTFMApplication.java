@@ -1,5 +1,7 @@
 package com.dean.tothefutureme.main;
 
+import android.os.StrictMode;
+
 import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.util.SetUtil;
@@ -30,6 +32,10 @@ public class TTFMApplication extends ConvenientApplication {
 
         if (authModel == null)
             authModel = new AuthModel();
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+//        builder.detectFileUriExposure();
     }
 
     @Override

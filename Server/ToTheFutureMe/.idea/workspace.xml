@@ -57,8 +57,8 @@
       <file leaf-file-name="LetterController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/letter/controller/LetterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+            <state relative-caret-position="118">
+              <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
               <folding>
                 <element signature="e#961#962#0" expanded="true" />
                 <element signature="e#1010#1011#0" expanded="true" />
@@ -502,12 +502,12 @@
       <workItem from="1512738354359" duration="1375000" />
       <workItem from="1512804270231" duration="2343000" />
       <workItem from="1512834379689" duration="97000" />
-      <workItem from="1512956362656" duration="1923000" />
+      <workItem from="1512956362656" duration="2394000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39104000" />
+    <option name="totallyTimeSpent" value="39575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="-77" width="1440" height="877" extended-state="6" />
@@ -895,8 +895,8 @@
         <state relative-caret-position="386">
           <caret line="74" column="51" lean-forward="true" selection-start-line="74" selection-start-column="51" selection-end-line="74" selection-end-column="51" />
           <folding>
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#1911#1912#0" expanded="true" />
+            <element signature="e#1855#1856#0" expanded="false" />
+            <element signature="e#1911#1912#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -949,8 +949,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/letter/controller/LetterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        <state relative-caret-position="118">
+          <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
           <folding>
             <element signature="e#961#962#0" expanded="true" />
             <element signature="e#1010#1011#0" expanded="true" />
