@@ -10,12 +10,6 @@
         tools:ignore="MenuTitle"/>
 
     <item
-        android:id="@+id/menuSaveLetter"
-        android:icon="@drawable/ic_menu_save"
-        app:showAsAction="always"
-        tools:ignore="MenuTitle"/>
-
-    <item
         android:id="@+id/menuUploadLetter"
         android:icon="@drawable/ic_menu_upload"
         app:showAsAction="always"

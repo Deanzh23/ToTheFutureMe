@@ -12,7 +12,7 @@ public class AppConfig {
     /**
      * 域名
      */
-    public static final String BASE_URL = "http://192.168.0.105:8444/ttfm/";
+    public static final String BASE_URL = "http://10.88.53.35:8444/ttfm/";
     /**
      * 验证账号可用性（邮箱）
      */
@@ -29,6 +29,10 @@ public class AppConfig {
      * 用户登陆
      */
     public static final String AUTH_LOGIN = "auth/login";
+    /**
+     * 上传信件
+     */
+    public static final String LETTER_UPLOAD = "letter/upload";
 
     public static final String FILE = "file/upload";
 

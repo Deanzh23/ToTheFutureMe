@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
+import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
 import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
@@ -98,8 +99,15 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
                                     } else {
                                         // 保存登陆用户信息到数据
                                         new Thread(() -> {
-                                            DatabaseUtil.deleteAll(AuthModel.class, null);
-                                            DatabaseUtil.saveOrUpdate(TTFMApplication.getAuthModel());
+                                            try {
+                                                JSONObject authJSONObject = response.getJSONObject("data");
+                                                DatabaseUtil.deleteAll(AuthModel.class, null);
+                                                TTFMApplication.setAuthModel(JSONUtil.json2Object(authJSONObject, AuthModel.class));
+                                                DatabaseUtil.saveOrUpdate(TTFMApplication.getAuthModel());
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                                error(-1);
+                                            }
                                         }).start();
 
                                         // 进入APP
@@ -108,32 +116,23 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    error(-2);
                                 }
                             });
                         }
 
                         @Override
                         public void error(int i) {
-                            handler.post(() -> {
-                                ToastUtil.showToast(LoginActivity.this, "登陆请求失败");
-                            });
+                            handler.post(() -> ToastUtil.showToast(LoginActivity.this, "登陆请求失败"));
                         }
 
                         @Override
                         public void end() {
-                            handler.post(() -> {
-                                progressDialog.dismiss();
-                            });
+                            handler.post(() -> progressDialog.dismiss());
                         }
                     });
         }).start();
 
-
-        /**
-         * debug
-         */
-//        startActivity(new Intent(this, HomeActivity.class));
-//        ConvenientApplication.killHistoryActivity(HomeActivity.class.getSimpleName());
     }
 
     /**

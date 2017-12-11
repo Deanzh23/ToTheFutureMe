@@ -35,39 +35,39 @@
                     app:popupTheme="@style/AppTheme.PopupOverlay"/>
             </android.support.design.widget.AppBarLayout>
 
-            <ScrollView
-                android:id="@+id/scrollView"
+            <!-- 信件壁纸 -->
+            <RelativeLayout
+                android:id="@+id/letterBackgroundLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/appBarLayout"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                android:padding="16dp">
 
-                <LinearLayout
+                <com.dean.tothefutureme.custom.view.textview.LetterTextView
+                    android:id="@+id/contentTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:hint="点击[铅笔]开始编辑"
+                    android:lineSpacingExtra="6dp"
+                    android:scrollbars="vertical"
+                    android:text="@={letterModel.content}"
+                    android:textSize="@dimen/text_size"/>
 
-                    <ImageView
-                        android:id="@+id/letterHeaderImageView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                    <com.dean.tothefutureme.custom.view.edittext.LetterEditText
-                        android:id="@+id/contentEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:enabled="false"
-                        android:gravity="left|top"
-                        android:hint="点击[铅笔]开始编辑"
-                        android:lineSpacingExtra="6dp"
-                        android:text="@={letterModel.content}"
-                        android:textSize="@dimen/text_size"/>
-                </LinearLayout>
-            </ScrollView>
+                <!-- 信件编辑内容 -->
+                <com.dean.tothefutureme.custom.view.edittext.LetterEditText
+                    android:id="@+id/contentEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:lineSpacingExtra="6dp"
+                    android:scrollbars="vertical"
+                    android:text="@={letterModel.content}"
+                    android:textSize="@dimen/text_size"
+                    android:visibility="gone"/>
+            </RelativeLayout>
         </RelativeLayout>
 
     </FrameLayout>

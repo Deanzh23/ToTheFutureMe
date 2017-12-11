@@ -1,18 +1,18 @@
-package com.dean.tothefutureme.custom.view.edittext;
+package com.dean.tothefutureme.custom.view.textview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.EditText;
+import android.widget.TextView;
+
+import com.dean.tothefutureme.custom.view.edittext.LetterEditText;
 
 /**
- * 信件（每行都带有行线的）EditText
+ * 信件（每行都带有行线的）TextView
  * <p>
  * 1.android:background="@android:color/transparent"
  * 2.android:lineSpacingExtra="6dp"
@@ -20,8 +20,8 @@ import android.widget.EditText;
  * </p>
  * Created by dean on 2017/12/9.
  */
-@SuppressLint({"AppCompatCustomView", "NewApi"})
-public class LetterEditText extends EditText implements TextWatcher {
+@SuppressLint("AppCompatCustomView")
+public class LetterTextView extends TextView {
 
     private Paint linePaint;
 
@@ -34,12 +34,10 @@ public class LetterEditText extends EditText implements TextWatcher {
      */
     private int width;
 
-    public LetterEditText(Context context, AttributeSet attrs) {
+    public LetterTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         initPaint();
-        // 设置文本变更监听器
-        addTextChangedListener(this);
     }
 
     /**
@@ -109,19 +107,6 @@ public class LetterEditText extends EditText implements TextWatcher {
         this.height = height;
         this.width = width;
 
-        postInvalidate();
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
         postInvalidate();
     }
 

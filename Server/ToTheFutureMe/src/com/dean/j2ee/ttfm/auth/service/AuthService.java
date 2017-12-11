@@ -1,5 +1,6 @@
 package com.dean.j2ee.ttfm.auth.service;
 
+import com.dean.j2ee.framework.json.JSONUtil;
 import com.dean.j2ee.framework.service.ConvenientService;
 import com.dean.j2ee.framework.utils.TextUils;
 import com.dean.j2ee.framework.utils.email.EMailUtils;
@@ -164,7 +165,9 @@ public class AuthService extends ConvenientService {
         if (authEntity == null)
             return getResponseJSON(LOGIN_FAILURE_NOT_CONFORM).toString();
         // 登陆成功
-        return getResponseJSON(RESPONSE_SUCCESS).toString();
+        JSONObject response = getResponseJSON(RESPONSE_SUCCESS);
+        response.put("data", JSONUtil.object2Json(authEntity));
+        return response.toString();
     }
 
 }

@@ -56,6 +56,10 @@ public class AuthModel extends BaseObservable implements Serializable {
      * 注册验证码
      */
     private String verificationCode;
+    /**
+     * 编辑模式
+     */
+    private boolean editModel = false;
 
     public AuthModel() {
     }
@@ -174,5 +178,19 @@ public class AuthModel extends BaseObservable implements Serializable {
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
         notifyPropertyChanged(BR.verificationCode);
+    }
+
+    public boolean isEditModel() {
+        return editModel;
+    }
+
+    @Bindable
+    public boolean getEditModel() {
+        return editModel;
+    }
+
+    public void setEditModel(boolean editModel) {
+        this.editModel = editModel;
+        notifyPropertyChanged(BR.editModel);
     }
 }

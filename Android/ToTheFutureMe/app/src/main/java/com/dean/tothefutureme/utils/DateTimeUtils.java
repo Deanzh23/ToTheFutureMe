@@ -3,6 +3,7 @@ package com.dean.tothefutureme.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 日期时间工具类
@@ -14,11 +15,11 @@ public class DateTimeUtils {
     /**
      * 日期格式
      */
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/DD");
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd", Locale.CHINA);
     /**
      * 日期时间格式
      */
-    public static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy/MM/DD HH:mm");
+    public static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.CHINA);
 
     /**
      * 获取指定日期的毫秒数形式值
