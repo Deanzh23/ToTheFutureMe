@@ -23,6 +23,10 @@ public class AuthModel extends BaseObservable implements Serializable {
     @Column
     private String password;
     /**
+     * 修改密码时用于表示旧密码
+     */
+    private String oldPasswrod;
+    /**
      * 头像URL
      */
     @Column
@@ -95,6 +99,16 @@ public class AuthModel extends BaseObservable implements Serializable {
     public void setPassword(String password) {
         this.password = password;
         notifyPropertyChanged(BR.password);
+    }
+
+    @Bindable
+    public String getOldPasswrod() {
+        return oldPasswrod;
+    }
+
+    public void setOldPasswrod(String oldPasswrod) {
+        this.oldPasswrod = oldPasswrod;
+        notifyPropertyChanged(BR.oldPasswrod);
     }
 
     @Bindable

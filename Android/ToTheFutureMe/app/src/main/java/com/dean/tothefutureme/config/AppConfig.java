@@ -30,6 +30,10 @@ public class AppConfig {
      */
     public static final String AUTH_LOGIN = "auth/login";
     /**
+     * 更新用户信息
+     */
+    public static final String AUTH_UPLOAD = "auth/upload";
+    /**
      * 上传信件
      */
     public static final String LETTER_UPLOAD = "letter/upload";

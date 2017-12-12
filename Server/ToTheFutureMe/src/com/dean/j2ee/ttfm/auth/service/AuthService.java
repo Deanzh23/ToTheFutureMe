@@ -170,4 +170,36 @@ public class AuthService extends ConvenientService {
         return response.toString();
     }
 
+    /**
+     * 更新用户信息
+     *
+     * @param body
+     * @return
+     */
+    public Object upload(String body) {
+        if (TextUils.isEmpty(body))
+            return getResponseJSON(RESPONSE_PARAMETER_ERROR).toString();
+
+        JSONObject request = new JSONObject(body);
+        AuthEntity requestAuthEntity = new AuthEntity();
+        JSONUtil.json2Object(request, requestAuthEntity);
+
+        // 检查账号密码
+        AuthEntity authEntity = authDao.find(requestAuthEntity.getUsername(), requestAuthEntity.getPassword());
+        // 用户名或密码错误
+        if (authEntity == null)
+            return getResponseJSON(LOGIN_FAILURE_NOT_CONFORM).toString();
+
+        authEntity.setNickname(requestAuthEntity.getNickname());
+        authEntity.setGenderCode(requestAuthEntity.getGenderCode());
+        authEntity.setBirthday(requestAuthEntity.getBirthday());
+
+        // 保存到数据库
+        authDao.saveOrUpdate(authEntity);
+
+        JSONObject response = getResponseJSON(RESPONSE_SUCCESS);
+        response.put("data", JSONUtil.object2Json(authEntity));
+        return response.toString();
+    }
+
 }

@@ -71,4 +71,16 @@ public class AuthController extends ConvenientController {
         return authService.login(username, password);
     }
 
+    /**
+     * 更新用户信息
+     *
+     * @param body
+     * @return
+     */
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Object upload(@RequestBody String body) {
+        return authService.upload(body);
+    }
+
 }
