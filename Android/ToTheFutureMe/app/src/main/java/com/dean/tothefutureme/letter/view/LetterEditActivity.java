@@ -1,17 +1,18 @@
 package com.dean.tothefutureme.letter.view;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
@@ -25,6 +26,7 @@ import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
+import com.dean.tothefutureme.custom.view.edittext.LetterEditText;
 import com.dean.tothefutureme.databinding.ActivityLetterEditBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.main.TTFMApplication;
@@ -40,9 +42,10 @@ import java.util.UUID;
  * Created by dean on 2017/12/8.
  */
 @ContentView(R.layout.activity_letter_edit)
-public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBinding> implements Toolbar.OnMenuItemClickListener {
+public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBinding> implements Toolbar.OnMenuItemClickListener, LetterEditText.OnMaxLengthListener {
 
     private ProgressDialog waitDialog;
+    private AlertDialog uploadDialog;
 
     private LetterModel letterModel;
 
@@ -74,6 +77,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
             letterModel = new LetterModel();
 
         viewDataBinding.setLetterModel(letterModel);
+        updateLetterLengthLimit();
     }
 
     @Override
@@ -95,7 +99,13 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
                 viewDataBinding.contentTextView.setVisibility(isEditing ? View.GONE : View.VISIBLE);
                 viewDataBinding.contentEditText.setVisibility(isEditing ? View.VISIBLE : View.GONE);
 
-                if (!isEditing) {
+                // 编辑模式
+                if (isEditing) {
+                    // EditText获得焦点
+                    viewDataBinding.contentEditText.requestFocus();
+                }
+                // 非编辑模式
+                else if (!isEditing) {
                     // 收起键盘
                     KeyboardUtil.hideSoftKeyboard(LetterEditActivity.this);
                     // 保存到本地数据库
@@ -104,7 +114,23 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
                 break;
             // 上传
             case R.id.menuUploadLetter:
-                uploadLetter();
+                // 检查内容
+                if (letterModel == null || TextUtils.isEmpty(letterModel.getContent())) {
+                    ToastUtil.showToast(LetterEditActivity.this, "传送没有内容的信件毫无意义哟！", Toast.LENGTH_LONG, ToastUtil.LOCATION_MIDDLE);
+                    return true;
+                }
+
+                // 弹出上传提示
+                AlertDialog.Builder builder = new AlertDialog.Builder(LetterEditActivity.this);
+                builder.setTitle("确认传送吗？");
+                builder.setMessage("传送后，将不能修改，并且只能在指定时期再见到");
+                builder.setPositiveButton("确认传送", (dialog, which) -> {
+                    uploadDialog.dismiss();
+                    uploadLetter();
+                });
+                builder.setNeutralButton("放弃传送", (dialog, which) -> uploadDialog.dismiss());
+                uploadDialog = builder.create();
+                uploadDialog.show();
                 break;
         }
 
@@ -215,15 +241,27 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
 
                     @Override
                     public void error(int i) {
-                        handler.post(() -> ToastUtil.showToast(LetterEditActivity.this, "上传失败 " + i));
-                        if (waitDialog != null)
-                            waitDialog.dismiss();
+                        handler.post(() -> {
+                            if (waitDialog != null)
+                                waitDialog.dismiss();
+                            ToastUtil.showToast(LetterEditActivity.this, "上传失败 " + i);
+                        });
                     }
 
                     @Override
                     public void end() {
                     }
                 });
+    }
+
+    /**
+     * 更新文字长度限制
+     */
+    private void updateLetterLengthLimit() {
+        // 设置文字长度限制
+        viewDataBinding.contentEditText.setLetterLengthLimit(letterModel.getLetterLengthLimit());
+        // 设置最大文字长度监听器
+        viewDataBinding.contentEditText.setOnMaxLengthListener(this);
     }
 
     /**
@@ -241,4 +279,19 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
             LetterEditActivity.this.finish();
     }
 
+    /**
+     * 输入内容达到最大长度
+     */
+    @Override
+    public void onMaxLength() {
+        ToastUtil.showToast(this, "达到最大文字长度，执行缴费方法");
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (waitDialog != null && waitDialog.isShowing())
+            waitDialog.dismiss();
+
+        super.onDestroy();
+    }
 }

@@ -93,6 +93,11 @@ public class LetterModel extends BaseObservable implements Serializable {
      */
     private String localSaveDateTimeName;
     /**
+     * 文字长度限制
+     */
+    @Column
+    private int letterLengthLimit = 100;
+    /**
      * 信件内容
      */
     @Column
@@ -226,6 +231,14 @@ public class LetterModel extends BaseObservable implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getLetterLengthLimit() {
+        return letterLengthLimit;
+    }
+
+    public void setLetterLengthLimit(int letterLengthLimit) {
+        this.letterLengthLimit = letterLengthLimit;
     }
 
     @Bindable

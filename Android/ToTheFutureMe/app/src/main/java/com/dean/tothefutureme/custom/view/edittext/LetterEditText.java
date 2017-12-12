@@ -33,6 +33,19 @@ public class LetterEditText extends EditText implements TextWatcher {
      * 信件EditText的宽度值
      */
     private int width;
+    /**
+     * 文字长度
+     */
+    private int letterLengthLimit = 0;
+
+    /**
+     * 达到最大长度监听器
+     */
+    public interface OnMaxLengthListener {
+        void onMaxLength();
+    }
+
+    private OnMaxLengthListener onMaxLengthListener;
 
     public LetterEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -112,6 +125,20 @@ public class LetterEditText extends EditText implements TextWatcher {
         postInvalidate();
     }
 
+    /**
+     * 设置文字长度限制
+     *
+     * @param letterLengthLimit
+     */
+    public void setLetterLengthLimit(int letterLengthLimit) {
+        this.letterLengthLimit = letterLengthLimit;
+        setMaxEms(letterLengthLimit);
+    }
+
+    public void setOnMaxLengthListener(OnMaxLengthListener onMaxLengthListener) {
+        this.onMaxLengthListener = onMaxLengthListener;
+    }
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }
@@ -122,7 +149,18 @@ public class LetterEditText extends EditText implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        postInvalidate();
+        // 内容长度<=文字长度限制
+        if (letterLengthLimit == 0 || (s != null && s.length() < letterLengthLimit + 1)) {
+            postInvalidate();
+        }
+        // 文字长度>文字长度限制
+        else {
+            // 缴费提示
+            if (onMaxLengthListener != null)
+                onMaxLengthListener.onMaxLength();
+
+            setText(s.subSequence(0, letterLengthLimit));
+        }
     }
 
 }

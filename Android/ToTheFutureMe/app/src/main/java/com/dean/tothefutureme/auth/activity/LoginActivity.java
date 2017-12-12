@@ -123,7 +123,7 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
 
                         @Override
                         public void error(int i) {
-                            handler.post(() -> ToastUtil.showToast(LoginActivity.this, "登陆请求失败"));
+                            handler.post(() -> ToastUtil.showToast(LoginActivity.this, "登陆请求失败 " + i));
                         }
 
                         @Override
