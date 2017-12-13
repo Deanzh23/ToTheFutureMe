@@ -2,11 +2,14 @@ package com.dean.tothefutureme.auth.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
+import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
 import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
@@ -35,6 +38,22 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
     private AlertDialog exitLoginDialog;
 
     private Handler handler = new Handler();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        viewDataBinding.toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        viewDataBinding.toolbar.setTitle("账号设置");
+        setSupportActionBar(viewDataBinding.toolbar);
+        viewDataBinding.toolbar.setNavigationOnClickListener(v -> AuthSettingActivity.this.finish());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        KeyboardUtil.hideSoftKeyboard(this);
+    }
 
     /**
      * 提交修改密码

@@ -27,6 +27,7 @@ import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.auth.activity.AuthSettingActivity;
 import com.dean.tothefutureme.auth.model.AuthModel;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.FragmentMeBinding;
@@ -121,7 +122,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
                 }
                 break;
             case R.id.menuSetting:
-
+                startActivity(new Intent(activity, AuthSettingActivity.class));
                 break;
         }
 
