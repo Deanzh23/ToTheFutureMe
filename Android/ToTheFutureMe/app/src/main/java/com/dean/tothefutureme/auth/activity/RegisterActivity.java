@@ -144,9 +144,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("您的性别是？");
-        builder.setItems(genders, (dialog, which) -> {
-            TTFMApplication.getAuthModel().setGenderCode(which);
-        });
+        builder.setItems(genders, (dialog, which) -> TTFMApplication.getAuthModel().setGenderCode(which));
         builder.create().show();
     }
 
@@ -157,9 +155,9 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     public void setBirthday() {
         Date date = new Date();
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-            viewDataBinding.birthdayTextView.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
-        }, 1900 + date.getYear(), date.getMonth(), date.getDate());
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) ->
+                viewDataBinding.birthdayTextView.setText(year + "/" + (month + 1) + "/" + dayOfMonth)
+                , 1900 + date.getYear(), date.getMonth(), date.getDate());
         datePickerDialog.show();
     }
 
@@ -279,6 +277,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     @Override
     protected void cameraResult(Intent intent) {
         avatarImagePath = AppConfig.APP_IMAGE_PAT + "/temp.png";
+        setImage2Avatar();
     }
 
     /**

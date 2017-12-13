@@ -1,18 +1,20 @@
 package com.dean.tothefutureme.me;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
+import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.fragment.ConvenientFragment;
 import com.dean.android.framework.convenient.json.JSONUtil;
@@ -20,10 +22,11 @@ import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
 import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
+import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
+import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
-import com.dean.tothefutureme.auth.activity.LoginActivity;
 import com.dean.tothefutureme.auth.model.AuthModel;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.FragmentMeBinding;
@@ -32,18 +35,22 @@ import com.dean.tothefutureme.main.TTFMApplication;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+
 /**
  * 我的 Fragment
  * <p>
  * Created by dean on 2017/12/6.
  */
 @ContentView(R.layout.fragment_me)
-public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements Toolbar.OnMenuItemClickListener, View.OnClickListener {
+public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements Toolbar.OnMenuItemClickListener {
 
     private AppCompatActivity activity;
     private static MeFragment instance;
 
     private ProgressDialog waitDialog;
+
+    private String avatarImagePath;
 
     private Handler handler = new Handler();
 
@@ -88,8 +95,6 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
-
-        viewDataBinding.exitLoginButton.setOnClickListener(this);
     }
 
     @Override
@@ -113,6 +118,22 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
         }
 
         return true;
+    }
+
+    /**
+     * 选取图片作为头像
+     */
+    @OnClick(R.id.avatarImageView)
+    public void selectImage() {
+        if (!TTFMApplication.getAuthModel().isEditModel())
+            return;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("选取方式");
+//        BitmapUtil.openSystemCamera(this, AppConfig.APP_IMAGE_PAT, "temp.png")
+        builder.setNegativeButton("相机", (dialog, which) -> BitmapUtil.openSystemCamera(activity, AppConfig.APP_IMAGE_PAT, "temp.png"));
+        builder.setNeutralButton("相册", (dialog, which) -> BitmapUtil.openSystemPhotoAlbum(activity));
+        builder.create().show();
     }
 
     /**
@@ -169,14 +190,55 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
                 });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // 退出登陆
-            case R.id.exitLoginButton:
-                startActivity(new Intent(activity, LoginActivity.class));
-                TTFMApplication.killHistoryActivity(LoginActivity.class.getSimpleName());
-                break;
-        }
+    /**
+     * 设置性别
+     */
+    @OnClick(R.id.genderTextView)
+    public void setGender() {
+        if (!TTFMApplication.getAuthModel().isEditModel())
+            return;
+
+        String[] genders = new String[]{"女", "男"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("您的性别是？");
+        builder.setItems(genders, (dialog, which) -> TTFMApplication.getAuthModel().setGenderCode(which));
+        builder.create().show();
     }
+
+    /**
+     * 设置生日
+     */
+    @OnClick(R.id.birthdayTextView)
+    public void setBirthday() {
+        if (!TTFMApplication.getAuthModel().isEditModel())
+            return;
+
+        Date date = new Date();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(activity, (view, year, month, dayOfMonth) ->
+                viewDataBinding.birthdayTextView.setText(year + "/" + (month + 1) + "/" + dayOfMonth),
+                1900 + date.getYear(), date.getMonth(), date.getDate());
+        datePickerDialog.show();
+    }
+
+    public void albumResult(Intent intent) {
+        avatarImagePath = BitmapUtil.intent2ImagePath(activity, intent);
+        setImage2Avatar();
+    }
+
+    public void cameraResult(Intent intent) {
+        avatarImagePath = AppConfig.APP_IMAGE_PAT + "/temp.png";
+        setImage2Avatar();
+    }
+
+    /**
+     * 设置图片到头像控件
+     */
+    private void setImage2Avatar() {
+        if (!TextUtils.isEmpty(avatarImagePath))
+            BitmapUtil.setBitmap2ViewOnImageBitmap(activity, viewDataBinding.avatarImageView, avatarImagePath, false, null);
+        else
+            ToastUtil.showToast(activity, "图片未找到");
+    }
+
 }

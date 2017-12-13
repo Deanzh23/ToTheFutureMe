@@ -1,5 +1,6 @@
 package com.dean.tothefutureme.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -7,7 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.widget.RadioGroup;
 
-import com.dean.android.framework.convenient.activity.ConvenientActivity;
+import com.dean.android.framework.convenient.activity.ConvenientCameraActivity;
 import com.dean.android.framework.convenient.fragment.ConvenientFragment;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.toast.ToastUtil;
@@ -28,7 +29,7 @@ import java.util.TimerTask;
  * Created by dean on 2017/12/3.
  */
 @ContentView(R.layout.activity_home)
-public class HomeActivity extends ConvenientActivity<ActivityHomeBinding> implements RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> implements RadioGroup.OnCheckedChangeListener {
 
     private FragmentManager fragmentManager;
 
@@ -90,6 +91,36 @@ public class HomeActivity extends ConvenientActivity<ActivityHomeBinding> implem
     }
 
     @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (fragmentManager == null)
+            return;
+
+        int index = 0;
+        switch (checkedId) {
+            case R.id.timeLineRadioButton:
+                index = 0;
+                break;
+            case R.id.meRadioButton:
+                index = 1;
+                break;
+        }
+
+        switchFragment(index);
+    }
+
+    @Override
+    protected void albumResult(Intent intent) {
+        if (meFragment != null)
+            meFragment.albumResult(intent);
+    }
+
+    @Override
+    protected void cameraResult(Intent intent) {
+        if (meFragment != null)
+            meFragment.cameraResult(intent);
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (KeyEvent.KEYCODE_BACK == keyCode) {
             exitBy2Click();
@@ -115,24 +146,6 @@ public class HomeActivity extends ConvenientActivity<ActivityHomeBinding> implem
             }, 2000);
         } else
             System.exit(0);
-    }
-
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (fragmentManager == null)
-            return;
-
-        int index = 0;
-        switch (checkedId) {
-            case R.id.timeLineRadioButton:
-                index = 0;
-                break;
-            case R.id.meRadioButton:
-                index = 1;
-                break;
-        }
-
-        switchFragment(index);
     }
 
 }
