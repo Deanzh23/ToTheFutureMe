@@ -34,6 +34,10 @@ public class AppConfig {
      */
     public static final String AUTH_UPLOAD = "auth/upload";
     /**
+     * 修改密码
+     */
+    public static final String AUTH_EDIT_PASSWORD = "auth/editPassword";
+    /**
      * 上传信件
      */
     public static final String LETTER_UPLOAD = "letter/upload";

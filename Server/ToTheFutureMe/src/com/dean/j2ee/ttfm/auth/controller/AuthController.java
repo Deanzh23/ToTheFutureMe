@@ -77,4 +77,16 @@ public class AuthController extends ConvenientController {
         return authService.upload(body);
     }
 
+    /**
+     * 修改密码
+     *
+     * @param body
+     * @return
+     */
+    @RequestMapping(value = "/editPassword", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Object editPassword(@RequestBody String body) {
+        return authService.editPassword(body);
+    }
+
 }

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorThemeSkyBlue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundLightGrey"
+            android:paddingBottom="8dp"
+            android:paddingTop="16dp">
+
+            <Button
+                android:id="@+id/exitLoginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/ic_dean_button_blue_bg"
+                android:text="退出登陆"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size"/>
+
+            <Button
+                android:id="@+id/uploadButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/exitLoginButton"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/ic_dean_button_blue_bg"
+                android:text="修改密码"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size"/>
+
+            <com.dean.tothefutureme.custom.layout.NeatRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/avatarImageView"
+                android:layout_marginTop="24dp">
+
+                <!-- 旧密码 -->
+                <RelativeLayout
+                    android:id="@+id/oldPasswordLayout"
+                    style="@style/ItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp">
+
+                    <TextView
+                        android:id="@+id/oldPasswordLabelView"
+                        style="@style/ListItemTitleTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="旧密码"
+                        android:textSize="@dimen/text_size"/>
+
+                    <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                        android:id="@+id/oldPasswordEditText"
+                        style="@style/ListItemContentTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/oldPasswordLabelView"
+                        android:background="@drawable/ic_dean_text_blue_bg"
+                        android:gravity="right|center_vertical"
+                        android:hint="请输入旧密码（必填 允许1到8位）"
+                        android:inputType="textPassword"
+                        android:maxLength="8"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size"/>
+                </RelativeLayout>
+
+                <!-- 旧密码 -->
+                <RelativeLayout
+                    android:id="@+id/passwordLayout"
+                    style="@style/ItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/oldPasswordLayout"
+                    android:layout_marginTop="1dp">
+
+                    <TextView
+                        android:id="@+id/passwordLabelView"
+                        style="@style/ListItemTitleTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="新密码"
+                        android:textSize="@dimen/text_size"/>
+
+                    <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                        android:id="@+id/passwordEditText"
+                        style="@style/ListItemContentTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/passwordLabelView"
+                        android:background="@drawable/ic_dean_text_blue_bg"
+                        android:gravity="right|center_vertical"
+                        android:hint="请输入新密码（必填 允许1到8位）"
+                        android:inputType="textPassword"
+                        android:maxLength="8"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size"/>
+                </RelativeLayout>
+
+                <!-- 确认密码 -->
+                <RelativeLayout
+                    android:id="@+id/confirmPasswordLayout"
+                    style="@style/ItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/passwordLayout"
+                    android:layout_marginTop="1dp">
+
+                    <TextView
+                        android:id="@+id/confirmPasswordLabelView"
+                        style="@style/ListItemTitleTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="确认密码"
+                        android:textSize="@dimen/text_size"/>
+
+                    <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                        android:id="@+id/confirmPasswordEditText"
+                        style="@style/ListItemContentTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/confirmPasswordLabelView"
+                        android:background="@drawable/ic_dean_text_blue_bg"
+                        android:gravity="right|center_vertical"
+                        android:hint="请再次输入密码（必填 与新密码相同）"
+                        android:inputType="textPassword"
+                        android:maxLength="8"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size"/>
+                </RelativeLayout>
+
+            </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
+        </RelativeLayout>
+
+    </FrameLayout>
+</layout>

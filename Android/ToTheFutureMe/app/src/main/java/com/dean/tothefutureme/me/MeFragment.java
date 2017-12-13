@@ -81,7 +81,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_edit, menu);
+        inflater.inflate(R.menu.menu_me, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -91,7 +91,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
 
         viewDataBinding.toolbar.setTitle("我的");
         activity.setSupportActionBar(viewDataBinding.toolbar);
-        viewDataBinding.toolbar.inflateMenu(R.menu.menu_edit);
+        viewDataBinding.toolbar.inflateMenu(R.menu.menu_me);
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
@@ -100,22 +100,29 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        boolean isEditModel = !TTFMApplication.getAuthModel().isEditModel();
-        TTFMApplication.getAuthModel().setEditModel(isEditModel);
+        switch (item.getItemId()) {
+            case R.id.menuAddLetter:
+                boolean isEditModel = !TTFMApplication.getAuthModel().isEditModel();
+                TTFMApplication.getAuthModel().setEditModel(isEditModel);
 
-        viewDataBinding.toolbar.getMenu().getItem(0).setIcon(isEditModel ? R.drawable.ic_menu_save : R.drawable.ic_menu_user_info_edit);
-        viewDataBinding.nicknameEditText.setBackgroundResource(isEditModel ? R.drawable.ic_dean_text_blue_bg : android.R.color.white);
-        viewDataBinding.genderTextView.setBackgroundResource(isEditModel ? R.drawable.ic_dean_text_blue_bg : android.R.color.white);
-        viewDataBinding.birthdayTextView.setBackgroundResource(isEditModel ? R.drawable.ic_dean_text_blue_bg : android.R.color.white);
+                viewDataBinding.toolbar.getMenu().getItem(0).setIcon(isEditModel ? R.drawable.ic_menu_save : R.drawable.ic_menu_user_info_edit);
+                viewDataBinding.nicknameEditText.setBackgroundResource(isEditModel ? R.drawable.ic_dean_text_blue_bg : android.R.color.white);
+                viewDataBinding.genderTextView.setBackgroundResource(isEditModel ? R.drawable.ic_dean_text_blue_bg : android.R.color.white);
+                viewDataBinding.birthdayTextView.setBackgroundResource(isEditModel ? R.drawable.ic_dean_text_blue_bg : android.R.color.white);
 
-        ToastUtil.showToast(activity, isEditModel ? "开启编辑" : "保存信息");
+                ToastUtil.showToast(activity, isEditModel ? "开启编辑" : "保存信息");
 
-        // 保存信息
-        if (!isEditModel) {
-            waitDialog = ConvenientProgressDialog.getInstance(activity, "正在上传...", false);
-            waitDialog.show();
+                // 保存信息
+                if (!isEditModel) {
+                    waitDialog = ConvenientProgressDialog.getInstance(activity, "正在上传...", false);
+                    waitDialog.show();
 
-            new Thread(() -> uploadAuth()).start();
+                    new Thread(() -> uploadAuth()).start();
+                }
+                break;
+            case R.id.menuSetting:
+
+                break;
         }
 
         return true;

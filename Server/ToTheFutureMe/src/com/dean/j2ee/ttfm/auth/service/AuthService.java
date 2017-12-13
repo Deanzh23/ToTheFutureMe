@@ -193,4 +193,34 @@ public class AuthService extends ConvenientService {
         return response.toString();
     }
 
+    /**
+     * 修改密码
+     *
+     * @param body
+     * @return
+     */
+    public Object editPassword(String body) {
+        if (TextUils.isEmpty(body))
+            return getResponseJSON(RESPONSE_PARAMETER_ERROR).toString();
+
+        JSONObject request = new JSONObject(body);
+        String username = request.getString("username");
+        String oldPassword = request.getString("oldPassword");
+        String newPassword = request.getString("newPassword");
+
+        // 检查账号密码
+        AuthEntity authEntity = authDao.find(username, oldPassword);
+        // 用户名或密码错误
+        if (authEntity == null)
+            return getResponseJSON(LOGIN_FAILURE_NOT_CONFORM).toString();
+
+        // 保存到数据库
+        authEntity.setPassword(newPassword);
+        authDao.saveOrUpdate(authEntity);
+
+        JSONObject response = getResponseJSON(RESPONSE_SUCCESS);
+        response.put("data", newPassword);
+        return response.toString();
+    }
+
 }
