@@ -3,7 +3,9 @@ package com.dean.tothefutureme.timeline.view;
 import android.content.Context;
 
 import com.dean.android.framework.convenient.adapter.ConvenientAdapter;
+import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.AdapterTimeLineBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 
@@ -37,6 +39,8 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
             return;
 
         adapterTimeLineBinding.setLetterModel(letterModel);
+        // 设置发件人头像
+        BitmapUtil.imageLoader(adapterTimeLineBinding.senderAvatarImageView, letterModel.getSenderAvatarUrl(), AppConfig.APP_IMAGE_PAT, false);
     }
 
     @Override
