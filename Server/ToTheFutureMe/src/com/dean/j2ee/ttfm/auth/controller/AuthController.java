@@ -43,19 +43,13 @@ public class AuthController extends ConvenientController {
     /**
      * 用户注册
      *
-     * @param username
-     * @param password
-     * @param nickname
-     * @param genderCode
-     * @param birthday
+     * @param body
      * @return
      */
-    @RequestMapping(value = "/register/{username}/{password}/{avatarUrl}/{nickname}/{genderCode}/{birthday}", method = RequestMethod.POST,
-            produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object register(@PathVariable String username, @PathVariable String password, @PathVariable String avatarUrl, @PathVariable String nickname,
-                           @PathVariable int genderCode, @PathVariable long birthday) {
-        return authService.register(username, password, avatarUrl, nickname, genderCode, birthday);
+    public Object register(@RequestBody String body) {
+        return authService.register(body);
     }
 
     /**

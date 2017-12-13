@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.dean.android.framework.convenient.activity.ConvenientCameraActivity;
 import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
+import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
 import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
@@ -55,6 +56,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        TTFMApplication.getAuthModel().setPassword("");
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
     }
 
@@ -128,7 +130,6 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                         @Override
                         public void end() {
                             // 重新计时
-
                         }
                     });
         }).start();
@@ -208,7 +209,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                         }
 
                         // 注册用户信息
-                        registerUserInfo();
+                        new Thread(() -> registerUserInfo()).start();
                     }
 
                     @Override
@@ -234,16 +235,9 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
      * 注册用户信息
      */
     private void registerUserInfo() {
-        List<Object> urlParams = new ArrayList<>();
-        urlParams.add(TTFMApplication.getAuthModel().getUsername());
-        urlParams.add(TTFMApplication.getAuthModel().getPassword());
-        urlParams.add(TTFMApplication.getAuthModel().getAvatarUrl());
-        urlParams.add(TTFMApplication.getAuthModel().getNickname());
-        urlParams.add(TTFMApplication.getAuthModel().getGenderCode());
-        urlParams.add(TTFMApplication.getAuthModel().getBirthday());
         ConvenientHttpConnection registerConnection = new ConvenientHttpConnection();
-        registerConnection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_REGISTER, null, urlParams, (Map<String, String>) null,
-                new HttpConnectionListener() {
+        registerConnection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_REGISTER, null, null,
+                JSONUtil.object2Json(TTFMApplication.getAuthModel()).toString(), new HttpConnectionListener() {
                     @Override
                     public void success(String s) {
                         handler.post(() -> {
