@@ -37,16 +37,19 @@ public class AppConfig {
      * 上传信件
      */
     public static final String LETTER_UPLOAD = "letter/upload";
-
+    /**
+     * 图片上传
+     */
     public static final String FILE = "file/upload";
-
-    // 应答"成功"
+    /**
+     * 应答"成功"
+     */
     public static final String RESPONSE_SUCCESS = "200";
 
     /**
      * app基础SD卡路径
      */
-    public static final String APP_BASE_PATH = Environment.getExternalStorageDirectory().getPath() + "/ttfm/";
+    public static final String APP_BASE_PATH = Environment.getExternalStorageDirectory().getPath() + "/TTFM/";
     public static final String APP_IMAGE_PAT = APP_BASE_PATH + "image/";
 
     /**

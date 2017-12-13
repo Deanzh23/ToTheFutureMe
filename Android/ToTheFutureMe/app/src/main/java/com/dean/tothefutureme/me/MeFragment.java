@@ -95,6 +95,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
+        BitmapUtil.imageLoader(viewDataBinding.avatarImageView, TTFMApplication.getAuthModel().getAvatarUrl(), AppConfig.APP_IMAGE_PAT, false);
     }
 
     @Override
@@ -236,7 +237,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
      */
     private void setImage2Avatar() {
         if (!TextUtils.isEmpty(avatarImagePath))
-            BitmapUtil.setBitmap2ViewOnImageBitmap(activity, viewDataBinding.avatarImageView, avatarImagePath, false, null);
+            BitmapUtil.setBitmap2ViewOnImageBitmap(activity, viewDataBinding.avatarImageView, avatarImagePath, true, null);
         else
             ToastUtil.showToast(activity, "图片未找到");
     }
