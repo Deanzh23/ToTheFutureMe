@@ -10,7 +10,11 @@ import android.os.Environment;
 public class AppConfig {
 
     /**
-     * 域名
+     * 正式环境域名
+     */
+//    public static final String BASE_URL = "http://deanzh.7766.org:8444/ttfm/";
+    /**
+     * 本地开发环境域名
      */
     public static final String BASE_URL = "http://192.168.0.105:8444/ttfm/";
     /**

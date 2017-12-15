@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="ToTheFutureMe:war exploded">
+  <artifact type="war" name="ToTheFutureMe:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/ToTheFutureMe_war_exploded</output-path>
-    <root id="root">
+    <root id="archive" name="ToTheFutureMe_war exploded.war">
       <element id="javaee-facet-resources" facet="ToTheFutureMe/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -16,6 +16,11 @@
           <element id="library" level="project" name="json-lib" />
           <element id="library" level="project" name="mysql-connector-java-5.1.34_1" />
           <element id="library" level="project" name="javax.mail" />
+          <element id="library" level="project" name="gexin-rp-fastjson-1.0.0.0" />
+          <element id="library" level="project" name="gexin-rp-sdk-base-4.0.0.14" />
+          <element id="library" level="project" name="gexin-rp-sdk-http-4.0.1.9" />
+          <element id="library" level="project" name="gexin-rp-sdk-template-4.0.0.8" />
+          <element id="library" level="project" name="protobuf-java-2.5.0" />
         </element>
       </element>
     </root>

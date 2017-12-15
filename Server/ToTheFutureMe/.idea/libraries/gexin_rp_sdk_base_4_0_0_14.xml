@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gexin-rp-sdk-base-4.0.0.14">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/getui/gexin-rp-sdk-base-4.0.0.14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

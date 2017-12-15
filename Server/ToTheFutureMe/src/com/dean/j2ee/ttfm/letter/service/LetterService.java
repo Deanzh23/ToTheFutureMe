@@ -32,6 +32,7 @@ public class LetterService extends ConvenientService {
         // 构造信件实例
         LetterEntity letterEntity = new LetterEntity();
         JSONUtil.json2Object(new JSONObject(body), letterEntity);
+
         // 保存到数据库
         letterDao.saveOrUpdate(letterEntity);
 

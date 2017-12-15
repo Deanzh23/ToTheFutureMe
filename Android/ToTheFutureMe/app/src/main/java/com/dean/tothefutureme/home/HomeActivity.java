@@ -15,6 +15,7 @@ import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.ActivityHomeBinding;
+import com.dean.tothefutureme.main.TTFMApplication;
 import com.dean.tothefutureme.me.MeFragment;
 import com.dean.tothefutureme.timeline.view.TimeLineFragment;
 
@@ -45,6 +46,8 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
 
         loadFragments();
         viewDataBinding.bottomTabLayout.setOnCheckedChangeListener(this);
+        // 启动个推推送
+        TTFMApplication.startGeTuiPush();
     }
 
     @Override

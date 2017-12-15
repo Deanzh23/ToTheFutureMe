@@ -6,7 +6,6 @@ import android.databinding.Bindable;
 import com.dean.android.framework.convenient.database.annotation.Column;
 import com.dean.android.framework.convenient.database.annotation.PrimaryKey;
 import com.dean.tothefutureme.BR;
-import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.utils.DateTimeUtils;
 
 import java.io.Serializable;
@@ -75,7 +74,7 @@ public class AuthModel extends BaseObservable implements Serializable {
     }
 
     public String getAvatarUrl() {
-        return AppConfig.BASE_URL + avatarUrl;
+        return avatarUrl;
     }
 
     public void setAvatarUrl(String avatarUrl) {

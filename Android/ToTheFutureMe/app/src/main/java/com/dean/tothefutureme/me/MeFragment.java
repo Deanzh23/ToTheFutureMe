@@ -96,7 +96,8 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
-        BitmapUtil.imageLoader(viewDataBinding.avatarImageView, TTFMApplication.getAuthModel().getAvatarUrl(), AppConfig.APP_IMAGE_PAT, false);
+        BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + TTFMApplication.getAuthModel().getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                false);
     }
 
     @Override

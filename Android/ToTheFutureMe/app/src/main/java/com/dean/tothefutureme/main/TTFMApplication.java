@@ -4,6 +4,9 @@ import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.util.SetUtil;
 import com.dean.tothefutureme.auth.model.AuthModel;
+import com.dean.tothefutureme.push.TTFMIntentService;
+import com.dean.tothefutureme.push.TTFMPushService;
+import com.igexin.sdk.PushManager;
 
 import java.util.List;
 
@@ -55,6 +58,14 @@ public class TTFMApplication extends ConvenientApplication {
     @Override
     protected String checkVersionUrl() {
         return null;
+    }
+
+    /**
+     * 启动个推推送
+     */
+    public static void startGeTuiPush() {
+        PushManager.getInstance().initialize(instance.getApplicationContext(), TTFMPushService.class);
+        PushManager.getInstance().registerPushIntentService(instance.getApplicationContext(), TTFMIntentService.class);
     }
 
     public static AuthModel getAuthModel() {
