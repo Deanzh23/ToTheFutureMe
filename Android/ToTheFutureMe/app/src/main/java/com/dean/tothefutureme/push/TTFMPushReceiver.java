@@ -1,5 +1,6 @@
 package com.dean.tothefutureme.push;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import com.dean.android.framework.convenient.notification.exception.Notification
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
+import com.dean.tothefutureme.home.HomeActivity;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.utils.DateTimeUtils;
 
@@ -63,8 +65,10 @@ public class TTFMPushReceiver extends BroadcastReceiver {
      */
     private void showNotification(Context context) {
         try {
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, HomeActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
+
             NotificationUtil.sendNotification(context, R.mipmap.ic_launcher_round, null, DateTimeUtils.getDateString(new Date()),
-                    context.getResources().getString(R.string.app_name), "您收到一条传送信件哟！", null);
+                    context.getResources().getString(R.string.app_name), "您收到一条传送信件哟！", pendingIntent);
         } catch (NotificationLackIconException e) {
             e.printStackTrace();
             Log.e(AppConfig.TAG_YUN_BA, "显示通知栏 异常！");

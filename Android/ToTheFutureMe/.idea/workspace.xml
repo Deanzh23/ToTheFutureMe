@@ -66,10 +66,10 @@
       <file leaf-file-name="TTFMPushReceiver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/push/TTFMPushReceiver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="66" column="85" lean-forward="true" selection-start-line="66" selection-start-column="74" selection-end-line="66" selection-end-column="85" />
+            <state relative-caret-position="262">
+              <caret line="53" column="13" lean-forward="true" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
               <folding>
-                <element signature="e#2192#2243#0" expanded="true" />
+                <element signature="e#2433#2484#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2197,9 +2197,9 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/config/AppConfig.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/utils/DateTimeUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/push/TTFMPushReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/main/TTFMApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/auth/activity/AuthSettingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/push/TTFMPushReceiver.java" />
       </list>
     </option>
   </component>
@@ -2576,7 +2576,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513397937875" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513398330981" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2622,7 +2622,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513397937875" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513398330981" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2803,7 +2803,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513397937876" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513398330983" />
       </method>
     </configuration>
     <list size="1">
@@ -2950,23 +2950,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_letter_edit.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="48" lean-forward="false" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/custom/view/edittext/LetterEditText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="145" column="13" lean-forward="false" selection-start-line="145" selection-start-column="13" selection-end-line="145" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../../InstallTools/android-sdk/sources/android-26/android/app/Dialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
@@ -3272,12 +3255,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/app/libs/Convenient-Android-2.3.7.jar!/com/dean/android/framework/convenient/notification/NotificationUtil.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="74" column="150" lean-forward="false" selection-start-line="74" selection-start-column="137" selection-end-line="74" selection-end-column="150" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../InstallTools/android-sdk/sources/android-26/android/app/PendingIntent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="93" column="19" lean-forward="false" selection-start-line="93" selection-start-column="19" selection-end-line="93" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/push/TTFMPushReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="66" column="85" lean-forward="true" selection-start-line="66" selection-start-column="74" selection-end-line="66" selection-end-column="85" />
+        <state relative-caret-position="262">
+          <caret line="53" column="13" lean-forward="true" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
           <folding>
-            <element signature="e#2192#2243#0" expanded="true" />
+            <element signature="e#2433#2484#0" expanded="true" />
           </folding>
         </state>
       </provider>
