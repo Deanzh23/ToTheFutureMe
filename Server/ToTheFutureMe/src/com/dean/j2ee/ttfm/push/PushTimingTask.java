@@ -1,6 +1,6 @@
 package com.dean.j2ee.ttfm.push;
 
-import com.dean.j2ee.framework.http.HttpConnection;
+import com.dean.j2ee.framework.http.ConvenientHttpConnection;
 import com.dean.j2ee.framework.json.JSONUtil;
 import com.dean.j2ee.framework.utils.EncodingUtils;
 import com.dean.j2ee.framework.utils.email.EMailUtils;
@@ -71,11 +71,8 @@ public class PushTimingTask {
             new Thread(() -> {
                 // 发送信件推送->Android App
                 sendLetterPush2AndroidApp(letterEntity);
-            }).start();
-
-            new Thread(() -> {
                 // 发送信件通知邮件到邮箱
-                sendLetterPush2Mail(letterEntity);
+//                sendLetterPush2Mail(letterEntity);
             }).start();
         }
     }
@@ -93,9 +90,9 @@ public class PushTimingTask {
         bodyJSONObject.put("topic", EncodingUtils.md5Encode(letterEntity.getUserId()));
         bodyJSONObject.put("msg", JSONUtil.object2Json(letterEntity));
 
-        HttpConnection connection = new HttpConnection();
-        connection.sendHttpPost(Config.PUSH_URL, null, bodyJSONObject.toString());
-        System.out.println("[发送信件推送2Android] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
+        ConvenientHttpConnection connection = new ConvenientHttpConnection();
+        connection.sendHttpPost(Config.PUSH_URL, null, null, bodyJSONObject.toString(), null);
+        System.out.println("[发送信件推送2Android] -> topic=" + letterEntity.getUserId() + " msg=" + JSONUtil.object2Json(letterEntity).toString());
     }
 
     /**

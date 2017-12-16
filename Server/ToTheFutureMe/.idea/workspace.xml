@@ -44,41 +44,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PushTimingTask.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PushTimingTask.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/push/PushTimingTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="96" column="29" lean-forward="true" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="29" />
+            <state relative-caret-position="290">
+              <caret line="57" column="46" lean-forward="true" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConvenientHttpUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/ConvenientHttpUtil.java">
+      <file leaf-file-name="ConvenientHttpConnection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/ConvenientHttpConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+            <state relative-caret-position="135">
+              <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpConnection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/HttpConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="27" column="20" lean-forward="false" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefaultHttpConnection.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DefaultHttpConnection.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/DefaultHttpConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="163" column="46" lean-forward="true" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
+            <state relative-caret-position="182">
+              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -97,6 +87,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>eMail</find>
+      <find>bodyParams</find>
+      <find>letterId</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -131,6 +123,9 @@
         <option value="$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/db/AuthDao.java" />
         <option value="$PROJECT_DIR$/src/com/dean/j2ee/ttfm/letter/service/LetterService.java" />
         <option value="$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/service/AuthService.java" />
+        <option value="$PROJECT_DIR$/src/com/dean/j2ee/framework/http/listener/HttpConnectionListener.java" />
+        <option value="$PROJECT_DIR$/src/com/dean/j2ee/framework/http/DefaultHttpConnection.java" />
+        <option value="$PROJECT_DIR$/src/com/dean/j2ee/framework/http/ConvenientHttpConnection.java" />
         <option value="$PROJECT_DIR$/src/com/dean/j2ee/ttfm/push/PushTimingTask.java" />
       </list>
     </option>
@@ -148,7 +143,7 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1280" />
     <option name="y" value="-77" />
     <option name="width" value="1440" />
@@ -208,7 +203,33 @@
               <item name="ToTheFutureMe" type="cbb8eebc:String" user="ToTheFutureMe" />
               <item name="src" type="cbb8eebc:String" user="src" />
               <item name="com/dean/j2ee" type="cbb8eebc:String" user="com/dean/j2ee" />
+              <item name="framework" type="cbb8eebc:String" user="framework" />
+              <item name="http" type="cbb8eebc:String" user="http" />
+              <item name="listener" type="cbb8eebc:String" user="listener" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="ToTheFutureMe" type="cbb8eebc:String" user="ToTheFutureMe" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="com/dean/j2ee" type="cbb8eebc:String" user="com/dean/j2ee" />
               <item name="ttfm" type="cbb8eebc:String" user="ttfm" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="ToTheFutureMe" type="cbb8eebc:String" user="ToTheFutureMe" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="com/dean/j2ee" type="cbb8eebc:String" user="com/dean/j2ee" />
+              <item name="ttfm" type="cbb8eebc:String" user="ttfm" />
+              <item name="letter" type="cbb8eebc:String" user="letter" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="ToTheFutureMe" type="cbb8eebc:String" user="ToTheFutureMe" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="com/dean/j2ee" type="cbb8eebc:String" user="com/dean/j2ee" />
+              <item name="ttfm" type="cbb8eebc:String" user="ttfm" />
+              <item name="letter" type="cbb8eebc:String" user="letter" />
+              <item name="bean" type="cbb8eebc:String" user="bean" />
             </path>
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
@@ -492,12 +513,12 @@
       <workItem from="1513211512123" duration="1237000" />
       <workItem from="1513258833536" duration="1499000" />
       <workItem from="1513338582478" duration="6600000" />
-      <workItem from="1513387640620" duration="9348000" />
+      <workItem from="1513387640620" duration="12554000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68024000" />
+    <option name="totallyTimeSpent" value="71230000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="-77" width="1440" height="877" extended-state="6" />
@@ -549,29 +570,11 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="24" />
+      <option name="time" value="28" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
-        <watch expression="body" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/file/controller/FileUploadController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="19" column="31" lean-forward="true" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/config/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/bean/AuthEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -837,17 +840,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/letter/bean/LetterEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="34" column="18" lean-forward="false" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
-          <folding>
-            <element signature="e#759#760#0" expanded="true" />
-            <element signature="e#788#789#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/utils/email/EMailUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -904,34 +896,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/ConvenientHttpUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/letter/bean/LetterEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/push/PushTimingTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="96" column="29" lean-forward="true" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="29" />
+        <state relative-caret-position="151">
+          <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/HttpConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="27" column="20" lean-forward="false" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        <state relative-caret-position="173">
+          <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/ConvenientHttpUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/listener/HttpConnectionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="34" lean-forward="false" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/DefaultHttpConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="163" column="46" lean-forward="true" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
+        <state relative-caret-position="182">
+          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/framework/http/ConvenientHttpConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/push/PushTimingTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="57" column="46" lean-forward="true" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
           <folding />
         </state>
       </provider>

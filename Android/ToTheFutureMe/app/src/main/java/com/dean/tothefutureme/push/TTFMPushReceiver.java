@@ -32,9 +32,13 @@ import io.yunba.android.manager.YunBaManager;
  */
 public class TTFMPushReceiver extends BroadcastReceiver {
 
+    private int count = 0;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (YunBaManager.MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+
+            Log.d(AppConfig.TAG_YUN_BA, "count = " + count++);
 
             String topic = intent.getStringExtra(YunBaManager.MQTT_TOPIC);
             String msg = intent.getStringExtra(YunBaManager.MQTT_MSG);
@@ -42,9 +46,11 @@ public class TTFMPushReceiver extends BroadcastReceiver {
             Log.d(AppConfig.TAG_YUN_BA, "[onReceive] -> topic=" + topic + " msg=" + msg);
 
             try {
+                JSONObject json = new JSONObject(msg);
+                LetterModel letterModel = JSONUtil.json2Object(json, LetterModel.class);
+
                 // 保存到数据库
-                LetterModel letterModel = JSONUtil.json2Object(new JSONObject(msg), LetterModel.class);
-                DatabaseUtil.saveOrUpdate(letterModel);
+                new Thread(() -> DatabaseUtil.saveOrUpdate(letterModel)).start();
 
                 // 显示通知栏
                 showNotification(context);
