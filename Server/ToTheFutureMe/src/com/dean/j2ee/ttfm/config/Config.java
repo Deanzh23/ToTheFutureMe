@@ -17,9 +17,8 @@ public class Config {
     /**
      * 推送
      */
-    public static final String PUSH_URL = "http://sdk.open.api.igexin.com/apiex.htm";
-    public static final String PUSH_APP_ID = "YyZt8S1qqU7qUv0wsiHUL8";
-    public static final String PUSH_APP_KEY = "COvvafZWdy5wap0zkr61c7";
-    public static final String PUSH_APP_SECRET = "JlDvaCLdyF9Cw4LR6mm6n6";
+    public static final String PUSH_URL = "http://rest.yunba.io:8080";
+    public static final String PUSH_APP_KEY = "5a336b1709a6f76464e1483a";
+    public static final String PUSH_APP_SECRET = "sec-nGh5BjQBLtkmy7OCoWUG6BY99vWcuSRmtCwa3TquCk43cnVk";
 
 }
