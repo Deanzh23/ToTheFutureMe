@@ -29,7 +29,8 @@ public class DateTimeUtils {
      * @throws ParseException
      */
     public static long getDateMillisecond(String date) throws ParseException {
-        return DATE_FORMAT.parse(date).getTime();
+        String longString = String.valueOf(DATE_FORMAT.parse(date).getTime());
+        return Long.valueOf(longString.substring(0, longString.length() - 3));
     }
 
     /**

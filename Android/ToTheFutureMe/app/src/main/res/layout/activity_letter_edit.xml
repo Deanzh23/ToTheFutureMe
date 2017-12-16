@@ -43,30 +43,64 @@
                 android:layout_below="@id/appBarLayout"
                 android:padding="16dp">
 
-                <com.dean.tothefutureme.custom.view.textview.LetterTextView
-                    android:id="@+id/contentTextView"
+                <!-- 收件日期选择Layout -->
+                <com.dean.tothefutureme.custom.layout.NeatRelativeLayout
+                    android:id="@+id/receiveDateLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:gravity="start"
-                    android:hint="点击[铅笔]开始编辑"
-                    android:lineSpacingExtra="6dp"
-                    android:scrollbars="vertical"
-                    android:text="@={letterModel.content}"
-                    android:textSize="@dimen/text_size"/>
+                    android:layout_height="wrap_content">
 
-                <!-- 信件编辑内容 -->
-                <com.dean.tothefutureme.custom.view.edittext.LetterEditText
-                    android:id="@+id/contentEditText"
+                    <TextView
+                        android:id="@+id/receiveDateLabelTextView"
+                        style="@style/ListItemTitleTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="信件传送到"
+                        android:textSize="@dimen/text_size"/>
+
+                    <TextView
+                        android:id="@+id/receiveDateTextView"
+                        style="@style/ListItemContentTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/receiveDateLabelTextView"
+                        android:hint="选择传送到那一天"
+                        android:text="@={letterModel.receiveDateTimeName}"
+                        android:textSize="@dimen/text_size"/>
+                </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/letterLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:gravity="start"
-                    android:lineSpacingExtra="6dp"
-                    android:scrollbars="vertical"
-                    android:text="@={letterModel.content}"
-                    android:textSize="@dimen/text_size"
-                    android:visibility="gone"/>
+                    android:layout_below="@id/receiveDateLayout"
+                    android:layout_marginTop="12dp">
+
+                    <com.dean.tothefutureme.custom.view.textview.LetterTextView
+                        android:id="@+id/contentTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="start"
+                        android:hint="点击[铅笔]开始编辑"
+                        android:lineSpacingExtra="6dp"
+                        android:scrollbars="vertical"
+                        android:text="@={letterModel.content}"
+                        android:textSize="@dimen/text_size"/>
+
+                    <!-- 信件编辑内容 -->
+                    <com.dean.tothefutureme.custom.view.edittext.LetterEditText
+                        android:id="@+id/contentEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="start"
+                        android:lineSpacingExtra="6dp"
+                        android:scrollbars="vertical"
+                        android:text="@={letterModel.content}"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="gone"/>
+                </RelativeLayout>
+
             </RelativeLayout>
         </RelativeLayout>
 

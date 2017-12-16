@@ -1,6 +1,7 @@
 package com.dean.j2ee.ttfm.auth.db;
 
 import com.dean.j2ee.framework.db.ConvenientDao;
+import com.dean.j2ee.framework.utils.TextUils;
 import com.dean.j2ee.ttfm.auth.bean.AuthEntity;
 import com.dean.j2ee.ttfm.auth.bean.VerificationCodeEntity;
 import org.hibernate.SessionFactory;
@@ -86,7 +87,8 @@ public class AuthDao extends ConvenientDao {
     public AuthEntity find(String username, String password) {
         Map<String, Object> params = getParamMap();
         params.put("username", username);
-        params.put("password", password);
+        if (!TextUils.isEmpty(password))
+            params.put("password", password);
 
         AuthEntity authEntity = find(sessionFactory, AuthEntity.class, params);
 

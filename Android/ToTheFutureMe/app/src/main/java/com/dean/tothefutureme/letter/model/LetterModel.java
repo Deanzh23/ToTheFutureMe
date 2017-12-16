@@ -196,10 +196,7 @@ public class LetterModel extends BaseObservable implements Serializable {
 
         try {
             setReceiveDateTime(DateTimeUtils.getDateMillisecond(receiveDateTimeName));
-
-            String[] dateTimeArray = receiveDateTimeName.split(" ");
-            setReceiveDateName(dateTimeArray[0]);
-            setReceiveTimeName(dateTimeArray[1]);
+            setReceiveDateName(receiveDateTimeName);
         } catch (ParseException e) {
             e.printStackTrace();
         }

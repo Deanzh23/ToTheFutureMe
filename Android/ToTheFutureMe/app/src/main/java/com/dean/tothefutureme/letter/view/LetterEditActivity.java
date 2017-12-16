@@ -1,6 +1,7 @@
 package com.dean.tothefutureme.letter.view;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.dean.android.framework.convenient.network.http.listener.HttpConnectio
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
+import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
@@ -34,6 +36,7 @@ import com.dean.tothefutureme.main.TTFMApplication;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -67,9 +70,9 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         // 设置信件EditText的高度值给信件EditText
         viewDataBinding.contentEditText.post(() -> {
             // 内容显示控件宽高设置
-            viewDataBinding.contentTextView.setHeightAndWidth(viewDataBinding.contentTextView.getHeight(), viewDataBinding.contentTextView.getWidth());
+            viewDataBinding.contentTextView.setHeightAndWidth(viewDataBinding.letterLayout.getHeight(), viewDataBinding.contentTextView.getWidth());
             // 内容编辑控件宽高设置
-            viewDataBinding.contentEditText.setHeightAndWidth(viewDataBinding.contentTextView.getHeight(), viewDataBinding.contentTextView.getWidth());
+            viewDataBinding.contentEditText.setHeightAndWidth(viewDataBinding.letterLayout.getHeight(), viewDataBinding.contentTextView.getWidth());
         });
 
         letterModel = (LetterModel) getIntent().getSerializableExtra(LetterModel.class.getSimpleName());
@@ -119,6 +122,10 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
                     ToastUtil.showToast(LetterEditActivity.this, "传送没有内容的信件毫无意义哟！", Toast.LENGTH_LONG, ToastUtil.LOCATION_MIDDLE);
                     return true;
                 }
+                if (letterModel.getReceiveDateTime() <= 0) {
+                    ToastUtil.showToast(LetterEditActivity.this, "时光机也需要知道传送到哪天哟！", Toast.LENGTH_LONG, ToastUtil.LOCATION_MIDDLE);
+                    return true;
+                }
 
                 // 弹出上传提示
                 AlertDialog.Builder builder = new AlertDialog.Builder(LetterEditActivity.this);
@@ -144,6 +151,23 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
             return true;
         } else
             return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 选择收件日期
+     */
+    @OnClick(R.id.receiveDateTextView)
+    public void selectReceiveDate() {
+        if (!isEditing)
+            return;
+
+        Date date = new Date();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+            StringBuilder builder = new StringBuilder();
+            builder.append(year).append("/").append(month + 1).append("/").append(dayOfMonth);
+            viewDataBinding.receiveDateTextView.setText(builder.toString());
+        }, 1900 + date.getYear(), date.getMonth(), date.getDate());
+        datePickerDialog.show();
     }
 
     /**

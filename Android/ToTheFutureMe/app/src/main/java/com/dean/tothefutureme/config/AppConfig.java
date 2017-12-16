@@ -57,7 +57,7 @@ public class AppConfig {
     /**
      * app基础SD卡路径
      */
-    public static final String APP_BASE_PATH = Environment.getExternalStorageDirectory().getPath() + "/TTFM/";
+    public static final String APP_BASE_PATH = Environment.getExternalStorageDirectory().getPath() + "/TTFM";
     public static final String APP_IMAGE_PAT = APP_BASE_PATH + "image/";
 
     /**

@@ -1,6 +1,6 @@
 package com.dean.j2ee.ttfm.push;
 
-import com.dean.j2ee.framework.http.ConvenientHttpUtil;
+import com.dean.j2ee.framework.http.HttpConnection;
 import com.dean.j2ee.framework.json.JSONUtil;
 import com.dean.j2ee.framework.utils.EncodingUtils;
 import com.dean.j2ee.framework.utils.email.EMailUtils;
@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
@@ -52,6 +51,35 @@ public class PushTimingTask {
             }).start();
     }
 
+    @Scheduled(cron = "0/50 * * * * ?")
+    private void debugCheckLetters() {
+        System.out.println("[debugCheckLetters]");
+
+        long startDateTime = getTime(0, 0, 0);
+        long endDateTime = getTime(23, 59, 59);
+
+        // 查询所有当天应该发送推送的信件实例
+        List<LetterEntity> letterEntities = letterDao.findAllLetterBySendTime(startDateTime, endDateTime);
+
+        if (letterEntities == null || letterEntities.size() == 0)
+            return;
+
+        // 遍历信件实例集，封装推送实例
+        for (LetterEntity letterEntity : letterEntities) {
+            System.out.println("letterEntities size is " + letterEntities.size());
+
+            new Thread(() -> {
+                // 发送信件推送->Android App
+                sendLetterPush2AndroidApp(letterEntity);
+            }).start();
+
+            new Thread(() -> {
+                // 发送信件通知邮件到邮箱
+                sendLetterPush2Mail(letterEntity);
+            }).start();
+        }
+    }
+
     /**
      * 发送信件推送->Android App
      *
@@ -65,13 +93,9 @@ public class PushTimingTask {
         bodyJSONObject.put("topic", EncodingUtils.md5Encode(letterEntity.getUserId()));
         bodyJSONObject.put("msg", JSONUtil.object2Json(letterEntity));
 
-        try {
-            ConvenientHttpUtil.sendHttp(ConvenientHttpUtil.METHOD_POST, Config.PUSH_URL, null, bodyJSONObject);
-            System.out.println("[发送信件推送2Android] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            System.out.println("[发送信件推送2Android 失败!] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
-        }
+        HttpConnection connection = new HttpConnection();
+        connection.sendHttpPost(Config.PUSH_URL, null, bodyJSONObject.toString());
+        System.out.println("[发送信件推送2Android] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
     }
 
     /**
@@ -104,7 +128,8 @@ public class PushTimingTask {
         date.setMinutes(minutes);
         date.setSeconds(seconds);
 
-        return date.getTime();
+        String longString = String.valueOf(date.getTime());
+        return Long.valueOf(longString.substring(0, longString.length() - 3));
     }
 
 }
