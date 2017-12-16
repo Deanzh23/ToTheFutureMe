@@ -93,7 +93,7 @@ public class AuthService extends ConvenientService {
         String verificationCode = EMailUtils.getVerificationCode();
         // 发送验证码到指定邮箱
         try {
-            EMailUtils.sendEMail("给未来的自己", username, Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD, "您本次的注册验证码为：" + verificationCode);
+            EMailUtils.sendEMail(Config.APP_NAME, username, Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD, "您本次的注册验证码为：" + verificationCode);
 
             // 这里需要将验证码跟username关联，并存储到临时表里，注册后将其从临时表中删除
             verificationCodeEntity = new VerificationCodeEntity();

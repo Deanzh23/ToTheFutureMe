@@ -3,6 +3,7 @@ package com.dean.j2ee.ttfm.push;
 import com.dean.j2ee.framework.http.ConvenientHttpUtil;
 import com.dean.j2ee.framework.json.JSONUtil;
 import com.dean.j2ee.framework.utils.EncodingUtils;
+import com.dean.j2ee.framework.utils.email.EMailUtils;
 import com.dean.j2ee.ttfm.config.Config;
 import com.dean.j2ee.ttfm.letter.bean.LetterEntity;
 import com.dean.j2ee.ttfm.letter.db.LetterDao;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
@@ -42,15 +44,20 @@ public class PushTimingTask {
 
         // 遍历信件实例集，封装推送实例
         for (LetterEntity letterEntity : letterEntities)
-            new Thread(() -> sendLetterPush(letterEntity)).start();
+            new Thread(() -> {
+                // 发送信件推送->Android App
+                sendLetterPush2AndroidApp(letterEntity);
+                // 发送信件通知邮件到邮箱
+                sendLetterPush2Mail(letterEntity);
+            }).start();
     }
 
     /**
-     * 发送信件推送
+     * 发送信件推送->Android App
      *
      * @param letterEntity
      */
-    private void sendLetterPush(LetterEntity letterEntity) {
+    private void sendLetterPush2AndroidApp(LetterEntity letterEntity) {
         JSONObject bodyJSONObject = new JSONObject();
         bodyJSONObject.put("method", "publish");
         bodyJSONObject.put("appkey", Config.PUSH_APP_KEY);
@@ -60,10 +67,26 @@ public class PushTimingTask {
 
         try {
             ConvenientHttpUtil.sendHttp(ConvenientHttpUtil.METHOD_POST, Config.PUSH_URL, null, bodyJSONObject);
-            System.out.println("[发送信件推送] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
+            System.out.println("[发送信件推送2Android] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            System.out.println("[发送信件推送 失败!] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
+            System.out.println("[发送信件推送2Android 失败!] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
+        }
+    }
+
+    /**
+     * 发送信件通知邮件到邮箱
+     *
+     * @param letterEntity
+     */
+    private void sendLetterPush2Mail(LetterEntity letterEntity) {
+        try {
+            EMailUtils.sendEMail(Config.APP_NAME, letterEntity.getUserId(), Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD,
+                    "您收到一条传送信件哟，快到 " + Config.APP_NAME + " 中查看吧！");
+            System.out.println("[发送信件推送2Mail] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.out.println("[发送信件推送2Mail 失败!] -> topic=" + letterEntity.getUserId() + " msg=" + letterEntity.getLetterId());
         }
     }
 

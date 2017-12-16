@@ -3,6 +3,11 @@ package com.dean.j2ee.ttfm.config;
 public class Config {
 
     /**
+     * App名称
+     */
+    public static final String APP_NAME = "给未来的自己";
+
+    /**
      * 邮箱地址和密码
      */
     public static final String APP_EMAIL = "Dearfutureself@163.com";
