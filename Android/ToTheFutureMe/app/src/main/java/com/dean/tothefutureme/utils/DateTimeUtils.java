@@ -42,4 +42,14 @@ public class DateTimeUtils {
         return DATE_TIME_FORMAT.format(new Date(dateTime));
     }
 
+    /**
+     * 获取指定日期的日期型字符串
+     *
+     * @param date
+     * @return
+     */
+    public static String getDateString(Date date) {
+        return DATE_FORMAT.format(date);
+    }
+
 }

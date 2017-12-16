@@ -77,26 +77,26 @@ public class TTFMApplication extends ConvenientApplication {
         YunBaManager.subscribe(instance.getApplicationContext(), new String[]{CodeUtils.md5Encode(TTFMApplication.getAuthModel().getUsername())},
                 new IMqttActionListener() {
                     @Override
-                    public void onSuccess(IMqttToken arg0) {
+                    public void onSuccess(IMqttToken iMqttToken) {
                         Log.d(AppConfig.TAG_YUN_BA, "Subscribe topic succeed");
                     }
 
                     @Override
-                    public void onFailure(IMqttToken arg0, Throwable arg1) {
+                    public void onFailure(IMqttToken iMqttToken, Throwable throwable) {
                         Log.d(AppConfig.TAG_YUN_BA, "Subscribe topic failed");
                     }
                 });
         // 监听用户上/下线
         YunBaManager.subscribePresence(instance.getApplicationContext(), CodeUtils.md5Encode(TTFMApplication.getAuthModel().getUsername()), new IMqttActionListener() {
                     @Override
-                    public void onSuccess(IMqttToken mqttToken) {
+                    public void onSuccess(IMqttToken iMqttToken) {
                         Log.d(AppConfig.TAG_YUN_BA, "subscribePresence to topic succeed");
                     }
 
                     @Override
-                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                        if (exception instanceof MqttException) {
-                            MqttException ex = (MqttException) exception;
+                    public void onFailure(IMqttToken iMqttToken, Throwable throwable) {
+                        if (throwable instanceof MqttException) {
+                            MqttException ex = (MqttException) throwable;
 
                             Log.d(AppConfig.TAG_YUN_BA, "subscribePresence failed with error code : " + ex.getReasonCode());
                         }

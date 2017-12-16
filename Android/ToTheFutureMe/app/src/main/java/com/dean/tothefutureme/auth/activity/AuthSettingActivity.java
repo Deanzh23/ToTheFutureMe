@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
@@ -13,6 +14,7 @@ import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
 import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
+import com.dean.android.framework.convenient.util.CodeUtils;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
@@ -22,8 +24,12 @@ import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityAuthSettingBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
 
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import io.yunba.android.manager.YunBaManager;
 
 /**
  * 账号设置 Activity
@@ -100,6 +106,21 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
         builder.setNegativeButton("退出登陆", (dialog, which) -> {
             if (exitLoginDialog != null)
                 exitLoginDialog.dismiss();
+
+            // 退出推送接收
+            YunBaManager.unsubscribe(TTFMApplication.getInstance().getApplicationContext(), CodeUtils.md5Encode(TTFMApplication.getAuthModel().getUsername()),
+                    new IMqttActionListener() {
+                        @Override
+                        public void onSuccess(IMqttToken iMqttToken) {
+                            Log.d(AppConfig.TAG_YUN_BA, "停止推送接收成功");
+                        }
+
+                        @Override
+                        public void onFailure(IMqttToken iMqttToken, Throwable throwable) {
+                            Log.e(AppConfig.TAG_YUN_BA, "停止推送接收失败！");
+                        }
+                    });
+
             AuthSettingActivity.this.startActivity(new Intent(AuthSettingActivity.this, LoginActivity.class));
             TTFMApplication.killHistoryActivity(LoginActivity.class.getSimpleName());
         });

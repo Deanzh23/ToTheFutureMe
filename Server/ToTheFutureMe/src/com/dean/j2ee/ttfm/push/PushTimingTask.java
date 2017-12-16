@@ -1,6 +1,7 @@
 package com.dean.j2ee.ttfm.push;
 
 import com.dean.j2ee.framework.http.ConvenientHttpUtil;
+import com.dean.j2ee.framework.json.JSONUtil;
 import com.dean.j2ee.framework.utils.EncodingUtils;
 import com.dean.j2ee.ttfm.config.Config;
 import com.dean.j2ee.ttfm.letter.bean.LetterEntity;
@@ -55,7 +56,7 @@ public class PushTimingTask {
         bodyJSONObject.put("appkey", Config.PUSH_APP_KEY);
         bodyJSONObject.put("seckey", Config.PUSH_APP_SECRET);
         bodyJSONObject.put("topic", EncodingUtils.md5Encode(letterEntity.getUserId()));
-        bodyJSONObject.put("msg", letterEntity.getLetterId());
+        bodyJSONObject.put("msg", JSONUtil.object2Json(letterEntity));
 
         try {
             ConvenientHttpUtil.sendHttp(ConvenientHttpUtil.METHOD_POST, Config.PUSH_URL, null, bodyJSONObject);
