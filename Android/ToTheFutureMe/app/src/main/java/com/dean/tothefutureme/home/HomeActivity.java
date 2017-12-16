@@ -47,7 +47,7 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
         loadFragments();
         viewDataBinding.bottomTabLayout.setOnCheckedChangeListener(this);
         // 启动个推推送
-        TTFMApplication.startGeTuiPush();
+        TTFMApplication.startYunBaPush();
     }
 
     @Override

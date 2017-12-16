@@ -71,4 +71,6 @@ public class AppConfig {
      */
     public static final String BROADCAST_RECEIVER_DATA_UPDATE = "broadcast_receiver_data_update";
 
+    public static final String TAG_YUN_BA = "YunBa SDK";
+
 }

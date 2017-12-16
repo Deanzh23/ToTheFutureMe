@@ -1,14 +1,21 @@
 package com.dean.tothefutureme.main;
 
+import android.util.Log;
+
 import com.dean.android.framework.convenient.application.ConvenientApplication;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
+import com.dean.android.framework.convenient.util.CodeUtils;
 import com.dean.android.framework.convenient.util.SetUtil;
 import com.dean.tothefutureme.auth.model.AuthModel;
-import com.dean.tothefutureme.push.TTFMIntentService;
-import com.dean.tothefutureme.push.TTFMPushService;
-import com.igexin.sdk.PushManager;
+import com.dean.tothefutureme.config.AppConfig;
+
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.List;
+
+import io.yunba.android.manager.YunBaManager;
 
 /**
  * 给未来的自己Application
@@ -63,9 +70,39 @@ public class TTFMApplication extends ConvenientApplication {
     /**
      * 启动个推推送
      */
-    public static void startGeTuiPush() {
-        PushManager.getInstance().initialize(instance.getApplicationContext(), TTFMPushService.class);
-        PushManager.getInstance().registerPushIntentService(instance.getApplicationContext(), TTFMIntentService.class);
+    public static void startYunBaPush() {
+        // 启动推送服务
+        YunBaManager.start(instance.getApplicationContext());
+        YunBaManager.resume(instance.getApplicationContext());
+        YunBaManager.subscribe(instance.getApplicationContext(), new String[]{CodeUtils.md5Encode(TTFMApplication.getAuthModel().getUsername())},
+                new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken arg0) {
+                        Log.d(AppConfig.TAG_YUN_BA, "Subscribe topic succeed");
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken arg0, Throwable arg1) {
+                        Log.d(AppConfig.TAG_YUN_BA, "Subscribe topic failed");
+                    }
+                });
+        // 监听用户上/下线
+        YunBaManager.subscribePresence(instance.getApplicationContext(), CodeUtils.md5Encode(TTFMApplication.getAuthModel().getUsername()), new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken mqttToken) {
+                        Log.d(AppConfig.TAG_YUN_BA, "subscribePresence to topic succeed");
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        if (exception instanceof MqttException) {
+                            MqttException ex = (MqttException) exception;
+
+                            Log.d(AppConfig.TAG_YUN_BA, "subscribePresence failed with error code : " + ex.getReasonCode());
+                        }
+                    }
+                }
+        );
     }
 
     public static AuthModel getAuthModel() {
