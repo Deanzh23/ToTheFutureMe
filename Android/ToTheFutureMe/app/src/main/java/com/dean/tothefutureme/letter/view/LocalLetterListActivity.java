@@ -94,10 +94,7 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
         // 开始读取数据动画并隐藏数据界面
         viewDataBinding.elasticityLoadingView.startAndHideView(viewDataBinding.contentLayout);
 
-        /**
-         * debug
-         */
-        handler.postDelayed(() -> new Thread(() -> {
+        new Thread(() -> {
             Selector selector = new Selector();
             selector.and("isLocal", "=", true).orderBy("localSaveDateTime", true);
             letterModels = DatabaseUtil.findAll(LetterModel.class, selector);
@@ -121,7 +118,7 @@ public class LocalLetterListActivity extends ConvenientActivity<ActivityLocalLet
                     localLetterAdapter.update(letterModels);
                 }
             });
-        }).start(), 4000);
+        }).start();
     }
 
 }

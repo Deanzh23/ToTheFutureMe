@@ -54,31 +54,31 @@ public class PushTimingTask {
     /**
      * debug
      */
-    @Scheduled(cron = "0/50 * * * * ?")
-    private void debugCheckLetters() {
-        System.out.println("[debugCheckLetters]");
-
-        long startDateTime = getTime(0, 0, 0);
-        long endDateTime = getTime(23, 59, 59);
-
-        // 查询所有当天应该发送推送的信件实例
-        List<LetterEntity> letterEntities = letterDao.findAllLetterBySendTime(startDateTime, endDateTime);
-
-        if (letterEntities == null || letterEntities.size() == 0)
-            return;
-
-        // 遍历信件实例集，封装推送实例
-        for (LetterEntity letterEntity : letterEntities) {
-            System.out.println("letterEntities size is " + letterEntities.size());
-
-            new Thread(() -> {
-                // 发送信件推送->Android App
-                sendLetterPush2AndroidApp(letterEntity);
-                // 发送信件通知邮件到邮箱
-//                sendLetterPush2Mail(letterEntity);
-            }).start();
-        }
-    }
+//    @Scheduled(cron = "0/60 * * * * ?")
+//    private void debugCheckLetters() {
+//        System.out.println("[debugCheckLetters]");
+//
+//        long startDateTime = getTime(0, 0, 0);
+//        long endDateTime = getTime(23, 59, 59);
+//
+//        // 查询所有当天应该发送推送的信件实例
+//        List<LetterEntity> letterEntities = letterDao.findAllLetterBySendTime(startDateTime, endDateTime);
+//
+//        if (letterEntities == null || letterEntities.size() == 0)
+//            return;
+//
+//        // 遍历信件实例集，封装推送实例
+//        for (LetterEntity letterEntity : letterEntities) {
+//            System.out.println("letterEntities size is " + letterEntities.size());
+//
+//            new Thread(() -> {
+//                // 发送信件推送->Android App
+//                sendLetterPush2AndroidApp(letterEntity);
+//                // 发送信件通知邮件到邮箱
+////                sendLetterPush2Mail(letterEntity);
+//            }).start();
+//        }
+//    }
 
     /**
      * 发送信件推送->Android App

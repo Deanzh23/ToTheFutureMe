@@ -66,7 +66,8 @@
     <column id="23" parent="11" name="type">
       <Position>3</Position>
       <Comment>信件类型（0：文字；1：语音）</Comment>
-      <DataType>int(1) unsigned zerofill|0</DataType>
+      <DataType>int(1) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
     <column id="24" parent="11" name="senderUserId">
       <Position>4</Position>
@@ -101,53 +102,60 @@
       <Comment>信件内容</Comment>
       <DataType>text|0</DataType>
     </column>
-    <key id="30" parent="11" name="PRIMARY">
+    <column id="30" parent="11" name="isRead">
+      <Position>10</Position>
+      <Comment>是否已读</Comment>
+      <DataType>int(1) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <key id="31" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>letterId
 userId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="31" parent="12" name="username">
+    <column id="32" parent="12" name="username">
       <Position>1</Position>
       <Comment>邮箱用户名</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="32" parent="12" name="token">
+    <column id="33" parent="12" name="token">
       <Position>2</Position>
       <Comment>token</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="33" parent="12" name="time">
+    <column id="34" parent="12" name="time">
       <Position>3</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="34" parent="12" name="PRIMARY">
+    <key id="35" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>token
 username</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="35" parent="13" name="username">
+    <column id="36" parent="13" name="username">
       <Position>1</Position>
       <Comment>邮箱用户名</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="13" name="verificationCode">
+    <column id="37" parent="13" name="verificationCode">
       <Position>2</Position>
       <Comment>用户验证码</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="37" parent="13" name="time">
+    <column id="38" parent="13" name="time">
       <Position>3</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="38" parent="13" name="PRIMARY">
+    <key id="39" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

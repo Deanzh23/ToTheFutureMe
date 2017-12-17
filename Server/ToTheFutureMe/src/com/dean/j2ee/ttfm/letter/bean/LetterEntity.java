@@ -2,9 +2,6 @@ package com.dean.j2ee.ttfm.letter.bean;
 
 import javax.persistence.*;
 
-/**
- * 信件Model
- */
 @Entity
 @Table(name = "letter", schema = "ttfm_db", catalog = "")
 @IdClass(LetterEntityPK.class)
@@ -19,6 +16,7 @@ public class LetterEntity {
     private long sendDateTime;
     private long receiveDateTime;
     private String content;
+    private int isRead;
 
     @Id
     @Column(name = "letterId")
@@ -110,6 +108,16 @@ public class LetterEntity {
         this.content = content;
     }
 
+    @Basic
+    @Column(name = "isRead")
+    public int getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(int isRead) {
+        this.isRead = isRead;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -119,6 +127,7 @@ public class LetterEntity {
 
         if (sendDateTime != that.sendDateTime) return false;
         if (receiveDateTime != that.receiveDateTime) return false;
+        if (isRead != that.isRead) return false;
         if (letterId != null ? !letterId.equals(that.letterId) : that.letterId != null) return false;
         if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
@@ -141,6 +150,7 @@ public class LetterEntity {
         result = 31 * result + (int) (sendDateTime ^ (sendDateTime >>> 32));
         result = 31 * result + (int) (receiveDateTime ^ (receiveDateTime >>> 32));
         result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + isRead;
         return result;
     }
 }

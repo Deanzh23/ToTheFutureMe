@@ -4,10 +4,7 @@ import com.dean.j2ee.framework.controller.ConvenientController;
 import com.dean.j2ee.ttfm.letter.service.LetterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 信件控制器
@@ -29,6 +26,20 @@ public class LetterController extends ConvenientController {
     @ResponseBody
     public Object upload(@RequestBody String body) {
         return letterService.upload(body);
+    }
+
+    /**
+     * 读取信件
+     *
+     * @param username   收件人用户名
+     * @param startIndex 起始下标
+     * @param count      信件数量
+     * @return
+     */
+    @RequestMapping(value = "/load/{username}/{startIndex}/{count}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Object loadLetters(@PathVariable String username, @PathVariable int startIndex, @PathVariable int count) {
+        return letterService.loadLetters(username, startIndex, count);
     }
 
 }

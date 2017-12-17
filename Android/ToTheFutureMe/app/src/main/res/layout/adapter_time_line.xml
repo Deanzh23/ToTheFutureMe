@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="2017/12/06"
+                    android:text="@{letterModel.receiveDateName}"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"/>
 
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/dateTextView"
                     android:layout_centerHorizontal="true"
-                    android:text="12:41"
+                    android:text="@{letterModel.receiveTimeName}"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"/>
             </RelativeLayout>
@@ -88,6 +88,18 @@
                         android:layout_marginLeft="8dp"
                         android:background="@mipmap/ic_launcher_round"/>
 
+                    <TextView
+                        android:id="@+id/readTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/senderAvatarImageView"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="16dp"
+                        android:paddingBottom="8dp"
+                        android:text="@{letterModel.isRead==1?`已读`:`未读`}"
+                        android:textColor="@{letterModel.isRead==1?@color/colorThemeSkyBlue:@color/colorAccent}"
+                        android:textSize="@dimen/text_size_small"/>
+
                     <!-- 发件日期时间 -->
                     <TextView
                         android:id="@+id/sendDateTimeTextView"
@@ -95,22 +107,29 @@
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@id/senderAvatarImageView"
                         android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@id/readTextView"
                         android:layout_toRightOf="@id/senderAvatarImageView"
                         android:paddingBottom="8dp"
-                        android:text="2016/12/04 23:59"
-                        android:textSize="@dimen/text_size_small"/>
+                        android:text="@{letterModel.sendDateTimeName}"
+                        android:textSize="@dimen/text_size_small"
+                        android:textStyle="bold"/>
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/contentTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/contentTopLayout"
-                    android:layout_marginRight="24dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
+                    android:background="@color/colorThemeSkyBlue"
                     android:ellipsize="end"
                     android:maxLines="4"
                     android:minLines="4"
-                    android:text="啊空间啊上飞机啊上了对方空间啊阿斯利康的风景啊上来的快放假啊撒上来的快放假啊上的风口浪尖啊上的法律框架啊上的法律框架刷卡来到解放军撒地方阿拉山口的飞机上的"
+                    android:padding="8dp"
+                    android:text="@{letterModel.content}"
+                    android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium"/>
             </RelativeLayout>
         </RelativeLayout>

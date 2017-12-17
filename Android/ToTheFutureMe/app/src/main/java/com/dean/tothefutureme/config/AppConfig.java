@@ -46,6 +46,10 @@ public class AppConfig {
      */
     public static final String LETTER_UPLOAD = "letter/upload";
     /**
+     * 上传信件
+     */
+    public static final String LETTER_LOAD = "letter/load";
+    /**
      * 图片上传
      */
     public static final String FILE = "file/upload";

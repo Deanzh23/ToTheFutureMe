@@ -20,14 +20,44 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay"/>
         </android.support.design.widget.AppBarLayout>
 
-        <ListView
-            android:id="@+id/timeLineListView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/appBarLayout"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:divider="@null"/>
+            android:layout_marginTop="8dp">
+
+            <!-- 加载动画View -->
+            <com.dean.android.fw.convenient.ui.view.loading.elasticity.ConvenientElasticityLoadingView
+                android:id="@+id/elasticityLoadingView"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_centerInParent="true"/>
+
+            <RelativeLayout
+                android:id="@+id/messageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/messageLineTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="您还未收到传送来的信件"
+                    android:textColor="@color/colorThemeSkyBlue"
+                    android:textSize="@dimen/text_size_big"
+                    android:textStyle="bold"/>
+
+                <!-- 信件数据ListView -->
+                <ListView
+                    android:id="@+id/timeLineListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"/>
+            </RelativeLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 

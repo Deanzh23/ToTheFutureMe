@@ -36,13 +36,37 @@ public class LetterDao extends ConvenientDao {
      * @return
      */
     public List<LetterEntity> findAllLetterBySendTime(long startDateTime, long endDateTime) {
-        List<LetterEntity> letterEntities = null;
+        List<LetterEntity> letterEntities;
 
         Session session = sessionFactory.openSession();
 
-        Query<LetterEntity> query = session.createQuery("from LetterEntity as l where l.receiveDateTime >= ? and l.receiveDateTime <= ? ");
+        Query query = session.createQuery("from LetterEntity as l where l.receiveDateTime >= ? and l.receiveDateTime <= ? ");
         query.setParameter(0, startDateTime);
         query.setParameter(1, endDateTime);
+        letterEntities = query.list();
+
+        session.close();
+
+        return letterEntities;
+    }
+
+    /**
+     * 获取指定用户的信件集合
+     *
+     * @param username
+     * @param startIndex
+     * @param count
+     * @return
+     */
+    public List<LetterEntity> findAllLetterByUsername(String username, int startIndex, int count) {
+        List<LetterEntity> letterEntities;
+
+        Session session = sessionFactory.openSession();
+
+        Query query = session.createQuery("from LetterEntity as l where l.userId >= ? order by l.receiveDateTime desc");
+        query.setParameter(0, username);
+        query.setFirstResult(startIndex);
+        query.setMaxResults(count);
         letterEntities = query.list();
 
         session.close();

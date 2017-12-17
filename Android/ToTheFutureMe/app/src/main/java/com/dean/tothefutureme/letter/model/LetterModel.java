@@ -10,6 +10,7 @@ import com.dean.tothefutureme.utils.DateTimeUtils;
 
 import java.io.Serializable;
 import java.text.ParseException;
+import java.util.Date;
 
 /**
  * 信件Model
@@ -107,6 +108,14 @@ public class LetterModel extends BaseObservable implements Serializable {
      */
     @Column
     private boolean isLocal = false;
+    /**
+     * 是否已读
+     * <p>
+     * 0：未读
+     * 1：已读
+     */
+    @Column
+    private int isRead = 0;
 
     public String getLetterId() {
         return letterId;
@@ -182,6 +191,11 @@ public class LetterModel extends BaseObservable implements Serializable {
 
     public void setReceiveDateTime(long receiveDateTime) {
         this.receiveDateTime = receiveDateTime;
+
+//        if (TextUtils.isEmpty(receiveDateTimeName))
+//            setReceiveDateTimeName(DateTimeUtils.getDateTimeMillisecond2String(receiveDateTime));
+
+        setReceiveDateName(DateTimeUtils.getDateString(new Date(receiveDateTime)));
 
         notifyPropertyChanged(BR.receiveDateTime);
     }
@@ -272,5 +286,15 @@ public class LetterModel extends BaseObservable implements Serializable {
 
     public void setLocalSaveDateTimeName(String localSaveDateTimeName) {
         this.localSaveDateTimeName = localSaveDateTimeName;
+    }
+
+    @Bindable
+    public int getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(int isRead) {
+        this.isRead = isRead;
+        notifyPropertyChanged(BR.isRead);
     }
 }
