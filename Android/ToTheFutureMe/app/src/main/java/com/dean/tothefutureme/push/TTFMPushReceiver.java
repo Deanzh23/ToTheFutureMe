@@ -71,10 +71,13 @@ public class TTFMPushReceiver extends BroadcastReceiver {
      */
     private void showNotification(Context context) {
         try {
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, HomeActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
+            Intent intent = new Intent(context, HomeActivity.class);
+            intent.putExtra(TTFMPushReceiver.class.getSimpleName(), true);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
             NotificationUtil.sendNotification(context, R.mipmap.ic_launcher_round, null, DateTimeUtils.getDateString(new Date()),
-                    context.getResources().getString(R.string.app_name), "您收到一条传送信件哟！", pendingIntent);
+                    context.getResources().getString(R.string.app_name), "您收到n条传送信件哟，点击查看.", pendingIntent, AppConfig.NOTIFICATION_TYPE,
+                    "n");
         } catch (NotificationLackIconException e) {
             e.printStackTrace();
             Log.e(AppConfig.TAG_YUN_BA, "显示通知栏 异常！");

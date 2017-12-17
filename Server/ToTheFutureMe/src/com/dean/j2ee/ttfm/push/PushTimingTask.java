@@ -51,6 +51,9 @@ public class PushTimingTask {
             }).start();
     }
 
+    /**
+     * debug
+     */
     @Scheduled(cron = "0/50 * * * * ?")
     private void debugCheckLetters() {
         System.out.println("[debugCheckLetters]");

@@ -80,7 +80,10 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
         loadData();
     }
 
-    private void loadData() {
+    /**
+     * 读取数据
+     */
+    public void loadData() {
         /**
          * debug
          */

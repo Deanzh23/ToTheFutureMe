@@ -17,6 +17,7 @@ import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.databinding.ActivityHomeBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
 import com.dean.tothefutureme.me.MeFragment;
+import com.dean.tothefutureme.push.TTFMPushReceiver;
 import com.dean.tothefutureme.timeline.view.TimeLineFragment;
 
 import java.util.ArrayList;
@@ -54,6 +55,10 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
     protected void onResume() {
         super.onResume();
         KeyboardUtil.hideSoftKeyboard(this);
+
+        // 从推送进入，重新读取时间轴数据
+        if (getIntent().getBooleanExtra(TTFMPushReceiver.class.getSimpleName(), false) && timeLineFragment != null)
+            timeLineFragment.loadData();
     }
 
     /**
