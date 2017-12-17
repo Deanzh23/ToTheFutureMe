@@ -42,4 +42,16 @@ public class LetterController extends ConvenientController {
         return letterService.loadLetters(username, startIndex, count);
     }
 
+    /**
+     * 设置指定信件已读
+     *
+     * @param letterId
+     * @return
+     */
+    @RequestMapping(value = "/readLetter/{letterId}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Object readLetter(@PathVariable String letterId) {
+        return letterService.readLetter(letterId);
+    }
+
 }

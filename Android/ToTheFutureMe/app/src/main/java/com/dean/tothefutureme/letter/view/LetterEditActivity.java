@@ -32,11 +32,14 @@ import com.dean.tothefutureme.custom.view.edittext.LetterEditText;
 import com.dean.tothefutureme.databinding.ActivityLetterEditBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.main.TTFMApplication;
+import com.dean.tothefutureme.timeline.view.TimeLineFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -52,7 +55,8 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
 
     private LetterModel letterModel;
 
-    private boolean isEditing = false;
+    private boolean isEditModel = false;
+    private boolean isLookModel = false;
 
     private Handler handler = new Handler();
 
@@ -61,8 +65,11 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // 是否是查看模式
+        isLookModel = getIntent().getBooleanExtra(TimeLineFragment.class.getSimpleName(), false);
+
         viewDataBinding.toolbar.setNavigationIcon(R.drawable.ic_menu_back);
-        viewDataBinding.toolbar.setTitle("信件编辑");
+        viewDataBinding.toolbar.setTitle(isLookModel ? "信件详细" : "编辑信件");
         setSupportActionBar(viewDataBinding.toolbar);
         viewDataBinding.toolbar.setNavigationOnClickListener(v -> exitLetterEditActivity());
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
@@ -81,11 +88,15 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
 
         viewDataBinding.setLetterModel(letterModel);
         updateLetterLengthLimit();
+
+        if (isLookModel)
+            setReadLetter();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity_letter_edit, menu);
+        if (!isLookModel)
+            getMenuInflater().inflate(R.menu.menu_activity_letter_edit, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -94,21 +105,21 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         switch (item.getItemId()) {
             // 编辑
             case R.id.menuEditLetter:
-                isEditing = !isEditing;
+                isEditModel = !isEditModel;
 
                 // 更改顶部图标
-                item.setIcon(isEditing ? R.drawable.ic_menu_save : R.drawable.ic_menu_user_info_edit);
+                item.setIcon(isEditModel ? R.drawable.ic_menu_save : R.drawable.ic_menu_user_info_edit);
                 // 切换内容控件显示隐藏
-                viewDataBinding.contentTextView.setVisibility(isEditing ? View.GONE : View.VISIBLE);
-                viewDataBinding.contentEditText.setVisibility(isEditing ? View.VISIBLE : View.GONE);
+                viewDataBinding.contentTextView.setVisibility(isEditModel ? View.GONE : View.VISIBLE);
+                viewDataBinding.contentEditText.setVisibility(isEditModel ? View.VISIBLE : View.GONE);
 
                 // 编辑模式
-                if (isEditing) {
+                if (isEditModel) {
                     // EditText获得焦点
                     viewDataBinding.contentEditText.requestFocus();
                 }
                 // 非编辑模式
-                else if (!isEditing) {
+                else if (!isEditModel) {
                     // 收起键盘
                     KeyboardUtil.hideSoftKeyboard(LetterEditActivity.this);
                     // 保存到本地数据库
@@ -158,7 +169,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
      */
     @OnClick(R.id.receiveDateTextView)
     public void selectReceiveDate() {
-        if (!isEditing)
+        if (!isEditModel || isLookModel)
             return;
 
         Date date = new Date();
@@ -200,7 +211,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
 
         // 保存到数据库
         DatabaseUtil.saveOrUpdate(letterModel);
-        isEditing = false;
+        isEditModel = false;
 
         // 保存完成后是否提示
         if (tagEnd && waitDialog != null) {
@@ -292,7 +303,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
      * 退出Activity
      */
     private void exitLetterEditActivity() {
-        if (isEditing) {
+        if (isEditModel) {
             AlertDialog.Builder builder = new AlertDialog.Builder(LetterEditActivity.this);
             builder.setMessage("您的信件还未保存");
             builder.setNegativeButton("保存信件", (dialog, which) -> new Thread(() -> saveLetter()).start());
@@ -309,6 +320,29 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
     @Override
     public void onMaxLength() {
         ToastUtil.showToast(this, "达到最大文字长度，执行缴费方法");
+    }
+
+    /**
+     * 设置信件已读
+     */
+    private void setReadLetter() {
+        new Thread(() -> {
+            // 发送信件已读更新广播
+            Intent intent = new Intent(AppConfig.BROADCAST_RECEIVER_LETTER_READ_UPDATE);
+            intent.putExtra(LetterModel.class.getSimpleName(), letterModel);
+            LetterEditActivity.this.sendBroadcast(intent);
+
+            // 更新数据库已读
+            letterModel.setIsRead(1);
+            DatabaseUtil.saveOrUpdate(letterModel);
+
+            // 设置服务器指定信件已读
+            List<String> urlParams = new ArrayList<>();
+            urlParams.add(letterModel.getLetterId());
+            ConvenientHttpConnection connection = new ConvenientHttpConnection();
+            connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.LETTER_LOAD_READ, null, urlParams, (String) null,
+                    null);
+        }).start();
     }
 
     @Override

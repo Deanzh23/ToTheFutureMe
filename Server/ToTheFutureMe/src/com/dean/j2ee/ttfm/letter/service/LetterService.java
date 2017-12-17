@@ -60,4 +60,18 @@ public class LetterService extends ConvenientService {
         return response.toString();
     }
 
+    /**
+     * 设置指定信件已读
+     *
+     * @param letterId
+     * @return
+     */
+    public Object readLetter(String letterId) {
+        LetterEntity letterEntity = letterDao.findByLetterId(letterId);
+        letterEntity.setIsRead(1);
+        letterDao.saveOrUpdate(letterEntity);
+
+        return getResponseJSON(RESPONSE_SUCCESS).toString();
+    }
+
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 信件DB
@@ -63,7 +64,7 @@ public class LetterDao extends ConvenientDao {
 
         Session session = sessionFactory.openSession();
 
-        Query query = session.createQuery("from LetterEntity as l where l.userId >= ? order by l.receiveDateTime desc");
+        Query query = session.createQuery("from LetterEntity as l where l.userId >= ? order by l.receiveDateTime , l.sendDateTime desc");
         query.setParameter(0, username);
         query.setFirstResult(startIndex);
         query.setMaxResults(count);
@@ -72,6 +73,19 @@ public class LetterDao extends ConvenientDao {
         session.close();
 
         return letterEntities;
+    }
+
+    /**
+     * 查找指定信件
+     *
+     * @param letterId
+     * @return
+     */
+    public LetterEntity findByLetterId(String letterId) {
+        Map<String, Object> params = getParamMap();
+        params.put("letterId", letterId);
+
+        return find(sessionFactory, LetterEntity.class, params);
     }
 
 }

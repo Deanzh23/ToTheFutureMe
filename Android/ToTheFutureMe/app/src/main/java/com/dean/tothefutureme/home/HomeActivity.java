@@ -1,6 +1,9 @@
 package com.dean.tothefutureme.home;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +17,9 @@ import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityHomeBinding;
+import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.main.TTFMApplication;
 import com.dean.tothefutureme.me.MeFragment;
 import com.dean.tothefutureme.push.TTFMPushReceiver;
@@ -41,6 +46,16 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
 
     private static Boolean isExit = false;
 
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // 信件已读更新广播接收
+            LetterModel letterModel = (LetterModel) intent.getSerializableExtra(LetterModel.class.getSimpleName());
+            if (timeLineFragment != null)
+                timeLineFragment.updateLetterRead(letterModel);
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +64,9 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
         viewDataBinding.bottomTabLayout.setOnCheckedChangeListener(this);
         // 启动个推推送
         TTFMApplication.startYunBaPush();
+        // 注册信件已读更新广播
+        IntentFilter intentFilter = new IntentFilter(AppConfig.BROADCAST_RECEIVER_LETTER_READ_UPDATE);
+        registerReceiver(receiver, intentFilter);
     }
 
     @Override
@@ -156,4 +174,9 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
             System.exit(0);
     }
 
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(receiver);
+        super.onDestroy();
+    }
 }

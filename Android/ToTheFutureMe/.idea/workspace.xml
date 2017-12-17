@@ -33,38 +33,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TimeLineFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimeLineAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-              <folding>
-                <element signature="e#988#989#0" expanded="true" />
-                <element signature="e#1037#1038#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="adapter_time_line.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/adapter_time_line.xml">
           <provider editor-type-id="android-designer2">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="119" column="52" lean-forward="false" selection-start-line="119" selection-start-column="37" selection-end-line="119" selection-end-column="52" />
+            <state relative-caret-position="214">
+              <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+              <folding>
+                <element signature="e#1747#1772#0" expanded="false" />
+                <element signature="e#2263#2288#0" expanded="false" />
+                <element signature="e#4183#4207#0" expanded="false" />
+                <element signature="e#4962#4986#0" expanded="false" />
+                <element signature="e#5825#5850#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LetterEditActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/view/LetterEditActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="49" column="33" lean-forward="false" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_letter_edit.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_letter_edit.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="99">
+              <caret line="52" column="66" lean-forward="false" selection-start-line="52" selection-start-column="66" selection-end-line="52" selection-end-column="66" />
+              <folding>
+                <element signature="e#2447#2465#0" expanded="false" />
+                <element signature="e#3110#3128#0" expanded="false" />
+                <element signature="e#4164#4182#0" expanded="false" />
+                <element signature="e#4814#4832#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,46 +83,11 @@
       <file leaf-file-name="LetterModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/model/LetterModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="187" column="30" lean-forward="false" selection-start-line="187" selection-start-column="19" selection-end-line="187" selection-end-column="30" />
+            <state relative-caret-position="323">
+              <caret line="202" column="44" lean-forward="false" selection-start-line="202" selection-start-column="44" selection-end-line="202" selection-end-column="44" />
               <folding>
-                <element signature="e#2504#2505#0" expanded="true" />
-                <element signature="e#2539#2540#0" expanded="true" />
-                <element signature="e#3834#3835#0" expanded="true" />
-                <element signature="e#3872#3873#0" expanded="true" />
-                <element signature="e#4338#4339#0" expanded="true" />
-                <element signature="e#4380#4381#0" expanded="true" />
-                <element signature="e#4859#4860#0" expanded="true" />
-                <element signature="e#4897#4898#0" expanded="true" />
-                <element signature="e#4959#4960#0" expanded="true" />
-                <element signature="e#5013#5014#0" expanded="true" />
-                <element signature="e#5069#5070#0" expanded="true" />
-                <element signature="e#5107#5108#0" expanded="true" />
-                <element signature="e#5251#5252#0" expanded="true" />
-                <element signature="e#5278#5279#0" expanded="true" />
+                <element signature="e#4321#4322#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DateTimeUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/utils/DateTimeUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-              <folding>
-                <element signature="e#1103#1104#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/home/HomeActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -130,8 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>LetterModel</find>
-      <find>APP_BASE_PATH</find>
       <find>B</find>
       <find>Base</find>
       <find>Base_</find>
@@ -160,6 +134,8 @@
       <find>onReceiveClientId</find>
       <find>onReceiveMessageData</find>
       <find>io.yunba.android.MESSAGE_RECEIVED_ACTION</find>
+      <find>isEditing</find>
+      <find>receiveDateName</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/app/src/main/res/layout</dir>
@@ -2199,20 +2175,20 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/push/TTFMReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/main/TTFMApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/auth/activity/AuthSettingActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_letter_edit.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/view/LetterEditActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/utils/DateTimeUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/push/TTFMPushReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/config/AppConfig.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_time_line.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/view/LocalLetterListActivity.java" />
         <option value="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/dean/tothefutureme/databinding/AdapterTimeLineBinding.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/home/HomeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/model/LetterModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/adapter_time_line.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/config/AppConfig.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/home/HomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/view/LetterEditActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/model/LetterModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_letter_edit.xml" />
       </list>
     </option>
   </component>
@@ -2441,6 +2417,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ToTheFutureMe" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tothefutureme" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="ProjectPane">
@@ -2499,7 +2497,7 @@
     <property name="device.picker.selection" value="a3ebec83" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
-    <property name="DEBUGGABLE_DEVICE" value="xiaomi-mi_5c-a3ebec83" />
+    <property name="DEBUGGABLE_DEVICE" value="mi_5c-a3ebec83" />
     <property name="DEBUGGABLE_PROCESS" value="com.dean.tothefutureme" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="DEBUGGER_ID" value="Auto" />
@@ -2603,7 +2601,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513493440105" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513499979855" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2649,7 +2647,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513493440105" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513499979855" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2830,7 +2828,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513493440106" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1513499979856" />
       </method>
     </configuration>
     <list size="1">
@@ -2880,7 +2878,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47058824" sideWeight="0.5076389" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32291666" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32291666" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2943,18 +2941,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/utils/DateTimeUtils.java</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="73" />
+      <option name="time" value="76" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -3079,25 +3069,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_letter_edit.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="54" column="59" lean-forward="false" selection-start-line="54" selection-start-column="59" selection-end-line="54" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/view/LetterEditActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="167" column="76" lean-forward="false" selection-start-line="167" selection-start-column="76" selection-end-line="167" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/auth/activity/RegisterActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -3175,14 +3146,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/config/AppConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="50" column="42" lean-forward="false" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/app/libs/Convenient-Android-2.4.1.jar!/com/dean/android/framework/convenient/network/http/DefaultHttpConnection.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -3242,14 +3205,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/home/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/app/libs/Convenient-Android-2.4.1.jar!/com/dean/android/framework/convenient/util/SetUtil.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -3283,17 +3238,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/config/AppConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="538">
+          <caret line="81" column="15" lean-forward="false" selection-start-line="81" selection-start-column="7" selection-end-line="81" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/utils/DateTimeUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
+        <state relative-caret-position="265">
           <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
             <element signature="e#1103#1104#0" expanded="true" />
@@ -3301,25 +3256,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/model/LetterModel.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/home/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="187" column="30" lean-forward="false" selection-start-line="187" selection-start-column="19" selection-end-line="187" selection-end-column="30" />
+        <state relative-caret-position="169">
+          <caret line="52" column="79" lean-forward="false" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="79" />
           <folding>
-            <element signature="e#2504#2505#0" expanded="true" />
-            <element signature="e#2539#2540#0" expanded="true" />
-            <element signature="e#3834#3835#0" expanded="true" />
-            <element signature="e#3872#3873#0" expanded="true" />
-            <element signature="e#4338#4339#0" expanded="true" />
-            <element signature="e#4380#4381#0" expanded="true" />
-            <element signature="e#4859#4860#0" expanded="true" />
-            <element signature="e#4897#4898#0" expanded="true" />
-            <element signature="e#4959#4960#0" expanded="true" />
-            <element signature="e#5013#5014#0" expanded="true" />
-            <element signature="e#5069#5070#0" expanded="true" />
-            <element signature="e#5107#5108#0" expanded="true" />
-            <element signature="e#5251#5252#0" expanded="true" />
-            <element signature="e#5278#5279#0" expanded="true" />
+            <element signature="e#1789#2160#0" expanded="true" />
+            <element signature="e#2159#2160#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="173" column="73" lean-forward="true" selection-start-line="173" selection-start-column="73" selection-end-line="173" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="36" column="31" lean-forward="false" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+          <folding>
+            <element signature="e#2555#2556#0" expanded="true" />
+            <element signature="e#2590#2591#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3329,19 +3291,48 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="119" column="52" lean-forward="false" selection-start-line="119" selection-start-column="37" selection-end-line="119" selection-end-column="52" />
+        <state relative-caret-position="214">
+          <caret line="41" column="25" lean-forward="false" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+          <folding>
+            <element signature="e#1747#1772#0" expanded="false" />
+            <element signature="e#2263#2288#0" expanded="false" />
+            <element signature="e#4183#4207#0" expanded="false" />
+            <element signature="e#4962#4986#0" expanded="false" />
+            <element signature="e#5825#5850#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/view/LetterEditActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="49" column="33" lean-forward="false" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/letter/model/LetterModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        <state relative-caret-position="323">
+          <caret line="202" column="44" lean-forward="false" selection-start-line="202" selection-start-column="44" selection-end-line="202" selection-end-column="44" />
           <folding>
-            <element signature="e#988#989#0" expanded="true" />
-            <element signature="e#1037#1038#0" expanded="true" />
+            <element signature="e#4321#4322#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_letter_edit.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="52" column="66" lean-forward="false" selection-start-line="52" selection-start-column="66" selection-end-line="52" selection-end-column="66" />
+          <folding>
+            <element signature="e#2447#2465#0" expanded="false" />
+            <element signature="e#3110#3128#0" expanded="false" />
+            <element signature="e#4164#4182#0" expanded="false" />
+            <element signature="e#4814#4832#0" expanded="false" />
           </folding>
         </state>
       </provider>

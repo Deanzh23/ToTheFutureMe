@@ -1,7 +1,7 @@
 package com.dean.tothefutureme.timeline.view;
 
 import android.content.Context;
-import android.view.View;
+import android.content.Intent;
 
 import com.dean.android.framework.convenient.adapter.ConvenientAdapter;
 import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
@@ -9,6 +9,7 @@ import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.AdapterTimeLineBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
+import com.dean.tothefutureme.letter.view.LetterEditActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +51,12 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
         receiveDates.add(letterModel.getReceiveDateName());
 
         adapterTimeLineBinding.getRoot().setOnClickListener(null);
-        adapterTimeLineBinding.contentTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO 跳转到信件编辑界面（只能查看不能编辑）
-            }
+        adapterTimeLineBinding.contentTextView.setOnClickListener(v -> {
+            // 跳转到信件编辑界面（只能查看不能编辑）
+            Intent intent = new Intent(context, LetterEditActivity.class);
+            intent.putExtra(LetterModel.class.getSimpleName(), letterModel);
+            intent.putExtra(TimeLineFragment.class.getSimpleName(), true);
+            context.startActivity(intent);
         });
     }
 
@@ -78,4 +80,7 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
         notifyDataSetChanged();
     }
 
+    public List<LetterModel> getLetterModels() {
+        return letterModels;
+    }
 }

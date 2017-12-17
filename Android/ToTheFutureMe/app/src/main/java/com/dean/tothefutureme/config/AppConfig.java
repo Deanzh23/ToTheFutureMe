@@ -46,9 +46,13 @@ public class AppConfig {
      */
     public static final String LETTER_UPLOAD = "letter/upload";
     /**
-     * 上传信件
+     * 读取信件
      */
     public static final String LETTER_LOAD = "letter/load";
+    /**
+     * 设置信件已读
+     */
+    public static final String LETTER_LOAD_READ = "letter/readLetter";
     /**
      * 图片上传
      */
@@ -71,9 +75,13 @@ public class AppConfig {
     public static final int IMAGE_TYPE_AVATAR = 0;
 
     /**
-     * 数据更新广播表示
+     * 数据更新广播标识
      */
     public static final String BROADCAST_RECEIVER_DATA_UPDATE = "broadcast_receiver_data_update";
+    /**
+     * 信件已读更新广播标识
+     */
+    public static final String BROADCAST_RECEIVER_LETTER_READ_UPDATE = "broadcast_receiver_letter_read_update";
 
     public static final String TAG_YUN_BA = "YunBa SDK";
     /**

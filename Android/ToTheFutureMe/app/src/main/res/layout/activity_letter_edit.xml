@@ -55,7 +55,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="信件传送到"
-                        android:textSize="@dimen/text_size"/>
+                        android:textColor="@color/colorThemeSkyBlue"
+                        android:textSize="@dimen/text_size"
+                        android:visibility="invisible"/>
 
                     <TextView
                         android:id="@+id/receiveDateTextView"
@@ -65,6 +67,7 @@
                         android:layout_toRightOf="@id/receiveDateLabelTextView"
                         android:hint="选择传送到那一天"
                         android:text="@={letterModel.receiveDateTimeName}"
+                        android:textColor="@color/colorThemeSkyBlue"
                         android:textSize="@dimen/text_size"/>
                 </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
 

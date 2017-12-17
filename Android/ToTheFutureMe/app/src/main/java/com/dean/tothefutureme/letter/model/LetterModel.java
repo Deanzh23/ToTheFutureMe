@@ -2,6 +2,7 @@ package com.dean.tothefutureme.letter.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.text.TextUtils;
 
 import com.dean.android.framework.convenient.database.annotation.Column;
 import com.dean.android.framework.convenient.database.annotation.PrimaryKey;
@@ -192,10 +193,8 @@ public class LetterModel extends BaseObservable implements Serializable {
     public void setReceiveDateTime(long receiveDateTime) {
         this.receiveDateTime = receiveDateTime;
 
-//        if (TextUtils.isEmpty(receiveDateTimeName))
-//            setReceiveDateTimeName(DateTimeUtils.getDateTimeMillisecond2String(receiveDateTime));
-
-        setReceiveDateName(DateTimeUtils.getDateString(new Date(receiveDateTime)));
+        if (TextUtils.isEmpty(getReceiveDateTimeName()))
+            setReceiveDateTimeName(DateTimeUtils.getDateString(new Date(receiveDateTime)));
 
         notifyPropertyChanged(BR.receiveDateTime);
     }

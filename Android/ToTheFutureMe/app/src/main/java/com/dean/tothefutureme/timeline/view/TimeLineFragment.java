@@ -124,7 +124,10 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
 
                                     if (!SetUtil.isEmpty(letterModels)) {
                                         // 绘制界面
-                                        handler.post(() -> setLetterData(letterModels));
+                                        handler.post(() -> {
+                                            setLetterData(letterModels);
+                                            viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.messageLayout);
+                                        });
 
                                         // 存储到数据库
                                         new Thread(() -> {
@@ -137,8 +140,6 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 error(-1);
-                            } finally {
-                                viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.messageLayout);
                             }
                         }
 
@@ -186,4 +187,28 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
         startActivity(new Intent(activity, LocalLetterListActivity.class));
         return true;
     }
+
+    /**
+     * 更新信件已读
+     *
+     * @param letterModel
+     */
+    public void updateLetterRead(LetterModel letterModel) {
+        if (timeLineAdapter != null && letterModel != null) {
+            List<LetterModel> letterModels = timeLineAdapter.getLetterModels();
+
+            int count = letterModels == null ? 0 : letterModels.size();
+            if (count <= 0)
+                return;
+
+            for (LetterModel tempLetterModel : letterModels) {
+                if (tempLetterModel.getLetterId().equals(letterModel.getLetterId())) {
+                    tempLetterModel.setIsRead(1);
+                    timeLineAdapter.notifyDataSetChanged();
+                    break;
+                }
+            }
+        }
+    }
+
 }
