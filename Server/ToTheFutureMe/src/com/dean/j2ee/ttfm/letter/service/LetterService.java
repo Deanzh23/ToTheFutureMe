@@ -3,6 +3,8 @@ package com.dean.j2ee.ttfm.letter.service;
 import com.dean.j2ee.framework.json.JSONUtil;
 import com.dean.j2ee.framework.service.ConvenientService;
 import com.dean.j2ee.framework.utils.TextUils;
+import com.dean.j2ee.ttfm.auth.bean.AuthEntity;
+import com.dean.j2ee.ttfm.auth.db.AuthDao;
 import com.dean.j2ee.ttfm.letter.bean.LetterEntity;
 import com.dean.j2ee.ttfm.letter.db.LetterDao;
 import org.json.JSONObject;
@@ -20,6 +22,8 @@ public class LetterService extends ConvenientService {
 
     @Autowired
     private LetterDao letterDao;
+    @Autowired
+    private AuthDao authDao;
 
     /**
      * 上传信件
@@ -53,6 +57,18 @@ public class LetterService extends ConvenientService {
      */
     public Object loadLetters(String username, int startIndex, int count) {
         List<LetterEntity> letterEntities = letterDao.findAllLetterByUsername(username, startIndex, count);
+
+        // 拼入用户信息
+        if (letterEntities != null && letterEntities.size() > 0) {
+            for (LetterEntity letterEntity : letterEntities) {
+                AuthEntity authEntity = authDao.find(letterEntity.getSenderUserId());
+
+                if (authEntity != null) {
+                    letterEntity.setSenderUserNickName(authEntity.getNickname());
+                    letterEntity.setSenderAvatarUrl(authEntity.getAvatarUrl());
+                }
+            }
+        }
 
         JSONObject response = getResponseJSON(RESPONSE_SUCCESS);
         response.put("data", JSONUtil.list2JSONArray(letterEntities));

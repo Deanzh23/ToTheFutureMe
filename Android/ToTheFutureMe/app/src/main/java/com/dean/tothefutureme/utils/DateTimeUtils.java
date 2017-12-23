@@ -56,9 +56,30 @@ public class DateTimeUtils {
         return DATE_FORMAT.format(date);
     }
 
+    /**
+     * xml中long转日期字符串
+     * <p>
+     * app:text_long2DateString="@{long值}"
+     *
+     * @param textView
+     * @param timeLong
+     */
     @BindingAdapter({"text_long2DateString"})
     public static void long2DateString(TextView textView, long timeLong) {
         textView.setText(DATE_FORMAT.format(new Date(timeLong)));
+    }
+
+    /**
+     * xml中long转日期字符串
+     * <p>
+     * app:text_long2DateTimeString="@{long值}"
+     *
+     * @param textView
+     * @param timeLong
+     */
+    @BindingAdapter({"text_long2DateTimeString"})
+    public static void long2DateTimeString(TextView textView, long timeLong) {
+        textView.setText(DATE_TIME_FORMAT.format(new Date(timeLong)));
     }
 
 }

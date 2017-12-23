@@ -80,17 +80,24 @@ public class AuthDao extends ConvenientDao {
     /**
      * 查找一个指定用户名、密码的账号
      *
-     * @param username
-     * @param password
+     * @param params
      * @return
      */
-    public AuthEntity find(String username, String password) {
-        Map<String, Object> params = getParamMap();
-        params.put("username", username);
-        if (!TextUils.isEmpty(password))
-            params.put("password", password);
+    public AuthEntity find(String... params) {
+        String username = null;
+        String password = null;
+        try {
+            username = params[0];
+            password = params[2];
+        } catch (Exception e) {
+        }
 
-        AuthEntity authEntity = find(sessionFactory, AuthEntity.class, params);
+        Map<String, Object> dbParams = getParamMap();
+        dbParams.put("username", username);
+        if (!TextUils.isEmpty(password))
+            dbParams.put("password", password);
+
+        AuthEntity authEntity = find(sessionFactory, AuthEntity.class, dbParams);
 
         return authEntity;
     }

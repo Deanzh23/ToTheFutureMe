@@ -128,8 +128,10 @@ public class PushTimingTask {
         date.setMinutes(minutes);
         date.setSeconds(seconds);
 
-        String longString = String.valueOf(date.getTime());
-        return Long.valueOf(longString.substring(0, longString.length() - 3));
+//        String longString = String.valueOf(date.getTime());
+//        return Long.valueOf(longString.substring(0, longString.length() - 3));
+
+        return date.getTime();
     }
 
 }

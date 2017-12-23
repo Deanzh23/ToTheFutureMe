@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -35,8 +36,8 @@
                 android:id="@+id/dateTimeLeftLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/lineImageView">
+                android:layout_toLeftOf="@id/lineImageView"
+                android:paddingTop="24dp">
 
                 <!-- 收件日期 -->
                 <TextView
@@ -44,9 +45,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="@{letterModel.receiveDateTime+``}"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:text_long2DateString="@{letterModel.receiveDateTime}"/>
 
                 <!-- 收件时间 -->
                 <TextView
@@ -55,7 +56,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/dateTextView"
                     android:layout_centerHorizontal="true"
-                    android:text="@{letterModel.receiveDateTime+``}"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"/>
             </RelativeLayout>
@@ -85,9 +85,10 @@
                         android:id="@+id/senderAvatarImageView"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_centerVertical="true"
                         android:background="@mipmap/ic_launcher_round"/>
 
+                    <!-- 已读未读 -->
                     <TextView
                         android:id="@+id/readTextView"
                         android:layout_width="wrap_content"
@@ -95,25 +96,43 @@
                         android:layout_alignBottom="@id/senderAvatarImageView"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="16dp"
-                        android:paddingBottom="8dp"
                         android:text="@{letterModel.isRead==1?`已读`:`未读`}"
                         android:textColor="@{letterModel.isRead==1?@color/colorThemeSkyBlue:@color/colorAccent}"
                         android:textSize="@dimen/text_size_small"/>
 
-                    <!-- 发件日期时间 -->
-                    <TextView
-                        android:id="@+id/sendDateTimeTextView"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/senderAvatarImageView"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="8dp"
                         android:layout_toLeftOf="@id/readTextView"
                         android:layout_toRightOf="@id/senderAvatarImageView"
-                        android:paddingBottom="8dp"
-                        android:text="@{letterModel.receiveDateTime+``}"
-                        android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold"/>
+                        android:orientation="vertical">
+
+                        <!-- 发件人昵称 -->
+                        <TextView
+                            android:id="@+id/senderNicknameTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{letterModel.senderUserNickName}"
+                            android:textSize="@dimen/text_size_medium"
+                            android:textStyle="bold"/>
+
+                        <View
+                            android:id="@+id/titleCenterView"
+                            android:layout_width="0dp"
+                            android:layout_height="4dp"/>
+
+                        <!-- 发件日期时间 -->
+                        <TextView
+                            android:id="@+id/sendDateTimeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_small"
+                            android:textStyle="bold"
+                            app:text_long2DateTimeString="@{letterModel.receiveDateTime}"/>
+                    </LinearLayout>
                 </RelativeLayout>
 
                 <TextView
@@ -123,7 +142,7 @@
                     android:layout_below="@id/contentTopLayout"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
-                    android:background="@color/colorThemeSkyBlue"
+                    android:background="@drawable/shape_letter_content"
                     android:ellipsize="end"
                     android:maxLines="4"
                     android:minLines="4"
