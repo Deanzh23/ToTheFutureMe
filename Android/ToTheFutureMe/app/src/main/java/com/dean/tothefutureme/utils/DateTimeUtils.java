@@ -66,7 +66,8 @@ public class DateTimeUtils {
      */
     @BindingAdapter({"text_long2DateString"})
     public static void long2DateString(TextView textView, long timeLong) {
-        textView.setText(DATE_FORMAT.format(new Date(timeLong)));
+        if (timeLong > 0)
+            textView.setText(DATE_FORMAT.format(new Date(timeLong)));
     }
 
     /**
@@ -79,7 +80,8 @@ public class DateTimeUtils {
      */
     @BindingAdapter({"text_long2DateTimeString"})
     public static void long2DateTimeString(TextView textView, long timeLong) {
-        textView.setText(DATE_TIME_FORMAT.format(new Date(timeLong)));
+        if (timeLong > 0)
+            textView.setText(DATE_TIME_FORMAT.format(new Date(timeLong)));
     }
 
 }

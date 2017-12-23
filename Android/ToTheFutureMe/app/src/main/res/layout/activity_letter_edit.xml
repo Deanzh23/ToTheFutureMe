@@ -69,7 +69,7 @@
                         android:paddingBottom="4dp"
                         android:paddingTop="4dp"
                         android:textColor="@color/colorThemeSkyBlue"
-                        android:textSize="@dimen/text_size"
+                        android:textSize="@dimen/text_size_medium"
                         app:text_long2DateString="@{letterModel.receiveDateTime}"/>
                 </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
 

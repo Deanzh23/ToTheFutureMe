@@ -32,33 +32,17 @@
                 android:layout_marginLeft="16dp"
                 android:background="@color/colorThemeSkyBlue"/>
 
-            <RelativeLayout
-                android:id="@+id/dateTimeLeftLayout"
+            <!-- 收件日期 -->
+            <TextView
+                android:id="@+id/dateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_toLeftOf="@id/lineImageView"
-                android:paddingTop="24dp">
-
-                <!-- 收件日期 -->
-                <TextView
-                    android:id="@+id/dateTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
-                    app:text_long2DateString="@{letterModel.receiveDateTime}"/>
-
-                <!-- 收件时间 -->
-                <TextView
-                    android:id="@+id/timeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/dateTextView"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"/>
-            </RelativeLayout>
+                android:paddingTop="24dp"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:text_long2DateString="@{letterModel.receiveDateTime}"/>
         </RelativeLayout>
 
         <!-- 发件人及其信件信息Layout -->
@@ -122,7 +106,7 @@
                         <View
                             android:id="@+id/titleCenterView"
                             android:layout_width="0dp"
-                            android:layout_height="4dp"/>
+                            android:layout_height="2dp"/>
 
                         <!-- 发件日期时间 -->
                         <TextView
