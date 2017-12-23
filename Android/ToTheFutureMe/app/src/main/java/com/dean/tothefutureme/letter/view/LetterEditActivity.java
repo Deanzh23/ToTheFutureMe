@@ -164,6 +164,8 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
             return super.onKeyDown(keyCode, event);
     }
 
+    private Date receiveDate;
+
     /**
      * 选择收件日期
      */
@@ -172,12 +174,17 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         if (!isEditModel || isLookModel)
             return;
 
-        Date date = new Date();
+        if (letterModel.getReceiveDateTime() <= 0)
+            receiveDate = new Date();
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-            StringBuilder builder = new StringBuilder();
-            builder.append(year).append("/").append(month + 1).append("/").append(dayOfMonth);
-            viewDataBinding.receiveDateTextView.setText(builder.toString());
-        }, 1900 + date.getYear(), date.getMonth(), date.getDate());
+
+            receiveDate.setYear(year - 1900);
+            receiveDate.setMonth(month);
+            receiveDate.setDate(dayOfMonth);
+
+            letterModel.setReceiveDateTime(receiveDate.getTime());
+        }, 1900 + receiveDate.getYear(), receiveDate.getMonth(), receiveDate.getDate());
         datePickerDialog.show();
     }
 

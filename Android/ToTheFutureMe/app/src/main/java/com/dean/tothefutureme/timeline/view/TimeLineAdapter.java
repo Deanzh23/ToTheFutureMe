@@ -11,7 +11,6 @@ import com.dean.tothefutureme.databinding.AdapterTimeLineBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.letter.view.LetterEditActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +23,6 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
     private Context context;
 
     private List<LetterModel> letterModels;
-
-    private List<String> receiveDates = new ArrayList<>();
 
     public TimeLineAdapter(Context context, List<LetterModel> letterModels) {
         this.context = context;
@@ -47,8 +44,6 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
 
         // 设置发件人头像
         BitmapUtil.imageLoader(adapterTimeLineBinding.senderAvatarImageView, letterModel.getSenderAvatarUrl(), AppConfig.APP_IMAGE_PAT, false);
-
-        receiveDates.add(letterModel.getReceiveDateName());
 
         adapterTimeLineBinding.getRoot().setOnClickListener(null);
         adapterTimeLineBinding.contentTextView.setOnClickListener(v -> {

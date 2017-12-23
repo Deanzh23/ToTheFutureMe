@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="@{letterModel.receiveDateName}"
+                    android:text="@{letterModel.receiveDateTime+``}"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"/>
 
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/dateTextView"
                     android:layout_centerHorizontal="true"
-                    android:text="@{letterModel.receiveTimeName}"
+                    android:text="@{letterModel.receiveDateTime+``}"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"/>
             </RelativeLayout>
@@ -111,7 +111,7 @@
                         android:layout_toLeftOf="@id/readTextView"
                         android:layout_toRightOf="@id/senderAvatarImageView"
                         android:paddingBottom="8dp"
-                        android:text="@{letterModel.sendDateTimeName}"
+                        android:text="@{letterModel.receiveDateTime+``}"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"/>
                 </RelativeLayout>

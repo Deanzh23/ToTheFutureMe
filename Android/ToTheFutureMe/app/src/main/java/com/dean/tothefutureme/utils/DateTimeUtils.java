@@ -1,5 +1,8 @@
 package com.dean.tothefutureme.utils;
 
+import android.databinding.BindingAdapter;
+import android.widget.TextView;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,6 +54,11 @@ public class DateTimeUtils {
      */
     public static String getDateString(Date date) {
         return DATE_FORMAT.format(date);
+    }
+
+    @BindingAdapter({"text_long2DateString"})
+    public static void long2DateString(TextView textView, long timeLong) {
+        textView.setText(DATE_FORMAT.format(new Date(timeLong)));
     }
 
 }

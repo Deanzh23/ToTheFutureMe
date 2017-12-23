@@ -2,7 +2,6 @@ package com.dean.tothefutureme.letter.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.text.TextUtils;
 
 import com.dean.android.framework.convenient.database.annotation.Column;
 import com.dean.android.framework.convenient.database.annotation.PrimaryKey;
@@ -10,8 +9,6 @@ import com.dean.tothefutureme.BR;
 import com.dean.tothefutureme.utils.DateTimeUtils;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.util.Date;
 
 /**
  * 信件Model
@@ -65,26 +62,10 @@ public class LetterModel extends BaseObservable implements Serializable {
     @Column
     private long sendDateTime;
     /**
-     * 发件日期时间表示
-     */
-    private String sendDateTimeName;
-    /**
      * 收件日期时间毫秒值
      */
     @Column
     private long receiveDateTime;
-    /**
-     * 收件日期时间表示
-     */
-    private String receiveDateTimeName;
-    /**
-     * 收件日期表示
-     */
-    private String receiveDateName;
-    /**
-     * 收件时间表示
-     */
-    private String receiveTimeName;
     /**
      * 本地保存日期时间毫秒值
      */
@@ -169,20 +150,7 @@ public class LetterModel extends BaseObservable implements Serializable {
 
     public void setSendDateTime(long sendDateTime) {
         this.sendDateTime = sendDateTime;
-
-        setSendDateTimeName(DateTimeUtils.getDateTimeMillisecond2String(sendDateTime));
-
         notifyPropertyChanged(BR.sendDateTime);
-    }
-
-    @Bindable
-    public String getSendDateTimeName() {
-        return sendDateTimeName;
-    }
-
-    public void setSendDateTimeName(String sendDateTimeName) {
-        this.sendDateTimeName = sendDateTimeName;
-        notifyPropertyChanged(BR.sendDateTimeName);
     }
 
     @Bindable
@@ -192,47 +160,7 @@ public class LetterModel extends BaseObservable implements Serializable {
 
     public void setReceiveDateTime(long receiveDateTime) {
         this.receiveDateTime = receiveDateTime;
-
-        if (TextUtils.isEmpty(getReceiveDateTimeName()))
-            setReceiveDateTimeName(DateTimeUtils.getDateString(new Date(receiveDateTime)));
-
         notifyPropertyChanged(BR.receiveDateTime);
-    }
-
-    @Bindable
-    public String getReceiveDateTimeName() {
-        return receiveDateTimeName;
-    }
-
-    public void setReceiveDateTimeName(String receiveDateTimeName) {
-        this.receiveDateTimeName = receiveDateTimeName;
-
-        try {
-            setReceiveDateTime(DateTimeUtils.getDateMillisecond(receiveDateTimeName));
-            setReceiveDateName(receiveDateTimeName);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        notifyPropertyChanged(BR.receiveDateTimeName);
-    }
-
-    @Bindable
-    public String getReceiveDateName() {
-        return receiveDateName;
-    }
-
-    public void setReceiveDateName(String receiveDateName) {
-        this.receiveDateName = receiveDateName;
-    }
-
-    @Bindable
-    public String getReceiveTimeName() {
-        return receiveTimeName;
-    }
-
-    public void setReceiveTimeName(String receiveTimeName) {
-        this.receiveTimeName = receiveTimeName;
     }
 
     public int getType() {

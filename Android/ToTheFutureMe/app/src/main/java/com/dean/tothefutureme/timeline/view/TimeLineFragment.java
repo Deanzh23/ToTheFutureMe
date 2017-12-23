@@ -124,16 +124,11 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
 
                                     if (!SetUtil.isEmpty(letterModels)) {
                                         // 绘制界面
-                                        handler.post(() -> {
-                                            setLetterData(letterModels);
-                                            viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.messageLayout);
-                                        });
+                                        handler.post(() -> setLetterData(letterModels));
 
                                         // 存储到数据库
-                                        new Thread(() -> {
-                                            for (LetterModel letterModel : letterModels)
-                                                DatabaseUtil.saveOrUpdate(letterModel);
-                                        }).start();
+                                        for (LetterModel letterModel : letterModels)
+                                            DatabaseUtil.saveOrUpdate(letterModel);
                                     }
                                 } else
                                     error(-2);
@@ -146,20 +141,17 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
                         @Override
                         public void error(int i) {
                             handler.post(() -> ToastUtil.showToast(activity, "获取信件失败 " + i));
-                            new Thread(() -> {
-                                // 读取本地数据库
-                                Selector selector = new Selector("userId", "=", TTFMApplication.getAuthModel().getUsername());
-                                List<LetterModel> letterModels = DatabaseUtil.findAll(LetterModel.class, selector);
-                                // 绘制界面
-                                handler.post(() -> {
-                                    viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.messageLayout);
-                                    setLetterData(letterModels);
-                                });
-                            }).start();
+
+                            // 读取本地数据库
+                            Selector selector = new Selector("userId", "=", TTFMApplication.getAuthModel().getUsername());
+                            List<LetterModel> letterModels = DatabaseUtil.findAll(LetterModel.class, selector);
+                            // 绘制界面
+                            handler.post(() -> setLetterData(letterModels));
                         }
 
                         @Override
                         public void end() {
+                            handler.post(() -> viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.messageLayout));
                         }
                     });
         }).start();
