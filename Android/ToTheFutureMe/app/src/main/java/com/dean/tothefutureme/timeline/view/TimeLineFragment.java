@@ -1,5 +1,6 @@
 package com.dean.tothefutureme.timeline.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,6 +52,7 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
 
     private TimeLineAdapter timeLineAdapter;
 
+    @SuppressLint("StaticFieldLeak")
     private static TimeLineFragment instance;
 
     private Handler handler = new Handler();
@@ -202,6 +205,8 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
             for (LetterModel tempLetterModel : letterModels) {
                 if (tempLetterModel.getLetterId().equals(letterModel.getLetterId())) {
                     tempLetterModel.setIsRead(1);
+
+                    Log.d(TimeLineAdapter.class.getSimpleName(), "[timeLineAdapter.notifyDataSetChanged()]");
                     timeLineAdapter.notifyDataSetChanged();
                     break;
                 }

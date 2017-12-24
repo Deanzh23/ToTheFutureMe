@@ -67,8 +67,8 @@
                     <!-- 发件人头像 -->
                     <com.dean.tothefutureme.custom.view.image.RoundImageView
                         android:id="@+id/senderAvatarImageView"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_centerVertical="true"
                         android:background="@mipmap/ic_launcher_round"/>
 

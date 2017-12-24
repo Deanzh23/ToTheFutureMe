@@ -43,7 +43,8 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
         adapterTimeLineBinding.setLetterModel(letterModel);
 
         // 设置发件人头像
-        BitmapUtil.imageLoader(adapterTimeLineBinding.senderAvatarImageView, letterModel.getSenderAvatarUrl(), AppConfig.APP_IMAGE_PAT, false);
+        BitmapUtil.imageLoader(adapterTimeLineBinding.senderAvatarImageView, AppConfig.BASE_URL + letterModel.getSenderAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                false);
 
         adapterTimeLineBinding.getRoot().setOnClickListener(null);
         adapterTimeLineBinding.contentTextView.setOnClickListener(v -> {

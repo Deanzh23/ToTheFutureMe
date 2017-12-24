@@ -20,7 +20,7 @@ import java.io.IOException;
 @Service
 public class FileService extends ConvenientService {
 
-    private static final String PATH_STATIC = "/resources";
+    private static final String PATH_STATIC = "resources";
     private static final String PATH_UPLOAD = "WEB-INF/data/upload";
 
     @Autowired
