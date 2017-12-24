@@ -64,7 +64,7 @@
                         style="@style/ListItemContentTheme"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/receiveDateLabelTextView"
+                        android:layout_toEndOf="@id/receiveDateLabelTextView"
                         android:hint="选择传送到那一天"
                         android:paddingBottom="4dp"
                         android:paddingTop="4dp"

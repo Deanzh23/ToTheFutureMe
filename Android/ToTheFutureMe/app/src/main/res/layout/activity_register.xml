@@ -135,7 +135,10 @@
                                     android:hint="请输入验证码（必填）"
                                     android:inputType="number"
                                     android:maxLength="6"
-                                    android:padding="8dp"
+                                    android:paddingBottom="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="16dp"
+                                    android:paddingTop="8dp"
                                     android:singleLine="true"
                                     android:text="@={authModel.verificationCode}"
                                     android:textSize="@dimen/text_size"/>

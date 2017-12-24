@@ -159,7 +159,11 @@ public class LetterEditText extends EditText implements TextWatcher {
             if (onMaxLengthListener != null)
                 onMaxLengthListener.onMaxLength();
 
-            setText(s.subSequence(0, letterLengthLimit));
+            if (s != null) {
+                setText(s.subSequence(0, letterLengthLimit));
+                // 将光标放到内容结尾
+                setSelection(s.length());
+            }
         }
     }
 

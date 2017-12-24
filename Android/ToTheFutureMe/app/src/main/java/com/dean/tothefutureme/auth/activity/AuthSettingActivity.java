@@ -125,8 +125,16 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
                         }
                     });
 
-            AuthSettingActivity.this.startActivity(new Intent(AuthSettingActivity.this, LoginActivity.class));
-            TTFMApplication.killHistoryActivity(LoginActivity.class.getSimpleName());
+            new Thread(() -> {
+                TTFMApplication.getAuthModel().setPassword("");
+                TTFMApplication.getAuthModel().setToken(null);
+                DatabaseUtil.saveOrUpdate(TTFMApplication.getAuthModel());
+
+                handler.post(() -> {
+                    AuthSettingActivity.this.startActivity(new Intent(AuthSettingActivity.this, LoginActivity.class));
+                    TTFMApplication.killHistoryActivity(LoginActivity.class.getSimpleName());
+                });
+            }).start();
         });
         builder.setPositiveButton("取消", (dialog, which) -> {
             if (exitLoginDialog != null)
