@@ -20,6 +20,7 @@ import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityCheckUsernameBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
+import com.dean.tothefutureme.utils.TokenUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,7 +74,7 @@ public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsern
             connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_CHECK_USERNAME, null, null, bodyParams,
                     new HttpConnectionListener() {
                         @Override
-                        public void success(String s) {
+                        public void onSuccess(String s) {
                             handler.post(() -> {
                                 try {
                                     JSONObject response = new JSONObject(s);
@@ -86,21 +87,26 @@ public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsern
                                     } else if ("400".equals(code))
                                         ToastUtil.showToast(CheckUsernameActivity.this, "邮箱用户名已被占用，请更换邮箱用户名", Toast.LENGTH_LONG);
                                     else
-                                        error(-2);
+                                        onError(-2);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                    error(-1);
+                                    onError(-1);
                                 }
                             });
                         }
 
                         @Override
-                        public void error(int i) {
+                        public void onError(int i) {
                             handler.post(() -> ToastUtil.showToast(CheckUsernameActivity.this, "检测账号可用性失败"));
                         }
 
                         @Override
-                        public void end() {
+                        public void onTokenFailure() {
+                            handler.post(() -> TokenUtils.loginAgain(CheckUsernameActivity.this));
+                        }
+
+                        @Override
+                        public void onEnd() {
                             handler.post(() -> progressDialog.dismiss());
                         }
                     });

@@ -23,6 +23,7 @@ import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityAuthSettingBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
+import com.dean.tothefutureme.utils.TokenUtils;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -151,7 +152,7 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
                 connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_EDIT_PASSWORD, null, null, request.toString(),
                         new HttpConnectionListener() {
                             @Override
-                            public void success(String s) {
+                            public void onSuccess(String s) {
                                 try {
                                     JSONObject response = new JSONObject(s);
                                     String code = response.getString("code");
@@ -167,20 +168,25 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
                                             AuthSettingActivity.this.finish();
                                         });
                                     } else
-                                        error(-2);
+                                        onError(-2);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                    error(-1);
+                                    onError(-1);
                                 }
                             }
 
                             @Override
-                            public void error(int i) {
+                            public void onError(int i) {
                                 handler.post(() -> ToastUtil.showToast(AuthSettingActivity.this, "密码修改失败 " + i));
                             }
 
                             @Override
-                            public void end() {
+                            public void onTokenFailure() {
+                                handler.post(() -> TokenUtils.loginAgain(AuthSettingActivity.this));
+                            }
+
+                            @Override
+                            public void onEnd() {
                                 handler.post(() -> {
                                     if (waitDialog != null && waitDialog.isShowing())
                                         waitDialog.dismiss();

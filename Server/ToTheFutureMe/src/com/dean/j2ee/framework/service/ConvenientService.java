@@ -9,11 +9,10 @@ public class ConvenientService {
 
     // 应答"成功"
     protected static final String RESPONSE_SUCCESS = "200";
-
     // 应答"参数错误"
     protected static final String RESPONSE_PARAMETER_ERROR = "404";
     // 应答"token失效"
-    protected static final String RESPONSE_TOKEN_LOSE_EFFICACY = "900";
+    protected static final String RESPONSE_TOKEN_LOSE_EFFICACY = "9004";
     // 应答"未知错误"
     protected static final String RESPONSE_UN_KNOW_ERROR = "501";
     // 应答"用户个人限制访问"

@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_toLeftOf="@id/lineImageView"
-                android:paddingTop="24dp"
+                android:paddingTop="36dp"
                 android:textSize="@dimen/text_size_medium"
                 android:textStyle="bold"
                 app:text_long2DateString="@{letterModel.receiveDateTime}"/>

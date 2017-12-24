@@ -32,6 +32,7 @@ import com.dean.tothefutureme.auth.model.AuthModel;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.FragmentMeBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
+import com.dean.tothefutureme.utils.TokenUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -155,7 +156,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
                 JSONUtil.object2Json(TTFMApplication.getAuthModel()).toString(), new HttpConnectionListener() {
 
                     @Override
-                    public void success(String s) {
+                    public void onSuccess(String s) {
                         try {
                             JSONObject response = new JSONObject(s);
                             String code = response.getString("code");
@@ -177,15 +178,15 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
                                     ToastUtil.showToast(activity, "更新成功");
                                 });
                             } else
-                                error(-2);
+                                onError(-2);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            error(-1);
+                            onError(-1);
                         }
                     }
 
                     @Override
-                    public void error(int i) {
+                    public void onError(int i) {
                         handler.post(() -> {
                             if (waitDialog != null && waitDialog.isShowing())
                                 waitDialog.dismiss();
@@ -195,7 +196,16 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
                     }
 
                     @Override
-                    public void end() {
+                    public void onTokenFailure() {
+                        handler.post(() -> {
+                            if (waitDialog != null && waitDialog.isShowing())
+                                waitDialog.dismiss();
+                            TokenUtils.loginAgain(activity);
+                        });
+                    }
+
+                    @Override
+                    public void onEnd() {
                     }
                 });
     }

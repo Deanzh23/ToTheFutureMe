@@ -106,7 +106,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
             connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_SEND_VERIFICATION_CODE_AGAIN, null, null, bodyParams,
                     new HttpConnectionListener() {
                         @Override
-                        public void success(String s) {
+                        public void onSuccess(String s) {
                             try {
                                 JSONObject response = new JSONObject(s);
                                 String code = response.getString("code");
@@ -115,20 +115,24 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                                 if (AppConfig.RESPONSE_SUCCESS.equals(code))
                                     ToastUtil.showToast(RegisterActivity.this, "验证码已发送到您的邮箱", Toast.LENGTH_LONG);
                                 else
-                                    error(-2);
+                                    onError(-2);
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                error(-1);
+                                onError(-1);
                             }
                         }
 
                         @Override
-                        public void error(int i) {
+                        public void onError(int i) {
                             handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "发送验证码失败"));
                         }
 
                         @Override
-                        public void end() {
+                        public void onTokenFailure() {
+                        }
+
+                        @Override
+                        public void onEnd() {
                             // 重新计时
                         }
                     });
@@ -193,7 +197,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                 ConvenientHttpConnection connection = new ConvenientHttpConnection();
                 connection.sendFile(AppConfig.BASE_URL + AppConfig.FILE, urlParams, new File(avatarImagePath), new HttpConnectionListener() {
                     @Override
-                    public void success(String s) {
+                    public void onSuccess(String s) {
                         try {
                             JSONObject response = new JSONObject(s);
                             String code = response.getString("code");
@@ -211,7 +215,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                     }
 
                     @Override
-                    public void error(int i) {
+                    public void onError(int i) {
                         handler.post(() -> {
                             waitDialog.dismiss();
                             ToastUtil.showToast(RegisterActivity.this, i + "", Toast.LENGTH_LONG);
@@ -219,7 +223,11 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                     }
 
                     @Override
-                    public void end() {
+                    public void onTokenFailure() {
+                    }
+
+                    @Override
+                    public void onEnd() {
                     }
                 });
             } else {
@@ -237,7 +245,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
         registerConnection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_REGISTER, null, null,
                 JSONUtil.object2Json(TTFMApplication.getAuthModel()).toString(), new HttpConnectionListener() {
                     @Override
-                    public void success(String s) {
+                    public void onSuccess(String s) {
                         handler.post(() -> {
                             try {
                                 JSONObject response = new JSONObject(s);
@@ -257,12 +265,16 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                     }
 
                     @Override
-                    public void error(int i) {
+                    public void onError(int i) {
                         handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "注册失败 " + i));
                     }
 
                     @Override
-                    public void end() {
+                    public void onTokenFailure() {
+                    }
+
+                    @Override
+                    public void onEnd() {
                         handler.post(() -> waitDialog.dismiss());
                     }
                 });

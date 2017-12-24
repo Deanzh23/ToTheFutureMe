@@ -28,6 +28,7 @@ import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.letter.view.LocalLetterListActivity;
 import com.dean.tothefutureme.main.TTFMApplication;
+import com.dean.tothefutureme.utils.TokenUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -113,7 +114,7 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
             connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.LETTER_LOAD, null, urlParams, (Map<String, String>) null,
                     new HttpConnectionListener() {
                         @Override
-                        public void success(String s) {
+                        public void onSuccess(String s) {
                             try {
                                 JSONObject response = new JSONObject(s);
                                 String code = response.getString("code");
@@ -131,15 +132,15 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
                                             DatabaseUtil.saveOrUpdate(letterModel);
                                     }
                                 } else
-                                    error(-2);
+                                    onError(-2);
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                error(-1);
+                                onError(-1);
                             }
                         }
 
                         @Override
-                        public void error(int i) {
+                        public void onError(int i) {
                             handler.post(() -> ToastUtil.showToast(activity, "获取信件失败 " + i));
 
                             // 读取本地数据库
@@ -150,7 +151,12 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
                         }
 
                         @Override
-                        public void end() {
+                        public void onTokenFailure() {
+                            handler.post(() -> TokenUtils.loginAgain(activity));
+                        }
+
+                        @Override
+                        public void onEnd() {
                             handler.post(() -> viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.messageLayout));
                         }
                     });

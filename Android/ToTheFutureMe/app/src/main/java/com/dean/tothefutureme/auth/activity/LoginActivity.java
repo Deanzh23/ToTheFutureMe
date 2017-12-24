@@ -84,7 +84,7 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
             connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_LOGIN, null, urlParams, (Map<String, String>) null,
                     new HttpConnectionListener() {
                         @Override
-                        public void success(String s) {
+                        public void onSuccess(String s) {
                             // 跳转到Home page
                             handler.post(() -> {
                                 try {
@@ -106,7 +106,7 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
                                                 DatabaseUtil.saveOrUpdate(TTFMApplication.getAuthModel());
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
-                                                error(-1);
+                                                onError(-1);
                                             }
                                         }).start();
 
@@ -116,18 +116,22 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                    error(-2);
+                                    onError(-2);
                                 }
                             });
                         }
 
                         @Override
-                        public void error(int i) {
+                        public void onError(int i) {
                             handler.post(() -> ToastUtil.showToast(LoginActivity.this, "登陆请求失败 " + i));
                         }
 
                         @Override
-                        public void end() {
+                        public void onTokenFailure() {
+                        }
+
+                        @Override
+                        public void onEnd() {
                             handler.post(() -> progressDialog.dismiss());
                         }
                     });
