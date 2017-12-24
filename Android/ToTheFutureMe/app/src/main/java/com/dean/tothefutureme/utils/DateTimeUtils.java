@@ -57,6 +57,16 @@ public class DateTimeUtils {
     }
 
     /**
+     * 获取指定日期的日期型字符串
+     *
+     * @param time
+     * @return
+     */
+    public static String getDate2String(long time) {
+        return DATE_FORMAT.format(new Date(time));
+    }
+
+    /**
      * xml中long转日期字符串
      * <p>
      * app:text_long2DateString="@{long值}"

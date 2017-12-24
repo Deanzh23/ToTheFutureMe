@@ -64,7 +64,7 @@ public class LetterDao extends ConvenientDao {
 
         Session session = sessionFactory.openSession();
 
-        Query query = session.createQuery("from LetterEntity as l where l.userId >= ? order by l.receiveDateTime , l.sendDateTime desc");
+        Query query = session.createQuery("from LetterEntity as l where l.userId = ? order by l.receiveDateTime desc , l.sendDateTime desc");
         query.setParameter(0, username);
         query.setFirstResult(startIndex);
         query.setMaxResults(count);
