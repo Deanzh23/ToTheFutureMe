@@ -3,7 +3,7 @@ package com.dean.j2ee.ttfm.auth.bean;
 import javax.persistence.*;
 
 /**
- * 账号信息
+ * 账号及个人信息
  */
 @Entity
 @Table(name = "auth", schema = "ttfm_db", catalog = "")
@@ -15,6 +15,7 @@ public class AuthEntity {
     private String nickname;
     private Integer genderCode;
     private Long birthday;
+    private String token;
 
     @Id
     @Column(name = "username")
@@ -76,6 +77,16 @@ public class AuthEntity {
         this.birthday = birthday;
     }
 
+    @Basic
+    @Column(name = "token")
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,6 +100,7 @@ public class AuthEntity {
         if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
         if (genderCode != null ? !genderCode.equals(that.genderCode) : that.genderCode != null) return false;
         if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
+        if (token != null ? !token.equals(that.token) : that.token != null) return false;
 
         return true;
     }
@@ -101,6 +113,7 @@ public class AuthEntity {
         result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
         result = 31 * result + (genderCode != null ? genderCode.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (token != null ? token.hashCode() : 0);
         return result;
     }
 }

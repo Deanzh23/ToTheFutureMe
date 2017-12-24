@@ -165,8 +165,8 @@
                                     android:hint="请选择性别（选填）"
                                     android:padding="8dp"
                                     android:singleLine="true"
-                                    android:text="@{authModel.gender}"
-                                    android:textSize="@dimen/text_size"/>
+                                    android:textSize="@dimen/text_size"
+                                    app:bindText_GenderCode2String="@{authModel.genderCode}"/>
                             </RelativeLayout>
 
                             <!-- 出生日期 -->
@@ -197,8 +197,8 @@
                                     android:hint="请选择出生日期（选填）"
                                     android:padding="8dp"
                                     android:singleLine="true"
-                                    android:text="@={authModel.birthdayContent}"
-                                    android:textSize="@dimen/text_size"/>
+                                    android:textSize="@dimen/text_size"
+                                    app:text_long2DateString="@{authModel.birthday}"/>
                             </RelativeLayout>
                         </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
 

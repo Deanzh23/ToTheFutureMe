@@ -109,6 +109,7 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
 
         new Thread(() -> {
             List<String> urlParams = new ArrayList<>();
+            urlParams.add(TTFMApplication.getAuthModel().getToken());
             urlParams.add(TTFMApplication.getAuthModel().getUsername());
             urlParams.add("0");
             urlParams.add("1000");

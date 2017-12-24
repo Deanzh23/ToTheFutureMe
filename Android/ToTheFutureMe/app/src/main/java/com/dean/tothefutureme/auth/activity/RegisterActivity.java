@@ -81,7 +81,6 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     public void selectImage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("选取方式");
-//        BitmapUtil.openSystemCamera(this, AppConfig.APP_IMAGE_PAT, "temp.png")
         builder.setNegativeButton("相机", (dialog, which) -> BitmapUtil.openSystemCamera(this, AppConfig.APP_IMAGE_PAT, "temp.png"));
         builder.setNeutralButton("相册", (dialog, which) -> BitmapUtil.openSystemPhotoAlbum(this));
         builder.create().show();
@@ -152,16 +151,26 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
         builder.create().show();
     }
 
+    private Date birthday;
+
     /**
      * 设置生日
      */
     @OnClick(R.id.birthdayTextView)
     public void setBirthday() {
-        Date date = new Date();
+        if (TTFMApplication.getAuthModel().getBirthday() <= 0)
+            birthday = new Date();
+        else
+            birthday = new Date(TTFMApplication.getAuthModel().getBirthday());
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) ->
-                viewDataBinding.birthdayTextView.setText(year + "/" + (month + 1) + "/" + dayOfMonth)
-                , 1900 + date.getYear(), date.getMonth(), date.getDate());
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+
+            birthday.setYear(year - 1900);
+            birthday.setMonth(month);
+            birthday.setDate(dayOfMonth);
+
+            TTFMApplication.getAuthModel().setBirthday(birthday.getTime());
+        }, 1900 + birthday.getYear(), birthday.getMonth(), birthday.getDate());
         datePickerDialog.show();
     }
 
@@ -170,6 +179,9 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
      */
     @OnClick(R.id.registerButton)
     public void register() {
+        TTFMApplication.getAuthModel().setPassword(viewDataBinding.passwordEditText.getText().toString());
+        TTFMApplication.getAuthModel().setNickname(viewDataBinding.nicknameEditText.getText().toString());
+
         // 必填项检查
         if (TextUtils.isEmpty(TTFMApplication.getAuthModel().getVerificationCode())) {
             ToastUtil.showToast(this, "请填写验证码");

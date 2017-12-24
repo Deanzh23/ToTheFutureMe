@@ -68,13 +68,14 @@ public class AuthController extends ConvenientController {
     /**
      * 更新用户信息
      *
+     * @param token
      * @param body
      * @return
      */
-    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/upload/{token}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object upload(@RequestBody String body) {
-        return authService.upload(body);
+    public Object upload(@PathVariable String token, @RequestBody String body) {
+        return authService.upload(token, body);
     }
 
     /**
@@ -83,10 +84,10 @@ public class AuthController extends ConvenientController {
      * @param body
      * @return
      */
-    @RequestMapping(value = "/editPassword", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/editPassword/{token}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object editPassword(@RequestBody String body) {
-        return authService.editPassword(body);
+    public Object editPassword(@PathVariable String token, @RequestBody String body) {
+        return authService.editPassword(token, body);
     }
 
 }

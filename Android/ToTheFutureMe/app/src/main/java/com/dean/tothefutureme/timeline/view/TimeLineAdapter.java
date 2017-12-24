@@ -53,8 +53,7 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
             receiveDates.put(receiveDate, i);
 
         // 如果已经显示了"接收日期"，则不再显示相同的接收日期
-        if (receiveDates.get(receiveDate) != i)
-            adapterTimeLineBinding.dateTextView.setVisibility(View.INVISIBLE);
+        adapterTimeLineBinding.dateTextView.setVisibility(receiveDates.get(receiveDate) == i ? View.VISIBLE : View.INVISIBLE);
         // 设置发件人头像
         BitmapUtil.imageLoader(adapterTimeLineBinding.senderAvatarImageView, AppConfig.BASE_URL + letterModel.getSenderAvatarUrl(), AppConfig.APP_IMAGE_PAT,
                 false);

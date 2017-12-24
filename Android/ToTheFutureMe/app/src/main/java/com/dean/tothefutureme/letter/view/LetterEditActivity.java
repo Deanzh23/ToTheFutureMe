@@ -252,8 +252,11 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
      * 上传
      */
     private void upload() {
+        List<String> urlParams = new ArrayList<>();
+        urlParams.add(TTFMApplication.getAuthModel().getToken());
+
         ConvenientHttpConnection connection = new ConvenientHttpConnection();
-        connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.LETTER_UPLOAD, null, null, JSONUtil.object2Json(letterModel).toString(),
+        connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.LETTER_UPLOAD, null, urlParams, JSONUtil.object2Json(letterModel).toString(),
                 new HttpConnectionListener() {
 
                     @Override
@@ -344,22 +347,23 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
      */
     private void setReadLetter() {
         new Thread(() -> {
-            // 发送信件已读更新广播
-            Intent intent = new Intent(AppConfig.BROADCAST_RECEIVER_LETTER_READ_UPDATE);
-            intent.putExtra(LetterModel.class.getSimpleName(), letterModel);
-            LetterEditActivity.this.sendBroadcast(intent);
-
             // 更新数据库已读
             letterModel.setIsRead(1);
             DatabaseUtil.saveOrUpdate(letterModel);
 
             // 设置服务器指定信件已读
             List<String> urlParams = new ArrayList<>();
+            urlParams.add(TTFMApplication.getAuthModel().getToken());
             urlParams.add(letterModel.getLetterId());
             ConvenientHttpConnection connection = new ConvenientHttpConnection();
             connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.LETTER_LOAD_READ, null, urlParams, (String) null,
                     null);
         }).start();
+
+        // 发送信件已读更新广播
+        Intent intent = new Intent(AppConfig.BROADCAST_RECEIVER_LETTER_READ_UPDATE);
+        intent.putExtra(LetterModel.class.getSimpleName(), letterModel);
+        LetterEditActivity.this.sendBroadcast(intent);
     }
 
     @Override

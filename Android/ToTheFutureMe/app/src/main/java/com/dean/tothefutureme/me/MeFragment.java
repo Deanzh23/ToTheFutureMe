@@ -1,5 +1,6 @@
 package com.dean.tothefutureme.me;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -37,7 +38,9 @@ import com.dean.tothefutureme.utils.TokenUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 我的 Fragment
@@ -48,6 +51,7 @@ import java.util.Date;
 public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements Toolbar.OnMenuItemClickListener {
 
     private AppCompatActivity activity;
+    @SuppressLint("StaticFieldLeak")
     private static MeFragment instance;
 
     private ProgressDialog waitDialog;
@@ -141,7 +145,6 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("选取方式");
-//        BitmapUtil.openSystemCamera(this, AppConfig.APP_IMAGE_PAT, "temp.png")
         builder.setNegativeButton("相机", (dialog, which) -> BitmapUtil.openSystemCamera(activity, AppConfig.APP_IMAGE_PAT, "temp.png"));
         builder.setNeutralButton("相册", (dialog, which) -> BitmapUtil.openSystemPhotoAlbum(activity));
         builder.create().show();
@@ -151,8 +154,11 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
      * 上传用户信息
      */
     private void uploadAuth() {
+        List<String> urlParams = new ArrayList<>();
+        urlParams.add(TTFMApplication.getAuthModel().getToken());
+
         ConvenientHttpConnection connection = new ConvenientHttpConnection();
-        connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_UPLOAD, null, null,
+        connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_UPLOAD, null, urlParams,
                 JSONUtil.object2Json(TTFMApplication.getAuthModel()).toString(), new HttpConnectionListener() {
 
                     @Override
@@ -226,6 +232,8 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
         builder.create().show();
     }
 
+    private Date birthday;
+
     /**
      * 设置生日
      */
@@ -234,10 +242,19 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
         if (!TTFMApplication.getAuthModel().isEditModel())
             return;
 
-        Date date = new Date();
-        DatePickerDialog datePickerDialog = new DatePickerDialog(activity, (view, year, month, dayOfMonth) ->
-                viewDataBinding.birthdayTextView.setText(year + "/" + (month + 1) + "/" + dayOfMonth),
-                1900 + date.getYear(), date.getMonth(), date.getDate());
+        if (TTFMApplication.getAuthModel().getBirthday() <= 0)
+            birthday = new Date();
+        else
+            birthday = new Date(TTFMApplication.getAuthModel().getBirthday());
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(activity, (view, year, month, dayOfMonth) -> {
+
+            birthday.setYear(year - 1900);
+            birthday.setMonth(month);
+            birthday.setDate(dayOfMonth);
+
+            TTFMApplication.getAuthModel().setBirthday(birthday.getTime());
+        }, 1900 + birthday.getYear(), birthday.getMonth(), birthday.getDate());
         datePickerDialog.show();
     }
 

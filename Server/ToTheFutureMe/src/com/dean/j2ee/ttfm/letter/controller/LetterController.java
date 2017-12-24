@@ -19,27 +19,29 @@ public class LetterController extends ConvenientController {
     /**
      * 上传信件
      *
+     * @param token
      * @param body
      * @return
      */
-    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/upload/{token}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object upload(@RequestBody String body) {
-        return letterService.upload(body);
+    public Object upload(@PathVariable String token, @RequestBody String body) {
+        return letterService.upload(token, body);
     }
 
     /**
      * 读取信件
      *
+     * @param token
      * @param username   收件人用户名
      * @param startIndex 起始下标
      * @param count      信件数量
      * @return
      */
-    @RequestMapping(value = "/load/{username}/{startIndex}/{count}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/load/{token}/{username}/{startIndex}/{count}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object loadLetters(@PathVariable String username, @PathVariable int startIndex, @PathVariable int count) {
-        return letterService.loadLetters(username, startIndex, count);
+    public Object loadLetters(@PathVariable String token, @PathVariable String username, @PathVariable int startIndex, @PathVariable int count) {
+        return letterService.loadLetters(token, username, startIndex, count);
     }
 
     /**
@@ -48,10 +50,10 @@ public class LetterController extends ConvenientController {
      * @param letterId
      * @return
      */
-    @RequestMapping(value = "/readLetter/{letterId}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/readLetter/{token}/{letterId}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object readLetter(@PathVariable String letterId) {
-        return letterService.readLetter(letterId);
+    public Object readLetter(@PathVariable String token, @PathVariable String letterId) {
+        return letterService.readLetter(token, letterId);
     }
 
 }

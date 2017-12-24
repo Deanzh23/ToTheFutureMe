@@ -1,32 +1,26 @@
 package com.dean.j2ee.ttfm.token.bean;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
-/**
- * Token实例
- * <p>
- * Created by Dean on 2016/11/30.
- */
 @Entity
-@Table(name = "token", schema = "most_campus_db", catalog = "")
+@Table(name = "token", schema = "ttfm_db", catalog = "")
 public class TokenEntity {
 
-    private String userId;
+    private String username;
     private String token;
-    private Timestamp time;
-
-    @Id
-    @Column(name = "userId")
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    private long time;
 
     @Basic
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Id
     @Column(name = "token")
     public String getToken() {
         return token;
@@ -38,11 +32,11 @@ public class TokenEntity {
 
     @Basic
     @Column(name = "time")
-    public Timestamp getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
@@ -53,17 +47,18 @@ public class TokenEntity {
 
         TokenEntity that = (TokenEntity) o;
 
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (time != that.time) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (token != null ? !token.equals(that.token) : that.token != null) return false;
-        return time != null ? time.equals(that.time) : that.time == null;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
+        int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (token != null ? token.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (int) (time ^ (time >>> 32));
         return result;
     }
 }

@@ -30,6 +30,9 @@ import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.yunba.android.manager.YunBaManager;
 
 /**
@@ -143,13 +146,16 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
 
         new Thread(() -> {
             try {
+                List<String> urlParams = new ArrayList<>();
+                urlParams.add(TTFMApplication.getAuthModel().getToken());
+
                 JSONObject request = new JSONObject();
                 request.put("username", TTFMApplication.getAuthModel().getUsername());
                 request.put("oldPassword", viewDataBinding.oldPasswordEditText.getText().toString());
                 request.put("newPassword", viewDataBinding.passwordEditText.getText().toString());
 
                 ConvenientHttpConnection connection = new ConvenientHttpConnection();
-                connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_EDIT_PASSWORD, null, null, request.toString(),
+                connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_EDIT_PASSWORD, null, urlParams, request.toString(),
                         new HttpConnectionListener() {
                             @Override
                             public void onSuccess(String s) {

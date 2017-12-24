@@ -7,10 +7,14 @@ import com.dean.j2ee.framework.utils.email.EMailUtils;
 import com.dean.j2ee.ttfm.auth.bean.AuthEntity;
 import com.dean.j2ee.ttfm.auth.bean.VerificationCodeEntity;
 import com.dean.j2ee.ttfm.auth.db.AuthDao;
+import com.dean.j2ee.ttfm.config.Config;
+import com.dean.j2ee.ttfm.token.bean.TokenEntity;
+import com.dean.j2ee.ttfm.token.db.TokenDao;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -31,6 +35,8 @@ public class AuthService extends ConvenientService {
 
     @Autowired
     private AuthDao authDao;
+    @Autowired
+    private TokenDao tokenDao;
 
     /**
      * 检查用户名是否可用
@@ -90,20 +96,20 @@ public class AuthService extends ConvenientService {
         // 获取6位数字验证码
         String verificationCode = EMailUtils.getVerificationCode();
         // 发送验证码到指定邮箱
-//        try {
-//            EMailUtils.sendEMail(Config.APP_NAME, username, Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD, "您本次的注册验证码为：" + verificationCode);
+        try {
+            EMailUtils.sendEMail(Config.APP_NAME, username, Config.APP_EMAIL, Config.APP_EMAIL_PASSWORD, "您本次的注册验证码为：" + verificationCode);
 
-        // 这里需要将验证码跟username关联，并存储到临时表里，注册后将其从临时表中删除
-        verificationCodeEntity = new VerificationCodeEntity();
-        verificationCodeEntity.setUsername(username);
-        verificationCodeEntity.setVerificationCode(verificationCode);
-        verificationCodeEntity.setTime(System.currentTimeMillis());
+            // 这里需要将验证码跟username关联，并存储到临时表里，注册后将其从临时表中删除
+            verificationCodeEntity = new VerificationCodeEntity();
+            verificationCodeEntity.setUsername(username);
+            verificationCodeEntity.setVerificationCode(verificationCode);
+            verificationCodeEntity.setTime(System.currentTimeMillis());
 
-        authDao.saveOrUpdate(verificationCodeEntity);
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//            return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
-//        }
+            authDao.saveOrUpdate(verificationCodeEntity);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return getResponseJSON(REGISTER_USERNAME_FAILURE_EXIST).toString();
+        }
 
         return getResponseJSON(RESPONSE_SUCCESS).toString();
     }
@@ -159,6 +165,12 @@ public class AuthService extends ConvenientService {
         // 用户名或密码错误
         if (authEntity == null)
             return getResponseJSON(LOGIN_FAILURE_NOT_CONFORM).toString();
+
+        // 设置并保存token
+        TokenEntity tokenEntity = tokenDao.saveToken(authEntity.getUsername());
+        authEntity.setToken(tokenEntity.getToken());
+        authDao.saveOrUpdate(authEntity);
+
         // 登陆成功
         JSONObject response = getResponseJSON(RESPONSE_SUCCESS);
         response.put("data", JSONUtil.object2Json(authEntity));
@@ -168,12 +180,18 @@ public class AuthService extends ConvenientService {
     /**
      * 更新用户信息
      *
+     * @param token
      * @param body
      * @return
      */
-    public Object upload(String body) {
+    public Object upload(String token, String body) {
         if (TextUils.isEmpty(body))
             return getResponseJSON(RESPONSE_PARAMETER_ERROR).toString();
+
+        // token失效
+        TokenEntity tokenEntity = tokenDao.checkToken(token);
+        if (tokenEntity == null)
+            return getResponseJSON(RESPONSE_TOKEN_LOSE_EFFICACY).toString();
 
         JSONObject request = new JSONObject(body);
         AuthEntity requestAuthEntity = new AuthEntity();
@@ -200,12 +218,18 @@ public class AuthService extends ConvenientService {
     /**
      * 修改密码
      *
+     * @param token
      * @param body
      * @return
      */
-    public Object editPassword(String body) {
+    public Object editPassword(String token, String body) {
         if (TextUils.isEmpty(body))
             return getResponseJSON(RESPONSE_PARAMETER_ERROR).toString();
+
+        // token失效
+        TokenEntity tokenEntity = tokenDao.checkToken(token);
+        if (tokenEntity == null)
+            return getResponseJSON(RESPONSE_TOKEN_LOSE_EFFICACY).toString();
 
         JSONObject request = new JSONObject(body);
         String username = request.getString("username");
