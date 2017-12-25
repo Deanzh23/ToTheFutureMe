@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.EditText;
 
 /**
@@ -84,13 +83,10 @@ public class LetterEditText extends EditText implements TextWatcher {
         // 共有多少行
         // 当前文本行数
         int contentLineCount = getLineCount() + 1;
-        Log.d(LetterEditText.class.getSimpleName(), "contentLineCount == " + contentLineCount);
         // 屏幕能显示的行数
         int screenLineCount = height / lineHeight;
-        Log.d(LetterEditText.class.getSimpleName(), "screenLineCount == " + screenLineCount);
         // 真实的行数
         int lineCount = contentLineCount > screenLineCount ? contentLineCount : screenLineCount;
-        Log.d(LetterEditText.class.getSimpleName(), "lineCount == " + lineCount);
         // 画行线
         drawLines(canvas, lineHeight, lineCount);
         // 保存画板
@@ -162,7 +158,7 @@ public class LetterEditText extends EditText implements TextWatcher {
             if (s != null) {
                 setText(s.subSequence(0, letterLengthLimit));
                 // 将光标放到内容结尾
-                setSelection(s.length());
+                setSelection(letterLengthLimit);
             }
         }
     }

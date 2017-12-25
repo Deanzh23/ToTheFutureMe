@@ -47,8 +47,8 @@
 
                     <com.dean.tothefutureme.custom.view.image.RoundImageView
                         android:id="@+id/avatarImageView"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
                         android:background="@mipmap/ic_launcher_round"
                         app:civ_border_color="@android:color/white"

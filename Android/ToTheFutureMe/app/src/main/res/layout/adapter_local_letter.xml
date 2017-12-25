@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/letterSaveDateTimeTextView"
                 android:layout_marginTop="8dp"
-                android:background="@color/colorThemeSkyBlue"
+                android:background="@drawable/shape_letter_content"
                 android:padding="12dp">
 
                 <TextView

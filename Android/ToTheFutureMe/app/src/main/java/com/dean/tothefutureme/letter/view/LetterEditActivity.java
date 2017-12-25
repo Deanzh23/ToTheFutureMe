@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -326,7 +327,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         if (isEditModel) {
             AlertDialog.Builder builder = new AlertDialog.Builder(LetterEditActivity.this);
             builder.setMessage("您的信件还未保存");
-            builder.setNegativeButton("保存信件", (dialog, which) -> new Thread(() -> saveLetter()).start());
+            builder.setNegativeButton("保存信件", (dialog, which) -> saveLetter());
             builder.setPositiveButton("放弃并退出", (dialog, which) -> LetterEditActivity.this.finish());
             builder.setCancelable(true);
             builder.create().show();
