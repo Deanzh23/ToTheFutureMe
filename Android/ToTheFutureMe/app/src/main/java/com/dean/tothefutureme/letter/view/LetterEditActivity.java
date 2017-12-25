@@ -167,7 +167,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
     }
 
     /**
-     * 选择收件日期
+     * 选择收件日期2
      */
     @OnClick(R.id.receiveDateTextView)
     public void selectReceiveDate() {
@@ -312,6 +312,10 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
      * 更新文字长度限制
      */
     private void updateLetterLengthLimit() {
+        // 如果是查看模式，不限制文字长度
+        if (isLookModel)
+            return;
+
         // 设置文字长度限制
         viewDataBinding.contentEditText.setLetterLengthLimit(letterModel.getLetterLengthLimit());
         // 设置最大文字长度监听器
