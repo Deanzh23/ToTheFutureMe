@@ -40,6 +40,10 @@ public class MainActivity extends ConvenientMainActivity<ActivityMainBinding> {
         handler.post(() -> {
             MobclickAgent.openActivityDurationTrack(false);
 
+            // 如果用户已经登陆，直接跳转到HomeActivity，并且向友盟发送用户登陆统计
+            if (TextUtils.isEmpty(token))
+                MobclickAgent.onProfileSignIn(TTFMApplication.getAuthModel().getUsername());
+
             startActivity(new Intent(MainActivity.this, TextUtils.isEmpty(token) ? LoginActivity.class : HomeActivity.class));
             MainActivity.this.finish();
         });

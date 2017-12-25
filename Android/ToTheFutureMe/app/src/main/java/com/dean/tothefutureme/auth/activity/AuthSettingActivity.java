@@ -11,7 +11,7 @@ import android.util.Log;
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
-import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
+import com.dean.android.framework.convenient.network.http.listener.OnHttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.CodeUtils;
 import com.dean.android.framework.convenient.util.TextUtils;
@@ -159,7 +159,7 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
 
                 ConvenientHttpConnection connection = new ConvenientHttpConnection();
                 connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_EDIT_PASSWORD, null, urlParams, request.toString(),
-                        new HttpConnectionListener() {
+                        new OnHttpConnectionListener() {
                             @Override
                             public void onSuccess(String s) {
                                 try {

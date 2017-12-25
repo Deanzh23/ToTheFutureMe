@@ -13,7 +13,7 @@ import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
-import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
+import com.dean.android.framework.convenient.network.http.listener.OnHttpConnectionListener;
 import com.dean.android.framework.convenient.permission.annotations.Permission;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
@@ -83,7 +83,7 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
 
             ConvenientHttpConnection connection = new ConvenientHttpConnection();
             connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_LOGIN, null, urlParams, (Map<String, String>) null,
-                    new HttpConnectionListener() {
+                    new OnHttpConnectionListener() {
                         @Override
                         public void onSuccess(String s) {
                             // 跳转到Home page

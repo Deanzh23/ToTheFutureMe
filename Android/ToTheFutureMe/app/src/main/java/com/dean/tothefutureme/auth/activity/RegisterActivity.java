@@ -14,7 +14,7 @@ import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
-import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
+import com.dean.android.framework.convenient.network.http.listener.OnHttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
@@ -103,7 +103,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
 
             ConvenientHttpConnection connection = new ConvenientHttpConnection();
             connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_SEND_VERIFICATION_CODE_AGAIN, null, null, bodyParams,
-                    new HttpConnectionListener() {
+                    new OnHttpConnectionListener() {
                         @Override
                         public void onSuccess(String s) {
                             try {
@@ -207,7 +207,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
                 urlParams.add(AppConfig.IMAGE_TYPE_AVATAR);
 
                 ConvenientHttpConnection connection = new ConvenientHttpConnection();
-                connection.sendFile(AppConfig.BASE_URL + AppConfig.FILE, urlParams, new File(avatarImagePath), new HttpConnectionListener() {
+                connection.sendFile(AppConfig.BASE_URL + AppConfig.FILE, urlParams, new File(avatarImagePath), new OnHttpConnectionListener() {
                     @Override
                     public void onSuccess(String s) {
                         try {
@@ -255,7 +255,7 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     private void registerUserInfo() {
         ConvenientHttpConnection registerConnection = new ConvenientHttpConnection();
         registerConnection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_REGISTER, null, null,
-                JSONUtil.object2Json(TTFMApplication.getAuthModel()).toString(), new HttpConnectionListener() {
+                JSONUtil.object2Json(TTFMApplication.getAuthModel()).toString(), new OnHttpConnectionListener() {
                     @Override
                     public void onSuccess(String s) {
                         handler.post(() -> {

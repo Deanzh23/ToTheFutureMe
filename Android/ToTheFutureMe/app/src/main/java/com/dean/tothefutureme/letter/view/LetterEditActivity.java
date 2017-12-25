@@ -20,7 +20,7 @@ import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
-import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
+import com.dean.android.framework.convenient.network.http.listener.OnHttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
@@ -256,7 +256,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
 
         ConvenientHttpConnection connection = new ConvenientHttpConnection();
         connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.LETTER_UPLOAD, null, urlParams, JSONUtil.object2Json(letterModel).toString(),
-                new HttpConnectionListener() {
+                new OnHttpConnectionListener() {
 
                     @Override
                     public void onSuccess(String s) {

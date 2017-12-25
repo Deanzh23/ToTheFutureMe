@@ -21,7 +21,7 @@ import com.dean.android.framework.convenient.fragment.ConvenientFragment;
 import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
-import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
+import com.dean.android.framework.convenient.network.http.listener.OnHttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
@@ -159,7 +159,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
 
         ConvenientHttpConnection connection = new ConvenientHttpConnection();
         connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.AUTH_UPLOAD, null, urlParams,
-                JSONUtil.object2Json(TTFMApplication.getAuthModel()).toString(), new HttpConnectionListener() {
+                JSONUtil.object2Json(TTFMApplication.getAuthModel()).toString(), new OnHttpConnectionListener() {
 
                     @Override
                     public void onSuccess(String s) {
