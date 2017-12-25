@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
-import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
 import com.dean.android.framework.convenient.network.http.listener.HttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
@@ -24,6 +23,7 @@ import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityAuthSettingBinding;
 import com.dean.tothefutureme.main.TTFMApplication;
 import com.dean.tothefutureme.utils.TokenUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -57,12 +57,6 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
         viewDataBinding.toolbar.setTitle("账号设置");
         setSupportActionBar(viewDataBinding.toolbar);
         viewDataBinding.toolbar.setNavigationOnClickListener(v -> AuthSettingActivity.this.finish());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        KeyboardUtil.hideSoftKeyboard(this);
     }
 
     /**
@@ -131,6 +125,7 @@ public class AuthSettingActivity extends ConvenientActivity<ActivityAuthSettingB
                 DatabaseUtil.saveOrUpdate(TTFMApplication.getAuthModel());
 
                 handler.post(() -> {
+                    MobclickAgent.onProfileSignOff();
                     AuthSettingActivity.this.startActivity(new Intent(AuthSettingActivity.this, LoginActivity.class));
                     TTFMApplication.killHistoryActivity(LoginActivity.class.getSimpleName());
                 });

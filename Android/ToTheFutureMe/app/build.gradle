@@ -50,4 +50,7 @@ dependencies {
     implementation files('libs/org.apache.http.legacy.jar')
     implementation files('libs/xUtils-2.6.14.jar')
     implementation files('libs/yunba-sdk-release1.8.5.jar')
+    implementation files('libs/umeng-common-1.4.0.jar')
+    implementation files('libs/umeng-analytics-7.4.0.jar')
+    implementation files('libs/utdid4all-1.0.4.jar')
 }

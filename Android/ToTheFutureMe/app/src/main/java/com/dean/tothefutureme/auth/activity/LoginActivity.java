@@ -26,6 +26,7 @@ import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityLoginBinding;
 import com.dean.tothefutureme.home.HomeActivity;
 import com.dean.tothefutureme.main.TTFMApplication;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,6 +111,7 @@ public class LoginActivity extends ConvenientActivity<ActivityLoginBinding> {
                                             }
                                         }).start();
 
+                                        MobclickAgent.onProfileSignIn(TTFMApplication.getAuthModel().getUsername());
                                         // 进入APP
                                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                         ConvenientApplication.killHistoryActivity(HomeActivity.class.getSimpleName());

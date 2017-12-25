@@ -8,6 +8,7 @@ import com.dean.android.framework.convenient.util.CodeUtils;
 import com.dean.android.framework.convenient.util.SetUtil;
 import com.dean.tothefutureme.auth.model.AuthModel;
 import com.dean.tothefutureme.config.AppConfig;
+import com.umeng.commonsdk.UMConfigure;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -40,6 +41,9 @@ public class TTFMApplication extends ConvenientApplication {
 
         if (authModel == null)
             authModel = new AuthModel();
+
+        // 输出友盟Log
+        UMConfigure.setLogEnabled(true);
     }
 
     @Override
