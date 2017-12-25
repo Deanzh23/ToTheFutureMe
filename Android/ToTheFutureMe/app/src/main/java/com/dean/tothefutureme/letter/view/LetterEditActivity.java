@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +55,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
     private AlertDialog uploadDialog;
 
     private LetterModel letterModel;
+    private Date receiveDate;
 
     private boolean isEditModel = false;
     private boolean isLookModel = false;
@@ -165,8 +165,6 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         } else
             return super.onKeyDown(keyCode, event);
     }
-
-    private Date receiveDate;
 
     /**
      * 选择收件日期

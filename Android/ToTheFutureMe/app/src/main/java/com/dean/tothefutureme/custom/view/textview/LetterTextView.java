@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
@@ -38,6 +39,8 @@ public class LetterTextView extends TextView {
         super(context, attrs);
 
         initPaint();
+        // 设置TextView可以滚动
+        setMovementMethod(ScrollingMovementMethod.getInstance());
     }
 
     /**

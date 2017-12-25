@@ -62,6 +62,7 @@ public class AuthController extends ConvenientController {
     @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public Object login(@PathVariable String username, @PathVariable String password) {
+
         return authService.login(username, password);
     }
 

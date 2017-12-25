@@ -147,7 +147,6 @@ public class LetterEditText extends EditText implements TextWatcher {
     public void afterTextChanged(Editable s) {
         // 内容长度<=文字长度限制
         if (letterLengthLimit == 0 || (s != null && s.length() < letterLengthLimit + 1)) {
-            postInvalidate();
         }
         // 文字长度>文字长度限制
         else {
@@ -155,11 +154,11 @@ public class LetterEditText extends EditText implements TextWatcher {
             if (onMaxLengthListener != null)
                 onMaxLengthListener.onMaxLength();
 
-            if (s != null) {
-                setText(s.subSequence(0, letterLengthLimit));
-                // 将光标放到内容结尾
-                setSelection(letterLengthLimit);
-            }
+//            if (s != null) {
+//                setText(s.subSequence(0, letterLengthLimit));
+//                // 将光标放到内容结尾
+//                setSelection(letterLengthLimit);
+//            }
         }
     }
 
