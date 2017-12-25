@@ -12,7 +12,7 @@ public class AppConfig {
     /**
      * 正式环境域名
      */
-//    public static final String BASE_URL = "http://deanzh.7766.org:8444/ttfm/";
+    public static final String BASE_URL = "http://deanzh.7766.org:8444/ttfm/";
     /**
      * 本地开发环境域名
      */
@@ -20,7 +20,7 @@ public class AppConfig {
     /**
      * 公司本地开发环境域名
      */
-    public static final String BASE_URL = "http://10.88.54.198:8444/ttfm/";
+//    public static final String BASE_URL = "http://10.88.54.198:8444/ttfm/";
     /**
      * 验证账号可用性（邮箱）
      */
