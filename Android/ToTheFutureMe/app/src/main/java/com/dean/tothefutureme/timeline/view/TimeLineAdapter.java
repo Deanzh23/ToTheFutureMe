@@ -28,11 +28,30 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
 
     private List<LetterModel> letterModels;
     private Map<String, Integer> receiveDates = new HashMap<>();
+    private Map<String, Integer> receiveColorDrawables = new HashMap<>();
 
     public TimeLineAdapter(Context context, List<LetterModel> letterModels) {
         this.context = context;
         this.letterModels = letterModels;
+
+        colorDrawableArray = new int[3];
+        colorDrawableArray[0] = R.drawable.time_line_1;
+        colorDrawableArray[1] = R.drawable.time_line_2;
+        colorDrawableArray[2] = R.drawable.time_line_3;
+        colorTextArray = new int[3];
+        colorTextArray[0] = R.color.colorTimeLine1;
+        colorTextArray[1] = R.color.colorTimeLine2;
+        colorTextArray[2] = R.color.colorTimeLine3;
+        colorBackgroundArray = new int[3];
+        colorBackgroundArray[0] = R.drawable.shape_time_line_1_content;
+        colorBackgroundArray[1] = R.drawable.shape_time_line_2_content;
+        colorBackgroundArray[2] = R.drawable.shape_time_line_3_content;
     }
+
+    private int colorCount;
+    private int[] colorDrawableArray;
+    private int[] colorTextArray;
+    private int[] colorBackgroundArray;
 
     @Override
     public int setItemLayoutId() {
@@ -54,6 +73,20 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
 
         // 如果已经显示了"接收日期"，则不再显示相同的接收日期
         adapterTimeLineBinding.dateTextView.setVisibility(receiveDates.get(receiveDate) == i ? View.VISIBLE : View.INVISIBLE);
+        // 设置颜色
+        int colorIndex;
+        if (receiveColorDrawables.containsKey(receiveDate))
+            colorIndex = receiveColorDrawables.get(receiveDate);
+        else {
+            colorIndex = (++colorCount) % 3;
+            receiveColorDrawables.put(receiveDate, colorIndex);
+        }
+        adapterTimeLineBinding.lineImageView.setBackgroundResource(colorDrawableArray[colorIndex]);
+        adapterTimeLineBinding.dateTextView.setTextColor(context.getResources().getColor(colorTextArray[colorIndex]));
+        adapterTimeLineBinding.senderNicknameTextView.setTextColor(context.getResources().getColor(colorTextArray[colorIndex]));
+        adapterTimeLineBinding.sendDateTimeTextView.setTextColor(context.getResources().getColor(colorTextArray[colorIndex]));
+        adapterTimeLineBinding.contentTextView.setBackgroundResource(colorBackgroundArray[colorIndex]);
+
         // 设置发件人头像
         BitmapUtil.imageLoader(adapterTimeLineBinding.senderAvatarImageView, AppConfig.BASE_URL + letterModel.getSenderAvatarUrl(), AppConfig.APP_IMAGE_PAT,
                 false);
