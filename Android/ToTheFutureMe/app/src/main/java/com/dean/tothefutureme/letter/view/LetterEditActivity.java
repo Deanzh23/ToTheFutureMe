@@ -319,7 +319,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         // 设置文字长度限制
         viewDataBinding.contentEditText.setLetterLengthLimit(letterModel.getLetterLengthLimit());
         // 设置最大文字长度监听器
-        viewDataBinding.contentEditText.setOnMaxLengthListener(this);
+//        viewDataBinding.contentEditText.setOnMaxLengthListener(this);
     }
 
     /**
