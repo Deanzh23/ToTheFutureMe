@@ -52,14 +52,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_time_line.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="fragment_time_line.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_time_line.xml">
           <provider editor-type-id="android-designer2">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="112" column="46" lean-forward="true" selection-start-line="112" selection-start-column="46" selection-end-line="112" selection-end-column="46" />
+            <state relative-caret-position="-9">
+              <caret line="25" column="51" lean-forward="false" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -75,17 +75,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="adapter_time_line.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="adapter_time_line.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/adapter_time_line.xml">
           <provider editor-type-id="android-designer2">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="79" column="63" lean-forward="false" selection-start-line="79" selection-start-column="63" selection-end-line="79" selection-end-column="63" />
-              <folding>
-                <marker date="1515072352586" expanded="false" signature="3537:3561" ph="&quot;10sp&quot;" />
-              </folding>
+            <state relative-caret-position="300">
+              <caret line="88" column="66" lean-forward="true" selection-start-line="88" selection-start-column="66" selection-end-line="88" selection-end-column="66" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2185,8 +2183,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/custom/layout/PercentageRelativeLayout.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/adapter_time_line.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_time_line.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/adapter_time_line.xml" />
       </list>
     </option>
   </component>
@@ -2632,7 +2630,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515073714286" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515075032266" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2678,7 +2676,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515073714286" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515075032266" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2859,7 +2857,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515073714288" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515075032271" />
       </method>
     </configuration>
     <list size="1">
@@ -3331,19 +3329,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/adapter_time_line.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="79" column="63" lean-forward="false" selection-start-line="79" selection-start-column="63" selection-end-line="79" selection-end-column="63" />
-          <folding>
-            <marker date="1515072352586" expanded="false" signature="3537:3561" ph="&quot;10sp&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dean/tothefutureme/timeline/view/TimeLineFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -3360,8 +3345,19 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="112" column="46" lean-forward="true" selection-start-line="112" selection-start-column="46" selection-end-line="112" selection-end-column="46" />
+        <state relative-caret-position="-9">
+          <caret line="25" column="51" lean-forward="false" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/adapter_time_line.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="88" column="66" lean-forward="true" selection-start-line="88" selection-start-column="66" selection-end-line="88" selection-end-column="66" />
           <folding />
         </state>
       </provider>
