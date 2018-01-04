@@ -6,28 +6,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            android:visibility="gone">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorThemeSkyBlue"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
-        </android.support.design.widget.AppBarLayout>
-
         <!-- 个人信息Layout -->
         <com.dean.tothefutureme.custom.layout.PercentageRelativeLayout
             android:id="@+id/userInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/appBarLayout"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="12dp">
 
             <RelativeLayout
                 android:id="@+id/avatarLayout"

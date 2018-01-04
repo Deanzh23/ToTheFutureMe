@@ -88,7 +88,7 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.contentLayout, timeLineFragment);
-        fragmentTransaction.hide(timeLineFragment);
+//        fragmentTransaction.hide(timeLineFragment);
 //        fragmentTransaction.add(R.id.contentLayout, meFragment);
 //        fragmentTransaction.hide(meFragment);
         fragmentTransaction.commit();
