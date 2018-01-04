@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
-import android.widget.RadioGroup;
 
 import com.dean.android.framework.convenient.activity.ConvenientCameraActivity;
 import com.dean.android.framework.convenient.fragment.ConvenientFragment;
@@ -21,7 +20,6 @@ import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityHomeBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.main.TTFMApplication;
-import com.dean.tothefutureme.me.MeFragment;
 import com.dean.tothefutureme.push.TTFMPushReceiver;
 import com.dean.tothefutureme.timeline.view.TimeLineFragment;
 
@@ -36,13 +34,13 @@ import java.util.TimerTask;
  * Created by dean on 2017/12/3.
  */
 @ContentView(R.layout.activity_home)
-public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> implements RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> {
 
     private FragmentManager fragmentManager;
 
     private List<ConvenientFragment> fragments = new ArrayList<>();
     private TimeLineFragment timeLineFragment;
-    private MeFragment meFragment;
+//    private MeFragment meFragment;
 
     private static Boolean isExit = false;
 
@@ -61,7 +59,6 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
         super.onCreate(savedInstanceState);
 
         loadFragments();
-        viewDataBinding.bottomTabLayout.setOnCheckedChangeListener(this);
         // 启动个推推送
         TTFMApplication.startYunBaPush();
         // 注册信件已读更新广播
@@ -84,66 +81,29 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
      */
     private void loadFragments() {
         timeLineFragment = TimeLineFragment.getInstance();
-        meFragment = MeFragment.getInstance();
+//        meFragment = MeFragment.getInstance();
         fragments.add(timeLineFragment);
-        fragments.add(meFragment);
+//        fragments.add(meFragment);
 
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.contentLayout, timeLineFragment);
         fragmentTransaction.hide(timeLineFragment);
-        fragmentTransaction.add(R.id.contentLayout, meFragment);
-        fragmentTransaction.hide(meFragment);
+//        fragmentTransaction.add(R.id.contentLayout, meFragment);
+//        fragmentTransaction.hide(meFragment);
         fragmentTransaction.commit();
-
-        switchFragment(0);
-    }
-
-    /**
-     * 通过下标切换显示Fragment
-     *
-     * @param index
-     */
-    private void switchFragment(int index) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        int size = fragments == null ? 0 : fragments.size();
-        for (int i = 0; i < size; i++)
-            if (i != index)
-                fragmentTransaction.hide(fragments.get(i));
-
-        fragmentTransaction.show(fragments.get(index));
-        fragmentTransaction.commit();
-    }
-
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (fragmentManager == null)
-            return;
-
-        int index = 0;
-        switch (checkedId) {
-            case R.id.timeLineRadioButton:
-                index = 0;
-                break;
-            case R.id.meRadioButton:
-                index = 1;
-                break;
-        }
-
-        switchFragment(index);
     }
 
     @Override
     protected void albumResult(Intent intent) {
-        if (meFragment != null)
-            meFragment.albumResult(intent);
+//        if (meFragment != null)
+//            meFragment.albumResult(intent);
     }
 
     @Override
     protected void cameraResult(Intent intent) {
-        if (meFragment != null)
-            meFragment.cameraResult(intent);
+//        if (meFragment != null)
+//            meFragment.cameraResult(intent);
     }
 
     @Override
@@ -160,7 +120,7 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
      */
     private void exitBy2Click() {
         Timer tExit;
-        if (isExit == false) {
+        if (!isExit) {
             isExit = true;
             ToastUtil.showToast(this, "再按一次退出程序");
             tExit = new Timer();

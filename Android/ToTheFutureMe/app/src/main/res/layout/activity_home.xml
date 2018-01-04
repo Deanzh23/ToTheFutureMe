@@ -8,54 +8,12 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true">
 
-        <RelativeLayout
+        <!-- 内容layout -->
+        <!--android:background="@color/colorBackgroundLightGrey"-->
+        <FrameLayout
+            android:id="@+id/contentLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackgroundLightGrey">
-
-            <!-- 底部tab -->
-            <RadioGroup
-                android:id="@+id/bottomTabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@android:color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:weightSum="2">
-
-                <RadioButton
-                    android:id="@+id/timeLineRadioButton"
-                    style="@style/RadioButtonTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:drawableTop="@drawable/selector_tab_time_line"
-                    android:text="时间轴"
-                    android:textColor="@drawable/selector_bottom_text_color"
-                    android:textSize="@dimen/text_size_small"/>
-
-                <RadioButton
-                    android:id="@+id/meRadioButton"
-                    style="@style/RadioButtonTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/selector_tab_me"
-                    android:text="我的"
-                    android:textColor="@drawable/selector_bottom_text_color"
-                    android:textSize="@dimen/text_size_small"/>
-            </RadioGroup>
-
-            <!-- 内容layout -->
-            <!--android:background="@color/colorBackgroundLightGrey"-->
-            <FrameLayout
-                android:id="@+id/contentLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/bottomTabLayout"
-                android:background="@drawable/shape_gradient_time_line"/>
-
-        </RelativeLayout>
+            android:background="@drawable/shape_gradient_time_line"/>
     </RelativeLayout>
 </layout>

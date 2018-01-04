@@ -1,5 +1,6 @@
 package com.dean.tothefutureme.custom.layout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class NeatRelativeLayout extends RelativeLayout {
         this.context = context;
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         Log.d(NeatRelativeLayout.class.getSimpleName(), "[onLayout]");
