@@ -4,10 +4,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorThemeSkyBlue"
+        android:background="@color/colorTimeLineStart"
         android:clipToPadding="true"
         android:fitsSystemWindows="true">
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,6 +22,7 @@
                 android:background="@android:color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:weightSum="2">
 
                 <RadioButton
@@ -48,12 +48,13 @@
             </RadioGroup>
 
             <!-- 内容layout -->
+            <!--android:background="@color/colorBackgroundLightGrey"-->
             <FrameLayout
                 android:id="@+id/contentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/bottomTabLayout"
-                android:background="@color/colorBackgroundLightGrey"/>
+                android:background="@drawable/shape_gradient_time_line"/>
 
         </RelativeLayout>
     </RelativeLayout>

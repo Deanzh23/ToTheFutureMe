@@ -14,6 +14,10 @@
     <color name="colorTitle">#434954</color>
     <color name="colorContent">#6F737B</color>
 
+    <color name="colorTimeLineStart">#DD8BB6</color>
+    <color name="colorTimeLineCenter">#84589C</color>
+    <color name="colorTimeLineEnd">#2E3A7F</color>
+
     <color name="colorTimeLine1">#FA6F57</color>
     <color name="colorTimeLine2">#4FCEAD</color>
     <color name="colorTimeLine3">#AC94EA</color>

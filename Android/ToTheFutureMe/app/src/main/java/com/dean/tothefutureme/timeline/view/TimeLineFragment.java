@@ -92,11 +92,11 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewDataBinding.toolbar.setTitle("时间轴");
-        activity.setSupportActionBar(viewDataBinding.toolbar);
-        /** 这里解决Fragment切换后，menu消失问题 **/
-        viewDataBinding.toolbar.inflateMenu(R.menu.menu_time_line);
-        viewDataBinding.toolbar.setOnMenuItemClickListener(this);
+//        viewDataBinding.toolbar.setTitle("时间轴");
+//        activity.setSupportActionBar(viewDataBinding.toolbar);
+//        /** 这里解决Fragment切换后，menu消失问题 **/
+//        viewDataBinding.toolbar.inflateMenu(R.menu.menu_time_line);
+//        viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         loadData();
     }
