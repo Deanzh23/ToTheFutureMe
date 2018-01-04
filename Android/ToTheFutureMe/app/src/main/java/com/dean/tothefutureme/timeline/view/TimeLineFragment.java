@@ -7,11 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.dean.android.framework.convenient.database.Selector;
@@ -24,6 +20,7 @@ import com.dean.android.framework.convenient.network.http.listener.OnHttpConnect
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.SetUtil;
 import com.dean.android.framework.convenient.view.ContentView;
+import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
@@ -46,7 +43,7 @@ import java.util.Map;
  * Created by dean on 2017/12/3.
  */
 @ContentView(R.layout.fragment_time_line)
-public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding> implements Toolbar.OnMenuItemClickListener {
+public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding> {
 
     private AppCompatActivity activity;
 
@@ -71,27 +68,16 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         KeyboardUtil.hideSoftKeyboard(activity);
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_time_line, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
         loadData();
     }
 
@@ -166,8 +152,8 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
             viewDataBinding.timeLineListView.setVisibility(View.GONE);
             viewDataBinding.messageLineTextView.setVisibility(View.VISIBLE);
         } else {
+            viewDataBinding.imageBottomView.setVisibility(View.VISIBLE);
             viewDataBinding.messageLineTextView.setVisibility(View.GONE);
-            viewDataBinding.timeLineListView.setVisibility(View.VISIBLE);
         }
 
         if (timeLineAdapter == null) {
@@ -175,13 +161,24 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
             viewDataBinding.timeLineListView.setAdapter(timeLineAdapter);
         } else
             timeLineAdapter.update(letterModels);
+
+        viewDataBinding.imageBottomView.setVisibility(SetUtil.isEmpty(letterModels) ? View.INVISIBLE : View.VISIBLE);
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        // 到本地信件列表
+    /**
+     * 跳转到本地信件列表
+     */
+    @OnClick(R.id.jump2LocalLetterImageView)
+    public void jump2LocalLetterList() {
         startActivity(new Intent(activity, LocalLetterListActivity.class));
-        return true;
+    }
+
+    /**
+     * 跳转到用户信息编辑
+     */
+    @OnClick(R.id.avatarImageView)
+    public void jump2UserInfoEdit() {
+
     }
 
     /**

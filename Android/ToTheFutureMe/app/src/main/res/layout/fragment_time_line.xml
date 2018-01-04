@@ -2,17 +2,40 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="authModel"
+            type="com.dean.tothefutureme.auth.model.AuthModel"/>
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- 个人信息Layout -->
-        <com.dean.tothefutureme.custom.layout.PercentageRelativeLayout
-            android:id="@+id/userInfoLayout"
+        <RelativeLayout
+            android:id="@+id/menuLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="12dp">
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:id="@+id/jump2LocalLetterImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_bar_menu_time_list"/>
+
+        </RelativeLayout>
+
+        <!-- 个人信息Layout -->
+        <com.dean.tothefutureme.custom.layout.PercentageRelativeLayout
+            android:id="@+id/avatarInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menuLayout">
 
             <RelativeLayout
                 android:id="@+id/avatarLayout"
@@ -22,26 +45,71 @@
 
                 <com.dean.tothefutureme.custom.view.image.RoundImageView
                     android:id="@+id/avatarImageView"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@mipmap/ic_launcher_round"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/avatar_man_1"
                     app:civ_border_color="@android:color/white"
                     app:civ_border_width="2dp"/>
 
                 <ImageView
                     android:id="@+id/imageBottomView"
                     android:layout_width="4dp"
-                    android:layout_height="32dp"
+                    android:layout_height="16dp"
                     android:layout_below="@id/avatarImageView"
                     android:layout_centerHorizontal="true"
-                    android:background="@android:color/black"/>
+                    android:background="#88FFFFFF"
+                    android:visibility="invisible"/>
             </RelativeLayout>
         </com.dean.tothefutureme.custom.layout.PercentageRelativeLayout>
+
+        <View
+            android:id="@+id/userInfoCenterView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"/>
+
+        <!-- 用户基本信息Layout -->
+        <RelativeLayout
+            android:id="@+id/userInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/avatarInfoLayout"
+            android:layout_alignTop="@id/avatarInfoLayout"
+            android:layout_toRightOf="@id/userInfoCenterView">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="32dp"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nicknameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{authModel.nickname}"
+                    android:textColor="@android:color/white"
+                    android:textSize="23sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/usernameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@{authModel.username}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium"/>
+            </LinearLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/userInfoLayout"
+            android:layout_below="@id/avatarInfoLayout"
             android:layout_marginBottom="8dp">
 
             <!-- 加载动画View -->
@@ -72,7 +140,8 @@
                     android:id="@+id/timeLineListView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:divider="@null"/>
+                    android:divider="@null"
+                    android:overScrollMode="never"/>
             </RelativeLayout>
         </RelativeLayout>
 
