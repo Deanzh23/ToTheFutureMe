@@ -35,9 +35,9 @@ public class TimeLineAdapter extends ConvenientAdapter<AdapterTimeLineBinding> {
         this.letterModels = letterModels;
 
         colorDrawableArray = new int[3];
-        colorDrawableArray[0] = R.drawable.time_line_1;
-        colorDrawableArray[1] = R.drawable.time_line_2;
-        colorDrawableArray[2] = R.drawable.time_line_3;
+        colorDrawableArray[0] = R.drawable.ic_time_line_1;
+        colorDrawableArray[1] = R.drawable.ic_time_line_2;
+        colorDrawableArray[2] = R.drawable.ic_time_line_3;
         colorTextArray = new int[3];
         colorTextArray[0] = R.color.colorTimeLine1;
         colorTextArray[1] = R.color.colorTimeLine2;

@@ -24,7 +24,7 @@
 
             <ImageView
                 android:id="@+id/lineImageView"
-                android:layout_width="4dp"
+                android:layout_width="8dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
@@ -72,17 +72,27 @@
                         android:background="@mipmap/ic_launcher_round"/>
 
                     <!-- 已读未读 -->
-                    <TextView
+                    <!--android:text="@{letterModel.isRead==1?`已读`:`未读`}"-->
+                    <!--android:textColor="@{letterModel.isRead==1?@color/colorThemeSkyBlue:@color/colorAccent}"-->
+                    <!--<TextView-->
+                    <!--android:id="@+id/readTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignBottom="@id/senderAvatarImageView"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_marginRight="16dp"-->
+                    <!--android:background="@drawable/ic_time_line_yes"-->
+                    <!--android:textSize="@dimen/text_size_small"-->
+                    <!--android:textStyle="bold"/>-->
+
+                    <ImageView
                         android:id="@+id/readTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
                         android:layout_alignBottom="@id/senderAvatarImageView"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="16dp"
-                        android:text="@{letterModel.isRead==1?`已读`:`未读`}"
-                        android:textColor="@{letterModel.isRead==1?@color/colorThemeSkyBlue:@color/colorAccent}"
-                        android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold"/>
+                        android:background="@drawable/ic_time_line_yes"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

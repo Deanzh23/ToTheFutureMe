@@ -34,7 +34,7 @@ public class PercentageRelativeLayout extends RelativeLayout {
             if (childView.getVisibility() != View.GONE) {
                 if (childView.getTag() != null) {
                     int childViewWidth = childView.getMeasuredWidth();
-                    transverseCheap = (int) (layoutWidth / 10f * 3 - l - (childViewWidth / 2) - ScreenUtils.dp2px(context, 2));
+                    transverseCheap = (int) (layoutWidth / 10f * 3 - l - (childViewWidth / 2) - ScreenUtils.dp2px(context, 4));
                 }
 
                 l += transverseCheap;
