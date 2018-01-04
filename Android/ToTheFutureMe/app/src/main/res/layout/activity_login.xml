@@ -39,7 +39,7 @@
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/ic_launcher_round"/>
+                    android:background="@drawable/ic_transfer"/>
 
             </RelativeLayout>
 
@@ -99,7 +99,8 @@
                     android:layout_height="wrap_content"
                     android:padding="4dp"
                     android:text="用户注册"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/colorTimeLineCenter"
+                    android:typeface="monospace"/>
 
                 <TextView
                     android:id="@+id/findPasswordTextView"
@@ -109,7 +110,8 @@
                     android:layout_alignParentRight="true"
                     android:padding="4dp"
                     android:text="密码找回"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/colorTimeLineCenter"
+                    android:typeface="monospace"/>
             </RelativeLayout>
         </RelativeLayout>
     </FrameLayout>
