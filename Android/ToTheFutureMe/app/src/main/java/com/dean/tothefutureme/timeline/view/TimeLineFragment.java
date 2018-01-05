@@ -27,6 +27,7 @@ import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.letter.view.LocalLetterListActivity;
 import com.dean.tothefutureme.main.TTFMApplication;
+import com.dean.tothefutureme.me.MeActivity;
 import com.dean.tothefutureme.utils.TokenUtils;
 
 import org.json.JSONArray;
@@ -178,7 +179,7 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
      */
     @OnClick(R.id.avatarImageView)
     public void jump2UserInfoEdit() {
-
+        startActivity(new Intent(activity, MeActivity.class));
     }
 
     /**

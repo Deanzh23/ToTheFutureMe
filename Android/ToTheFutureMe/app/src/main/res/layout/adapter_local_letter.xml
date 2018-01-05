@@ -26,8 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
                 android:text="@{@string/app_letter_message_save_date_time_label+letterModel.localSaveDateTimeName}"
-                android:textSize="@dimen/text_size_small"/>
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"/>
 
             <RelativeLayout
                 android:id="@+id/letterContentLayout"
@@ -47,7 +49,7 @@
                     android:minLines="4"
                     android:text="@{letterModel.content}"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size_medium"/>
             </RelativeLayout>
         </RelativeLayout>
 

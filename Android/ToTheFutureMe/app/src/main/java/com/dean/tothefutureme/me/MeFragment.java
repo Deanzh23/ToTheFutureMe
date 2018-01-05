@@ -95,9 +95,11 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewDataBinding.toolbar.setTitle("我的");
+        viewDataBinding.toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        viewDataBinding.toolbar.setTitle("个人信息");
         activity.setSupportActionBar(viewDataBinding.toolbar);
         viewDataBinding.toolbar.inflateMenu(R.menu.menu_me);
+        viewDataBinding.toolbar.setNavigationOnClickListener(v -> activity.finish());
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());

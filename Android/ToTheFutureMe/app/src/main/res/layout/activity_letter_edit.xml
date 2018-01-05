@@ -87,7 +87,7 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:gravity="start"
-                        android:hint="点击[铅笔]开始编辑"
+                        android:hint="  点击[铅笔]开始编辑"
                         android:lineSpacingExtra="6dp"
                         android:scrollbarStyle="insideOverlay"
                         android:scrollbars="none"

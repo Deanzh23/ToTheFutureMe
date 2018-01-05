@@ -103,6 +103,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden"/>
 
+        <activity
+            android:name=".me.MeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"/>
+
         <!-- 配置YunBa SDK核心服务 -->
         <service android:name="io.yunba.android.core.YunBaService"/>
 

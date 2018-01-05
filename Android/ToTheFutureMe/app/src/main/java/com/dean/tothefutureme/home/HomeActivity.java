@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
 import com.dean.android.framework.convenient.activity.ConvenientCameraActivity;
-import com.dean.android.framework.convenient.fragment.ConvenientFragment;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.view.ContentView;
@@ -23,8 +22,6 @@ import com.dean.tothefutureme.main.TTFMApplication;
 import com.dean.tothefutureme.push.TTFMPushReceiver;
 import com.dean.tothefutureme.timeline.view.TimeLineFragment;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,10 +34,7 @@ import java.util.TimerTask;
 public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> {
 
     private FragmentManager fragmentManager;
-
-    private List<ConvenientFragment> fragments = new ArrayList<>();
     private TimeLineFragment timeLineFragment;
-//    private MeFragment meFragment;
 
     private static Boolean isExit = false;
 
@@ -80,17 +74,10 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
      * 加载fragments
      */
     private void loadFragments() {
-        timeLineFragment = TimeLineFragment.getInstance();
-//        meFragment = MeFragment.getInstance();
-        fragments.add(timeLineFragment);
-//        fragments.add(meFragment);
-
         fragmentManager = getSupportFragmentManager();
+        timeLineFragment = TimeLineFragment.getInstance();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.contentLayout, timeLineFragment);
-//        fragmentTransaction.hide(timeLineFragment);
-//        fragmentTransaction.add(R.id.contentLayout, meFragment);
-//        fragmentTransaction.hide(meFragment);
         fragmentTransaction.commit();
     }
 
