@@ -28,6 +28,13 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_action_bar_menu_time_list"/>
 
+            <ImageView
+                android:id="@+id/jump2FriendImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@id/jump2LocalLetterImageView"
+                android:src="@drawable/ic_friend"/>
         </RelativeLayout>
 
         <!-- 个人信息Layout -->

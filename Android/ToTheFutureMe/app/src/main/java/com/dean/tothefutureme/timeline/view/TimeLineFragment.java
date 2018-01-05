@@ -24,6 +24,7 @@ import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
+import com.dean.tothefutureme.friend.FriendListActivity;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.letter.view.LocalLetterListActivity;
 import com.dean.tothefutureme.main.TTFMApplication;
@@ -180,6 +181,14 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
     @OnClick(R.id.avatarImageView)
     public void jump2UserInfoEdit() {
         startActivity(new Intent(activity, MeActivity.class));
+    }
+
+    /**
+     * 跳转到好友列表
+     */
+    @OnClick(R.id.jump2FriendImageView)
+    public void jump2FriendList() {
+        startActivity(new Intent(activity, FriendListActivity.class));
     }
 
     /**
