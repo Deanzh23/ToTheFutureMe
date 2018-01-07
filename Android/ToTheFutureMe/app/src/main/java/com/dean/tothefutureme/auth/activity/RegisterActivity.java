@@ -203,50 +203,58 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
         new Thread(() -> {
             // 上传头像
             if (!TextUtils.isEmpty(avatarImagePath)) {
-                List<Object> urlParams = new ArrayList<>();
-                urlParams.add(AppConfig.IMAGE_TYPE_AVATAR);
-
-                ConvenientHttpConnection connection = new ConvenientHttpConnection();
-                connection.sendFile(AppConfig.BASE_URL + AppConfig.FILE, urlParams, new File(avatarImagePath), new OnHttpConnectionListener() {
-                    @Override
-                    public void onSuccess(String s) {
-                        try {
-                            JSONObject response = new JSONObject(s);
-                            String code = response.getString("code");
-                            if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
-                                // 设置头像
-                                String url = response.getJSONObject("data").getString("url");
-                                TTFMApplication.getAuthModel().setAvatarUrl(url);
-                            }
-                        } catch (JSONException e) {
-                            handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "上传头像失败"));
-                        }
-
-                        // 注册用户信息
-                        new Thread(() -> registerUserInfo()).start();
-                    }
-
-                    @Override
-                    public void onError(int i) {
-                        handler.post(() -> {
-                            waitDialog.dismiss();
-                            ToastUtil.showToast(RegisterActivity.this, i + "", Toast.LENGTH_LONG);
-                        });
-                    }
-
-                    @Override
-                    public void onTokenFailure() {
-                    }
-
-                    @Override
-                    public void onEnd() {
-                    }
-                });
-            } else {
-                // 正式注册用户
+                uploadAvatar();
+            }
+            // 正式注册用户
+            else {
                 registerUserInfo();
             }
         }).start();
+    }
+
+    /**
+     * 上传头像
+     */
+    private void uploadAvatar() {
+        List<Object> urlParams = new ArrayList<>();
+        urlParams.add(AppConfig.IMAGE_TYPE_AVATAR);
+
+        ConvenientHttpConnection connection = new ConvenientHttpConnection();
+        connection.sendFile(AppConfig.BASE_URL + AppConfig.FILE, urlParams, new File(avatarImagePath), new OnHttpConnectionListener() {
+            @Override
+            public void onSuccess(String s) {
+                try {
+                    JSONObject response = new JSONObject(s);
+                    String code = response.getString("code");
+                    if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
+                        // 设置头像
+                        String url = response.getJSONObject("data").getString("url");
+                        TTFMApplication.getAuthModel().setAvatarUrl(url);
+                    }
+                } catch (JSONException e) {
+                    handler.post(() -> ToastUtil.showToast(RegisterActivity.this, "上传头像失败"));
+                }
+
+                // 注册用户信息
+                new Thread(() -> registerUserInfo()).start();
+            }
+
+            @Override
+            public void onError(int i) {
+                handler.post(() -> {
+                    waitDialog.dismiss();
+                    ToastUtil.showToast(RegisterActivity.this, i + "", Toast.LENGTH_LONG);
+                });
+            }
+
+            @Override
+            public void onTokenFailure() {
+            }
+
+            @Override
+            public void onEnd() {
+            }
+        });
     }
 
     /**

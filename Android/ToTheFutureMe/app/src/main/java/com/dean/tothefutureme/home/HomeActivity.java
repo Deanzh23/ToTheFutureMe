@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
-import com.dean.android.framework.convenient.activity.ConvenientCameraActivity;
+import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.view.ContentView;
@@ -31,7 +31,7 @@ import java.util.TimerTask;
  * Created by dean on 2017/12/3.
  */
 @ContentView(R.layout.activity_home)
-public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> {
+public class HomeActivity extends ConvenientActivity<ActivityHomeBinding> {
 
     private FragmentManager fragmentManager;
     private TimeLineFragment timeLineFragment;
@@ -41,10 +41,19 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            // 头像数据更新广播
+            if (AppConfig.BROADCAST_RECEIVER_USER_UPDATE.equals(action)) {
+                if (timeLineFragment != null)
+                    timeLineFragment.updateAvatar();
+            }
             // 信件已读更新广播接收
-            LetterModel letterModel = (LetterModel) intent.getSerializableExtra(LetterModel.class.getSimpleName());
-            if (timeLineFragment != null)
-                timeLineFragment.updateLetterRead(letterModel);
+            else if (AppConfig.BROADCAST_RECEIVER_DATA_UPDATE.equals(action)) {
+                LetterModel letterModel = (LetterModel) intent.getSerializableExtra(LetterModel.class.getSimpleName());
+                if (timeLineFragment != null)
+                    timeLineFragment.updateLetterRead(letterModel);
+            }
         }
     };
 
@@ -56,7 +65,9 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
         // 启动个推推送
         TTFMApplication.startYunBaPush();
         // 注册信件已读更新广播
-        IntentFilter intentFilter = new IntentFilter(AppConfig.BROADCAST_RECEIVER_LETTER_READ_UPDATE);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(AppConfig.BROADCAST_RECEIVER_LETTER_READ_UPDATE);
+        intentFilter.addAction(AppConfig.BROADCAST_RECEIVER_DATA_UPDATE);
         registerReceiver(receiver, intentFilter);
     }
 
@@ -82,23 +93,12 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
     }
 
     @Override
-    protected void albumResult(Intent intent) {
-//        if (meFragment != null)
-//            meFragment.albumResult(intent);
-    }
-
-    @Override
-    protected void cameraResult(Intent intent) {
-//        if (meFragment != null)
-//            meFragment.cameraResult(intent);
-    }
-
-    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (KeyEvent.KEYCODE_BACK == keyCode) {
             exitBy2Click();
             return true;
         }
+
         return super.onKeyDown(keyCode, event);
     }
 
@@ -124,6 +124,7 @@ public class HomeActivity extends ConvenientCameraActivity<ActivityHomeBinding> 
     @Override
     protected void onDestroy() {
         unregisterReceiver(receiver);
+
         super.onDestroy();
     }
 }

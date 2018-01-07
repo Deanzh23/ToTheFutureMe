@@ -16,11 +16,11 @@ public class AppConfig {
     /**
      * 本地开发环境域名
      */
-//    public static final String BASE_URL = "http://192.168.0.101:8444/ttfm/";
+    public static final String BASE_URL = "http://192.168.0.101:8444/ttfm/";
     /**
      * 公司本地开发环境域名
      */
-    public static final String BASE_URL = "http://10.88.53.17:8444/ttfm/";
+//    public static final String BASE_URL = "http://10.88.53.17:8444/ttfm/";
     /**
      * 验证账号可用性（邮箱）
      */
@@ -58,6 +58,14 @@ public class AppConfig {
      */
     public static final String LETTER_LOAD_READ = "letter/readLetter";
     /**
+     * 获取全部关注用户
+     */
+    public static final String ATTENTION_LOAD_FRIEND = "attention/loadAttention";
+    /**
+     * 搜索关注用户
+     */
+    public static final String ATTENTION_SEARCH_AUTH_BY_USERNAME = "attention/searchAuthByUsername";
+    /**
      * 图片上传
      */
     public static final String FILE = "file/upload";
@@ -82,6 +90,10 @@ public class AppConfig {
      * 数据更新广播标识
      */
     public static final String BROADCAST_RECEIVER_DATA_UPDATE = "broadcast_receiver_data_update";
+    /**
+     * 用户信息数据更新广播标识
+     */
+    public static final String BROADCAST_RECEIVER_USER_UPDATE = "broadcast_receiver_user_update";
     /**
      * 信件已读更新广播标识
      */

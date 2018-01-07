@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
@@ -38,6 +39,7 @@ import com.dean.tothefutureme.utils.TokenUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,6 +84,8 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
     @Override
     public void onResume() {
         super.onResume();
+
+        TTFMApplication.getAuthModel().setEditModel(false);
         KeyboardUtil.hideSoftKeyboard(activity);
     }
 
@@ -126,7 +130,12 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
                     waitDialog = ConvenientProgressDialog.getInstance(activity, "正在上传...", false);
                     waitDialog.show();
 
-                    new Thread(() -> uploadAuth()).start();
+                    new Thread(() -> {
+                        if (!TextUtils.isEmpty(avatarImagePath))
+                            uploadAvatar();
+                        else
+                            uploadAuth();
+                    }).start();
                 }
                 break;
             case R.id.menuSetting:
@@ -214,6 +223,7 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
 
                     @Override
                     public void onEnd() {
+                        activity.runOnUiThread(() -> activity.sendBroadcast(new Intent(AppConfig.BROADCAST_RECEIVER_USER_UPDATE)));
                     }
                 });
     }
@@ -275,9 +285,54 @@ public class MeFragment extends ConvenientFragment<FragmentMeBinding> implements
      */
     private void setImage2Avatar() {
         if (!TextUtils.isEmpty(avatarImagePath))
-            BitmapUtil.setBitmap2ViewOnImageBitmap(activity, viewDataBinding.avatarImageView, avatarImagePath, true, null);
+            BitmapUtil.setBitmap2ViewOnImageBitmap(activity, viewDataBinding.avatarImageView, avatarImagePath, false, null);
         else
             ToastUtil.showToast(activity, "图片未找到");
+    }
+
+    /**
+     * 上传头像
+     */
+    private void uploadAvatar() {
+        List<Object> urlParams = new ArrayList<>();
+        urlParams.add(AppConfig.IMAGE_TYPE_AVATAR);
+
+        ConvenientHttpConnection connection = new ConvenientHttpConnection();
+        connection.sendFile(AppConfig.BASE_URL + AppConfig.FILE, urlParams, new File(avatarImagePath), new OnHttpConnectionListener() {
+            @Override
+            public void onSuccess(String s) {
+                try {
+                    JSONObject response = new JSONObject(s);
+                    String code = response.getString("code");
+                    if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
+                        // 设置头像
+                        String url = response.getJSONObject("data").getString("url");
+                        TTFMApplication.getAuthModel().setAvatarUrl(url);
+                    }
+                } catch (JSONException e) {
+                    handler.post(() -> ToastUtil.showToast(activity, "上传头像失败"));
+                }
+
+                // 注册用户信息
+                new Thread(() -> uploadAuth()).start();
+            }
+
+            @Override
+            public void onError(int i) {
+                handler.post(() -> {
+                    waitDialog.dismiss();
+                    ToastUtil.showToast(activity, i + "", Toast.LENGTH_LONG);
+                });
+            }
+
+            @Override
+            public void onTokenFailure() {
+            }
+
+            @Override
+            public void onEnd() {
+            }
+        });
     }
 
 }

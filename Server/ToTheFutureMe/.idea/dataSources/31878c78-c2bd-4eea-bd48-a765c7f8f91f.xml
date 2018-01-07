@@ -14,152 +14,177 @@
     <schema id="8" parent="1" name="springmvc_hibernate_db"/>
     <schema id="9" parent="1" name="sys"/>
     <table id="10" parent="2" name="auth"/>
-    <table id="11" parent="2" name="letter"/>
-    <table id="12" parent="2" name="token"/>
-    <table id="13" parent="2" name="verificationCode"/>
-    <column id="14" parent="10" name="username">
+    <table id="11" parent="2" name="friend"/>
+    <table id="12" parent="2" name="letter"/>
+    <table id="13" parent="2" name="token"/>
+    <table id="14" parent="2" name="verificationCode"/>
+    <column id="15" parent="10" name="username">
       <Position>1</Position>
       <Comment>主键；e-mail形式</Comment>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="10" name="password">
+    <column id="16" parent="10" name="password">
       <Position>2</Position>
       <DataType>varchar(10)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="16" parent="10" name="avatarUrl">
+    <column id="17" parent="10" name="avatarUrl">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="17" parent="10" name="nickname">
+    <column id="18" parent="10" name="nickname">
       <Position>4</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="18" parent="10" name="genderCode">
+    <column id="19" parent="10" name="genderCode">
       <Position>5</Position>
       <DataType>int(1)|0</DataType>
       <DefaultExpression>&apos;3&apos;</DefaultExpression>
     </column>
-    <column id="19" parent="10" name="birthday">
+    <column id="20" parent="10" name="birthday">
       <Position>6</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="20" parent="10" name="token">
+    <column id="21" parent="10" name="token">
       <Position>7</Position>
       <Comment>token</Comment>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <key id="21" parent="10" name="PRIMARY">
+    <key id="22" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="22" parent="11" name="letterId">
+    <column id="23" parent="11" name="whoFriend">
+      <Position>1</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="11" name="username">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="11" name="nickname">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="26" parent="11" name="avatarUrl">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="27" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>whoFriend
+username</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="28" parent="12" name="letterId">
       <Position>1</Position>
       <Comment>信件ID，主键</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="11" name="userId">
+    <column id="29" parent="12" name="userId">
       <Position>2</Position>
       <Comment>收件人ID -&gt; username</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="11" name="type">
+    <column id="30" parent="12" name="type">
       <Position>3</Position>
       <Comment>信件类型（0：文字；1：语音）</Comment>
       <DataType>int(1) unsigned|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="25" parent="11" name="senderUserId">
+    <column id="31" parent="12" name="senderUserId">
       <Position>4</Position>
       <Comment>发件人ID -&gt; username</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="26" parent="11" name="senderUserNickName">
+    <column id="32" parent="12" name="senderUserNickName">
       <Position>5</Position>
       <Comment>发件人昵称</Comment>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="27" parent="11" name="senderAvatarUrl">
+    <column id="33" parent="12" name="senderAvatarUrl">
       <Position>6</Position>
       <Comment>发件人头像URL</Comment>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="28" parent="11" name="sendDateTime">
+    <column id="34" parent="12" name="sendDateTime">
       <Position>7</Position>
       <Comment>发件日期时间毫秒值</Comment>
       <DataType>bigint(20) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="11" name="receiveDateTime">
+    <column id="35" parent="12" name="receiveDateTime">
       <Position>8</Position>
       <Comment>收件日期时间毫秒值</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="11" name="content">
+    <column id="36" parent="12" name="content">
       <Position>9</Position>
       <Comment>信件内容</Comment>
       <DataType>text|0</DataType>
     </column>
-    <column id="31" parent="11" name="isRead">
+    <column id="37" parent="12" name="isRead">
       <Position>10</Position>
       <Comment>是否已读</Comment>
       <DataType>int(1) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <key id="32" parent="11" name="PRIMARY">
+    <key id="38" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>letterId
 userId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="33" parent="12" name="username">
+    <column id="39" parent="13" name="username">
       <Position>1</Position>
       <Comment>邮箱用户名</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="34" parent="12" name="token">
+    <column id="40" parent="13" name="token">
       <Position>2</Position>
       <Comment>token</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="35" parent="12" name="time">
+    <column id="41" parent="13" name="time">
       <Position>3</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="36" parent="12" name="PRIMARY">
+    <key id="42" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>token</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="37" parent="13" name="username">
+    <column id="43" parent="14" name="username">
       <Position>1</Position>
       <Comment>邮箱用户名</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="38" parent="13" name="verificationCode">
+    <column id="44" parent="14" name="verificationCode">
       <Position>2</Position>
       <Comment>用户验证码</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="39" parent="13" name="time">
+    <column id="45" parent="14" name="time">
       <Position>3</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="40" parent="13" name="PRIMARY">
+    <key id="46" parent="14" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

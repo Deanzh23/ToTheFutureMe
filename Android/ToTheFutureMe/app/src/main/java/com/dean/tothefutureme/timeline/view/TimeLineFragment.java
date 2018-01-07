@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.android.framework.convenient.database.Selector;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.fragment.ConvenientFragment;
@@ -22,9 +23,9 @@ import com.dean.android.framework.convenient.util.SetUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.attention.view.AttentionListActivity;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.FragmentTimeLineBinding;
-import com.dean.tothefutureme.friend.FriendListActivity;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.letter.view.LocalLetterListActivity;
 import com.dean.tothefutureme.main.TTFMApplication;
@@ -80,6 +81,8 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
         super.onActivityCreated(savedInstanceState);
 
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
+        BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + TTFMApplication.getAuthModel().getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                false);
         loadData();
     }
 
@@ -188,7 +191,7 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
      */
     @OnClick(R.id.jump2FriendImageView)
     public void jump2FriendList() {
-        startActivity(new Intent(activity, FriendListActivity.class));
+        startActivity(new Intent(activity, AttentionListActivity.class));
     }
 
     /**
@@ -214,6 +217,14 @@ public class TimeLineFragment extends ConvenientFragment<FragmentTimeLineBinding
                 }
             }
         }
+    }
+
+    /**
+     * 更新用户头像信息数据
+     */
+    public void updateAvatar() {
+        BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + TTFMApplication.getAuthModel().getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                false);
     }
 
 }
