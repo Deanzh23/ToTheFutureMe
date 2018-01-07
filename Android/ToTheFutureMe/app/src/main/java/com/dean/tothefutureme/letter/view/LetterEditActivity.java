@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
+import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
@@ -27,6 +28,8 @@ import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.android.framework.convenient.view.OnClick;
 import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.attention.model.AttentionModel;
+import com.dean.tothefutureme.attention.view.AttentionListActivity;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.custom.view.edittext.LetterEditText;
 import com.dean.tothefutureme.databinding.ActivityLetterEditBinding;
@@ -55,6 +58,7 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
     private AlertDialog uploadDialog;
 
     private LetterModel letterModel;
+    private AttentionModel attentionModel;
     private Date receiveDate;
 
     private boolean isEditModel = false;
@@ -89,6 +93,8 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
             letterModel = new LetterModel();
 
         viewDataBinding.setLetterModel(letterModel);
+        viewDataBinding.setAttentionModel(attentionModel);
+
         updateLetterLengthLimit();
 
         if (isLookModel)
@@ -167,7 +173,40 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
     }
 
     /**
-     * 选择收件日期2
+     * 选择收件人
+     */
+    @OnClick(R.id.avatarImageView)
+    public void onSelectReceiveUser() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("选择传送目标");
+        builder.setNegativeButton("自己", (dialog, which) -> {
+            attentionModel = new AttentionModel();
+            attentionModel.setUsername(TTFMApplication.getAuthModel().getUsername());
+            attentionModel.setNickname(TTFMApplication.getAuthModel().getNickname());
+            attentionModel.setAvatarUrl(TTFMApplication.getAuthModel().getAvatarUrl());
+            attentionModel.setWhoFriend(TTFMApplication.getAuthModel().getUsername());
+
+            BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + attentionModel.getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                    false);
+        });
+        builder.setPositiveButton("从关注中选择", (dialog, which) -> {
+            Intent intent = new Intent(LetterEditActivity.this, AttentionListActivity.class);
+            startActivityForResult(intent, 0);
+        });
+        builder.create().show();
+    }
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+
+        attentionModel = (AttentionModel) data.getSerializableExtra(AttentionModel.class.getSimpleName());
+        BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + attentionModel.getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                false);
+    }
+
+    /**
+     * 选择收件日期
      */
     @OnClick(R.id.receiveDateTextView)
     public void selectReceiveDate() {

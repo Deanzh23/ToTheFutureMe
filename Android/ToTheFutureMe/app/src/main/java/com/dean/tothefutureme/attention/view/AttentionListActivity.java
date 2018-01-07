@@ -40,7 +40,8 @@ import java.util.Map;
  * Created by dean on 2018/1/5.
  */
 @ContentView(R.layout.activity_attention_list)
-public class AttentionListActivity extends ConvenientActivity<ActivityAttentionListBinding> implements Toolbar.OnMenuItemClickListener {
+public class AttentionListActivity extends ConvenientActivity<ActivityAttentionListBinding> implements Toolbar.OnMenuItemClickListener,
+        AttentionAdapter.OnDeleteAttentionListener {
 
     private AttentionAdapter attentionAdapter;
 
@@ -144,7 +145,7 @@ public class AttentionListActivity extends ConvenientActivity<ActivityAttentionL
      */
     private void setFriendData() {
         if (attentionAdapter == null) {
-            attentionAdapter = new AttentionAdapter(AttentionListActivity.this, attentionModels);
+            attentionAdapter = new AttentionAdapter(AttentionListActivity.this, attentionModels, this);
             viewDataBinding.friendListView.setAdapter(attentionAdapter);
         } else
             attentionAdapter.update(attentionModels);
@@ -154,9 +155,16 @@ public class AttentionListActivity extends ConvenientActivity<ActivityAttentionL
     }
 
     @Override
+    public void onDelete() {
+        // 重新获取数据
+        loadData();
+    }
+
+    @Override
     protected void onDestroy() {
         unregisterReceiver(receiver);
 
         super.onDestroy();
     }
+
 }

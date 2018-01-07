@@ -16,284 +16,304 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackgroundLightGrey"
-            android:paddingBottom="4dp"
-            android:paddingTop="16dp">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/registerButton"
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/ic_dean_button_blue_bg"
-                android:text="注册"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size"/>
+                android:theme="@style/AppTheme.AppBarOverlay">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/registerButton"
-                android:layout_alignParentTop="true"
-                android:scrollbars="none">
-
-                <RelativeLayout
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorThemeSkyBlue"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            </android.support.design.widget.AppBarLayout>
 
-                    <com.dean.tothefutureme.custom.view.image.RoundImageView
-                        android:id="@+id/avatarImageView"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@mipmap/ic_launcher_round"
-                        app:civ_border_color="@android:color/white"
-                        app:civ_border_width="2dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackgroundLightGrey"
+                android:paddingBottom="4dp"
+                android:paddingTop="16dp">
 
-                    <com.dean.tothefutureme.custom.layout.NeatRelativeLayout
+                <Button
+                    android:id="@+id/registerButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/ic_dean_button_blue_bg"
+                    android:text="注册"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size"/>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/registerButton"
+                    android:layout_alignParentTop="true"
+                    android:scrollbars="none">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/avatarImageView"
-                        android:layout_marginTop="24dp">
+                        android:layout_height="wrap_content">
 
-                        <!-- 用户名 -->
-                        <RelativeLayout
-                            android:id="@+id/usernameLayout"
-                            style="@style/ItemStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        <com.dean.tothefutureme.custom.view.image.RoundImageView
+                            android:id="@+id/avatarImageView"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_centerHorizontal="true"
+                            android:src="@mipmap/ic_launcher_round"
+                            app:civ_border_color="@android:color/white"
+                            app:civ_border_width="2dp"/>
 
-                            <TextView
-                                android:id="@+id/usernameTitleView"
-                                style="@style/ListItemTitleTheme"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="邮箱"
-                                android:textSize="@dimen/text_size"/>
-
-                            <TextView
-                                android:id="@+id/usernameTextView"
-                                style="@style/ListItemContentTheme"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/usernameTitleView"
-                                android:text="@{authModel.username}"
-                                android:textSize="@dimen/text_size"/>
-                        </RelativeLayout>
-
-                        <!-- 填写邮箱的好处 -->
-                        <TextView
-                            android:id="@+id/eMailInputInfo"
+                        <com.dean.tothefutureme.custom.layout.NeatRelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/usernameLayout"
-                            android:background="@android:color/white"
-                            android:hint="@string/app_info_email"
-                            android:paddingBottom="8dp"
-                            android:paddingLeft="12dp"
-                            android:paddingRight="12dp"
-                            android:textSize="13sp"/>
+                            android:layout_below="@id/avatarImageView"
+                            android:layout_marginTop="24dp">
 
-                        <!-- 验证码 -->
-                        <RelativeLayout
-                            android:id="@+id/verificationCodeLayout"
-                            style="@style/ItemStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/eMailInputInfo"
-                            android:layout_marginTop="1dp">
-
-                            <TextView
-                                android:id="@+id/verificationCodeLabelView"
-                                style="@style/ListItemTitleTheme"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="验证码"
-                                android:textSize="@dimen/text_size"/>
-
+                            <!-- 用户名 -->
                             <RelativeLayout
+                                android:id="@+id/usernameLayout"
+                                style="@style/ItemStyle"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/verificationCodeLabelView">
+                                android:layout_height="wrap_content">
 
-                                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
-                                    android:id="@+id/verificationCodeEditText"
-                                    style="@style/ListItemContentTheme"
-                                    android:layout_width="match_parent"
+                                <TextView
+                                    android:id="@+id/usernameTitleView"
+                                    style="@style/ListItemTitleTheme"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="false"
-                                    android:layout_toLeftOf="@+id/sendVerificationCodeAgainButton"
-                                    android:background="@drawable/ic_dean_text_blue_bg"
-                                    android:gravity="right|center_vertical"
-                                    android:hint="请输入验证码（必填）"
-                                    android:inputType="number"
-                                    android:maxLength="6"
-                                    android:paddingBottom="8dp"
-                                    android:paddingLeft="8dp"
-                                    android:paddingRight="16dp"
-                                    android:paddingTop="8dp"
-                                    android:singleLine="true"
-                                    android:text="@={authModel.verificationCode}"
+                                    android:text="邮箱"
                                     android:textSize="@dimen/text_size"/>
 
                                 <TextView
-                                    android:id="@+id/sendVerificationCodeAgainButton"
+                                    android:id="@+id/usernameTextView"
+                                    style="@style/ListItemContentTheme"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignBottom="@id/verificationCodeEditText"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_alignTop="@id/verificationCodeEditText"
-                                    android:background="@drawable/ic_dean_button_blue_bg"
-                                    android:gravity="center"
-                                    android:paddingLeft="10dp"
-                                    android:paddingRight="10dp"
-                                    android:text="重新发送(60秒)"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="12sp"/>
+                                    android:layout_toRightOf="@id/usernameTitleView"
+                                    android:text="@{authModel.username}"
+                                    android:textSize="@dimen/text_size"/>
                             </RelativeLayout>
-                        </RelativeLayout>
 
-                        <!-- 密码 -->
-                        <RelativeLayout
-                            android:id="@+id/passwordLayout"
-                            style="@style/ItemStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/verificationCodeLayout"
-                            android:layout_marginTop="1dp">
-
+                            <!-- 填写邮箱的好处 -->
                             <TextView
-                                android:id="@+id/passwordLabelView"
-                                style="@style/ListItemTitleTheme"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/eMailInputInfo"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="密码"
-                                android:textSize="@dimen/text_size"/>
+                                android:layout_below="@id/usernameLayout"
+                                android:background="@android:color/white"
+                                android:hint="@string/app_info_email"
+                                android:paddingBottom="8dp"
+                                android:paddingLeft="12dp"
+                                android:paddingRight="12dp"
+                                android:textSize="13sp"/>
 
-                            <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
-                                android:id="@+id/passwordEditText"
-                                style="@style/ListItemContentTheme"
-                                android:layout_width="wrap_content"
+                            <!-- 验证码 -->
+                            <RelativeLayout
+                                android:id="@+id/verificationCodeLayout"
+                                style="@style/ItemStyle"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/passwordLabelView"
-                                android:background="@drawable/ic_dean_text_blue_bg"
-                                android:gravity="right|center_vertical"
-                                android:hint="请输入密码（必填 允许1到8位）"
-                                android:inputType="textPassword"
-                                android:maxLength="8"
-                                android:padding="8dp"
-                                android:singleLine="true"
-                                android:textSize="@dimen/text_size"/>
-                        </RelativeLayout>
+                                android:layout_below="@id/eMailInputInfo"
+                                android:layout_marginTop="1dp">
 
-                        <!-- 昵称 -->
-                        <RelativeLayout
-                            android:id="@+id/nicknameLayout"
-                            style="@style/ItemStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/passwordLayout"
-                            android:layout_marginTop="1dp">
+                                <TextView
+                                    android:id="@+id/verificationCodeLabelView"
+                                    style="@style/ListItemTitleTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="验证码"
+                                    android:textSize="@dimen/text_size"/>
 
-                            <TextView
-                                android:id="@+id/nicknameLabelView"
-                                style="@style/ListItemTitleTheme"
-                                android:layout_width="wrap_content"
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/verificationCodeLabelView">
+
+                                    <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                                        android:id="@+id/verificationCodeEditText"
+                                        style="@style/ListItemContentTheme"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="false"
+                                        android:layout_toLeftOf="@+id/sendVerificationCodeAgainButton"
+                                        android:background="@drawable/ic_dean_text_blue_bg"
+                                        android:gravity="right|center_vertical"
+                                        android:hint="请输入验证码（必填）"
+                                        android:inputType="number"
+                                        android:maxLength="6"
+                                        android:paddingBottom="8dp"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="16dp"
+                                        android:paddingTop="8dp"
+                                        android:singleLine="true"
+                                        android:text="@={authModel.verificationCode}"
+                                        android:textSize="@dimen/text_size"/>
+
+                                    <TextView
+                                        android:id="@+id/sendVerificationCodeAgainButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBottom="@id/verificationCodeEditText"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignTop="@id/verificationCodeEditText"
+                                        android:background="@drawable/ic_dean_button_blue_bg"
+                                        android:gravity="center"
+                                        android:paddingLeft="10dp"
+                                        android:paddingRight="10dp"
+                                        android:text="重新发送(60秒)"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="12sp"/>
+                                </RelativeLayout>
+                            </RelativeLayout>
+
+                            <!-- 密码 -->
+                            <RelativeLayout
+                                android:id="@+id/passwordLayout"
+                                style="@style/ItemStyle"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="昵称"
-                                android:textSize="@dimen/text_size"/>
+                                android:layout_below="@id/verificationCodeLayout"
+                                android:layout_marginTop="1dp">
 
-                            <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
-                                android:id="@+id/nicknameEditText"
-                                style="@style/ListItemContentTheme"
-                                android:layout_width="wrap_content"
+                                <TextView
+                                    android:id="@+id/passwordLabelView"
+                                    style="@style/ListItemTitleTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="密码"
+                                    android:textSize="@dimen/text_size"/>
+
+                                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                                    android:id="@+id/passwordEditText"
+                                    style="@style/ListItemContentTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/passwordLabelView"
+                                    android:background="@drawable/ic_dean_text_blue_bg"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="请输入密码（必填 允许1到8位）"
+                                    android:inputType="textPassword"
+                                    android:maxLength="8"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/text_size"/>
+                            </RelativeLayout>
+
+                            <!-- 昵称 -->
+                            <RelativeLayout
+                                android:id="@+id/nicknameLayout"
+                                style="@style/ItemStyle"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/nicknameLabelView"
-                                android:background="@drawable/ic_dean_text_blue_bg"
-                                android:gravity="right|center_vertical"
-                                android:hint="请输入昵称（必填 允许1到16位）"
-                                android:maxLength="16"
-                                android:padding="8dp"
-                                android:singleLine="true"
-                                android:textSize="@dimen/text_size"/>
-                        </RelativeLayout>
+                                android:layout_below="@id/passwordLayout"
+                                android:layout_marginTop="1dp">
 
-                        <!-- 性别 -->
-                        <RelativeLayout
-                            android:id="@+id/genderLayout"
-                            style="@style/ItemStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/nicknameLayout"
-                            android:layout_marginTop="1dp">
+                                <TextView
+                                    android:id="@+id/nicknameLabelView"
+                                    style="@style/ListItemTitleTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="昵称"
+                                    android:textSize="@dimen/text_size"/>
 
-                            <TextView
-                                android:id="@+id/genderLabelView"
-                                style="@style/ListItemTitleTheme"
-                                android:layout_width="wrap_content"
+                                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                                    android:id="@+id/nicknameEditText"
+                                    style="@style/ListItemContentTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/nicknameLabelView"
+                                    android:background="@drawable/ic_dean_text_blue_bg"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="请输入昵称（必填 允许1到16位）"
+                                    android:maxLength="16"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/text_size"/>
+                            </RelativeLayout>
+
+                            <!-- 性别 -->
+                            <RelativeLayout
+                                android:id="@+id/genderLayout"
+                                style="@style/ItemStyle"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="性别"
-                                android:textSize="@dimen/text_size"/>
+                                android:layout_below="@id/nicknameLayout"
+                                android:layout_marginTop="1dp">
 
-                            <TextView
-                                android:id="@+id/genderTextView"
-                                style="@style/ListItemContentTheme"
-                                android:layout_width="wrap_content"
+                                <TextView
+                                    android:id="@+id/genderLabelView"
+                                    style="@style/ListItemTitleTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="性别"
+                                    android:textSize="@dimen/text_size"/>
+
+                                <TextView
+                                    android:id="@+id/genderTextView"
+                                    style="@style/ListItemContentTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/genderLabelView"
+                                    android:background="@drawable/ic_dean_text_blue_bg"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="请选择性别（选填）"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/text_size"/>
+                            </RelativeLayout>
+
+                            <!-- 出生日期 -->
+                            <RelativeLayout
+                                android:id="@+id/birthdayLayout"
+                                style="@style/ItemStyle"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/genderLabelView"
-                                android:background="@drawable/ic_dean_text_blue_bg"
-                                android:gravity="right|center_vertical"
-                                android:hint="请选择性别（选填）"
-                                android:padding="8dp"
-                                android:singleLine="true"
-                                android:textSize="@dimen/text_size"/>
-                        </RelativeLayout>
+                                android:layout_below="@id/genderLayout"
+                                android:layout_marginTop="1dp">
 
-                        <!-- 出生日期 -->
-                        <RelativeLayout
-                            android:id="@+id/birthdayLayout"
-                            style="@style/ItemStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/genderLayout"
-                            android:layout_marginTop="1dp">
+                                <TextView
+                                    android:id="@+id/birthdayLabelView"
+                                    style="@style/ListItemTitleTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="生日"
+                                    android:textSize="@dimen/text_size"/>
 
-                            <TextView
-                                android:id="@+id/birthdayLabelView"
-                                style="@style/ListItemTitleTheme"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="生日"
-                                android:textSize="@dimen/text_size"/>
+                                <TextView
+                                    android:id="@+id/birthdayTextView"
+                                    style="@style/ListItemContentTheme"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/birthdayLabelView"
+                                    android:background="@drawable/ic_dean_text_blue_bg"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="请选择出生日期（选填）"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/text_size"
+                                    app:text_long2DateString="@{authModel.birthday}"/>
+                            </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/birthdayTextView"
-                                style="@style/ListItemContentTheme"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/birthdayLabelView"
-                                android:background="@drawable/ic_dean_text_blue_bg"
-                                android:gravity="right|center_vertical"
-                                android:hint="请选择出生日期（选填）"
-                                android:padding="8dp"
-                                android:singleLine="true"
-                                android:textSize="@dimen/text_size"
-                                app:text_long2DateString="@{authModel.birthday}"/>
-                        </RelativeLayout>
+                        </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
 
-                    </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
+                    </RelativeLayout>
+                </ScrollView>
 
-                </RelativeLayout>
-            </ScrollView>
+            </RelativeLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
     </FrameLayout>
-
 </layout>

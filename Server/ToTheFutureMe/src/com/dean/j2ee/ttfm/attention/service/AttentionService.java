@@ -9,6 +9,8 @@ import com.dean.j2ee.ttfm.token.db.TokenDao;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -83,7 +85,7 @@ public class AttentionService extends ConvenientService {
     }
 
     /**
-     * 添加好友关系
+     * 添加关注关系
      *
      * @param token
      * @param body
@@ -100,6 +102,28 @@ public class AttentionService extends ConvenientService {
         JSONUtil.json2Object(request, friendEntity);
 
         attentionDao.saveOrUpdate(friendEntity);
+
+        return getResponseJSON(RESPONSE_SUCCESS).toString();
+    }
+
+    /**
+     * 删除关注关系
+     *
+     * @param token
+     * @param body
+     * @return
+     */
+    public Object deleteAttention(@PathVariable String token, @RequestBody String body) {
+        // token失效
+        TokenEntity tokenEntity = tokenDao.checkToken(token);
+        if (tokenEntity == null)
+            return getResponseJSON(RESPONSE_TOKEN_LOSE_EFFICACY).toString();
+
+        JSONObject request = new JSONObject(body);
+        FriendEntity friendEntity = new FriendEntity();
+        JSONUtil.json2Object(request, friendEntity);
+
+        attentionDao.delete(friendEntity);
 
         return getResponseJSON(RESPONSE_SUCCESS).toString();
     }

@@ -44,6 +44,11 @@ public class CheckUsernameActivity extends ConvenientActivity<ActivityCheckUsern
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        viewDataBinding.toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        viewDataBinding.toolbar.setTitle("检查账号");
+        setSupportActionBar(viewDataBinding.toolbar);
+        viewDataBinding.toolbar.setNavigationOnClickListener(v -> CheckUsernameActivity.this.finish());
+
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
     }
 

@@ -54,4 +54,17 @@ public class AttentionController extends ConvenientController {
         return attentionService.addAttention(token, body);
     }
 
+    /**
+     * 删除关注关系
+     *
+     * @param token
+     * @param body
+     * @return
+     */
+    @RequestMapping(value = "/deleteAttention/{token}", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Object deleteAttention(@PathVariable String token, @RequestBody String body) {
+        return attentionService.deleteAttention(token, body);
+    }
+
 }

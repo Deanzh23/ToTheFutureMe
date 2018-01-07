@@ -56,6 +56,11 @@ public class RegisterActivity extends ConvenientCameraActivity<ActivityRegisterB
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        viewDataBinding.toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        viewDataBinding.toolbar.setTitle("注册用户");
+        setSupportActionBar(viewDataBinding.toolbar);
+        viewDataBinding.toolbar.setNavigationOnClickListener(v -> RegisterActivity.this.finish());
+
         TTFMApplication.getAuthModel().setPassword("");
         viewDataBinding.setAuthModel(TTFMApplication.getAuthModel());
     }

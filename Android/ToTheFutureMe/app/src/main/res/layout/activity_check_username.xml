@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -15,40 +16,60 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackgroundLightGrey"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
-                android:id="@+id/usernameView"
-                style="@style/TextTheme"
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/ic_dean_text_blue_bg"
-                android:hint="请输入您的邮箱地址"
-                android:inputType="textEmailAddress"
-                android:padding="8dp"
-                android:singleLine="true"
-                android:text="@={authModel.username}"
-                android:textSize="@dimen/text_size"/>
+                android:theme="@style/AppTheme.AppBarOverlay">
 
-            <TextView
-                android:id="@+id/checkUsernameTextView"
-                style="@style/TextTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:drawablePadding="4dp"
-                android:drawableRight="@drawable/ic_next_step"
-                android:gravity="center_vertical"
-                android:padding="8dp"
-                android:text="发送验证码"
-                android:textSize="@dimen/text_size"/>
-        </RelativeLayout>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorThemeSkyBlue"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            </android.support.design.widget.AppBarLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackgroundLightGrey"
+                android:padding="16dp">
+
+                <com.dean.android.fw.convenient.ui.view.input.ConvenientEditText
+                    android:id="@+id/usernameView"
+                    style="@style/TextTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/ic_dean_text_blue_bg"
+                    android:hint="请输入您的邮箱地址"
+                    android:inputType="textEmailAddress"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:text="@={authModel.username}"
+                    android:textSize="@dimen/text_size"/>
+
+                <TextView
+                    android:id="@+id/checkUsernameTextView"
+                    style="@style/TextTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:drawablePadding="4dp"
+                    android:drawableRight="@drawable/ic_next_step"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="发送验证码"
+                    android:textSize="@dimen/text_size"/>
+            </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 
 </layout>

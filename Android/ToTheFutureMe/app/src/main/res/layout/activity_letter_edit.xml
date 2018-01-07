@@ -7,6 +7,10 @@
         <variable
             name="letterModel"
             type="com.dean.tothefutureme.letter.model.LetterModel"/>
+
+        <variable
+            name="attentionModel"
+            type="com.dean.tothefutureme.attention.model.AttentionModel"/>
     </data>
 
     <FrameLayout
@@ -44,34 +48,67 @@
                 android:padding="16dp">
 
                 <!-- 收件日期选择Layout -->
-                <com.dean.tothefutureme.custom.layout.NeatRelativeLayout
+                <RelativeLayout
                     android:id="@+id/receiveDateLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/receiveDateLabelTextView"
-                        style="@style/ListItemTitleTheme"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/receiveUserInfoLayout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="信件传送到"
-                        android:textColor="@color/colorThemeSkyBlue"
-                        android:textSize="@dimen/text_size"
-                        android:visibility="invisible"/>
+                        android:layout_toLeftOf="@+id/receiveDateTextView">
+
+                        <com.dean.tothefutureme.custom.view.image.RoundImageView
+                            android:id="@+id/avatarImageView"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="6dp"
+                            android:src="@mipmap/ic_launcher_round"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@id/avatarImageView"
+                            android:layout_alignTop="@id/avatarImageView"
+                            android:layout_marginLeft="12dp"
+                            android:layout_toRightOf="@id/avatarImageView"
+                            android:paddingBottom="6dp"
+                            android:paddingTop="6dp">
+
+                            <TextView
+                                android:id="@+id/nicknameTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{attentionModel.nickname}"
+                                android:textSize="13sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/usernameTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:text="@{attentionModel.username}"
+                                android:textSize="11sp"/>
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/receiveDateTextView"
                         style="@style/ListItemContentTheme"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/receiveDateLabelTextView"
-                        android:hint="选择传送到那一天"
+                        android:layout_alignParentTop="true"
+                        android:hint="点击选择传送到那一天"
                         android:paddingBottom="4dp"
                         android:paddingTop="4dp"
                         android:textColor="@color/colorThemeSkyBlue"
                         android:textSize="@dimen/text_size_medium"
                         app:text_long2DateString="@{letterModel.receiveDateTime}"/>
-                </com.dean.tothefutureme.custom.layout.NeatRelativeLayout>
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/letterLayout"
@@ -87,7 +124,7 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:gravity="start"
-                        android:hint="  点击[铅笔]开始编辑"
+                        android:hint="  点击[铅笔]开始编辑，点击[小飞机]选择传送给谁。"
                         android:lineSpacingExtra="6dp"
                         android:scrollbarStyle="insideOverlay"
                         android:scrollbars="none"

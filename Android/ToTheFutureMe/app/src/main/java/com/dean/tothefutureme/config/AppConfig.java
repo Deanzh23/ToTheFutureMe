@@ -70,6 +70,10 @@ public class AppConfig {
      */
     public static final String ATTENTION_ADD_ATTENTION = "attention/addAttention";
     /**
+     * 解除关注人
+     */
+    public static final String ATTENTION_DELETE_ATTENTION = "attention/deleteAttention";
+    /**
      * 图片上传
      */
     public static final String FILE = "file/upload";
@@ -112,5 +116,7 @@ public class AppConfig {
      * 通知类型
      */
     public static final int NOTIFICATION_TYPE = 1;
+
+    public static final String INTENT_FROM = "intent_from";
 
 }

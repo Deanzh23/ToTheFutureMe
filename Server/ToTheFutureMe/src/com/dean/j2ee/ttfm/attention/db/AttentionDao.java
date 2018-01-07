@@ -53,12 +53,21 @@ public class AttentionDao extends ConvenientDao {
     }
 
     /**
-     * 保存好友关系
+     * 保存关注关系
      *
      * @param friendEntity
      */
     public void saveOrUpdate(FriendEntity friendEntity) {
         saveOrUpdate(sessionFactory, friendEntity);
+    }
+
+    /**
+     * 删除关注关系
+     *
+     * @param friendEntity
+     */
+    public void delete(FriendEntity friendEntity) {
+        delete(sessionFactory, friendEntity);
     }
 
 }
