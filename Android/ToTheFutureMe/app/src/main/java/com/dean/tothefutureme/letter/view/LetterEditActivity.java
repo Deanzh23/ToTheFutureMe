@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
 import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
+import com.dean.android.framework.convenient.database.Selector;
 import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
@@ -93,7 +94,26 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
             letterModel = new LetterModel();
 
         viewDataBinding.setLetterModel(letterModel);
-        viewDataBinding.setAttentionModel(attentionModel);
+
+        attentionModel = new AttentionModel();
+        // 自己发给自己的
+        if (TTFMApplication.getAuthModel().getUsername().equals(letterModel.getSenderUserId())) {
+            attentionModel.setUsername(TTFMApplication.getAuthModel().getUsername());
+            attentionModel.setNickname(TTFMApplication.getAuthModel().getNickname());
+            attentionModel.setAvatarUrl(TTFMApplication.getAuthModel().getAvatarUrl());
+            attentionModel.setWhoFriend(TTFMApplication.getAuthModel().getUsername());
+
+            setAttentionData();
+        } else {
+            new Thread(() -> {
+                // 从数据库里读取关注人
+                Selector selector = new Selector("whoFriend", "=", TTFMApplication.getAuthModel().getUsername());
+                selector.and("username", "=", letterModel.getSenderUserId());
+                attentionModel = DatabaseUtil.find(AttentionModel.class, selector);
+
+                LetterEditActivity.this.runOnUiThread(() -> setAttentionData());
+            }).start();
+        }
 
         updateLetterLengthLimit();
 
@@ -141,6 +161,10 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
                     ToastUtil.showToast(LetterEditActivity.this, "传送没有内容的信件毫无意义哟！", Toast.LENGTH_LONG, ToastUtil.LOCATION_MIDDLE);
                     return true;
                 }
+                if (attentionModel == null) {
+                    ToastUtil.showToast(LetterEditActivity.this, "点击小飞机选择要传送给谁", Toast.LENGTH_LONG, ToastUtil.LOCATION_MIDDLE);
+                    return true;
+                }
                 if (letterModel.getReceiveDateTime() <= 0) {
                     ToastUtil.showToast(LetterEditActivity.this, "时光机也需要知道传送到哪天哟！", Toast.LENGTH_LONG, ToastUtil.LOCATION_MIDDLE);
                     return true;
@@ -177,17 +201,21 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
      */
     @OnClick(R.id.avatarImageView)
     public void onSelectReceiveUser() {
+        if (isLookModel || !isEditModel)
+            return;
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("选择传送目标");
         builder.setNegativeButton("自己", (dialog, which) -> {
-            attentionModel = new AttentionModel();
+            if (attentionModel == null)
+                attentionModel = new AttentionModel();
+
             attentionModel.setUsername(TTFMApplication.getAuthModel().getUsername());
             attentionModel.setNickname(TTFMApplication.getAuthModel().getNickname());
             attentionModel.setAvatarUrl(TTFMApplication.getAuthModel().getAvatarUrl());
             attentionModel.setWhoFriend(TTFMApplication.getAuthModel().getUsername());
 
-            BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + attentionModel.getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
-                    false);
+            setAttentionData();
         });
         builder.setPositiveButton("从关注中选择", (dialog, which) -> {
             Intent intent = new Intent(LetterEditActivity.this, AttentionListActivity.class);
@@ -201,8 +229,18 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         super.onActivityReenter(resultCode, data);
 
         attentionModel = (AttentionModel) data.getSerializableExtra(AttentionModel.class.getSimpleName());
-        BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + attentionModel.getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
-                false);
+        setAttentionData();
+    }
+
+    /**
+     * 设置关注数据
+     */
+    private void setAttentionData() {
+        if (attentionModel != null) {
+            viewDataBinding.setAttentionModel(attentionModel);
+            BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + attentionModel.getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                    false);
+        }
     }
 
     /**
@@ -251,7 +289,8 @@ public class LetterEditActivity extends ConvenientActivity<ActivityLetterEditBin
         // 发件人ID -> 自己的username
         letterModel.setSenderUserId(TTFMApplication.getAuthModel().getUsername());
         // 收件人ID -> username
-        letterModel.setUserId(TTFMApplication.getAuthModel().getUsername());
+        if (attentionModel != null)
+            letterModel.setUserId(attentionModel.getUsername());
         // 发件日期时间毫秒值
         letterModel.setSendDateTime(System.currentTimeMillis());
 

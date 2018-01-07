@@ -1,5 +1,8 @@
 package com.dean.tothefutureme.attention.model;
 
+import com.dean.android.framework.convenient.database.annotation.Column;
+import com.dean.android.framework.convenient.database.annotation.PrimaryKey;
+
 import java.io.Serializable;
 
 /**
@@ -9,13 +12,14 @@ import java.io.Serializable;
  */
 public class AttentionModel implements Serializable {
 
+    @PrimaryKey
     private String username;
-
-    private String nickname;
-
-    private String avatarUrl;
-
+    @PrimaryKey
     private String whoFriend;
+    @Column
+    private String nickname;
+    @Column
+    private String avatarUrl;
 
     public String getUsername() {
         return username;

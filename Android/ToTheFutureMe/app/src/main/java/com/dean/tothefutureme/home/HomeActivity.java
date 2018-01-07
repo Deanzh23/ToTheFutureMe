@@ -11,17 +11,32 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
+import com.dean.android.framework.convenient.database.util.DatabaseUtil;
+import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.keyboard.KeyboardUtil;
+import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
+import com.dean.android.framework.convenient.network.http.listener.OnHttpConnectionListener;
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.view.ContentView;
 import com.dean.tothefutureme.R;
+import com.dean.tothefutureme.attention.model.AttentionModel;
+import com.dean.tothefutureme.attention.view.AttentionListActivity;
 import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.ActivityHomeBinding;
 import com.dean.tothefutureme.letter.model.LetterModel;
 import com.dean.tothefutureme.main.TTFMApplication;
 import com.dean.tothefutureme.push.TTFMPushReceiver;
 import com.dean.tothefutureme.timeline.view.TimeLineFragment;
+import com.dean.tothefutureme.utils.TokenUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -69,6 +84,9 @@ public class HomeActivity extends ConvenientActivity<ActivityHomeBinding> {
         intentFilter.addAction(AppConfig.BROADCAST_RECEIVER_LETTER_READ_UPDATE);
         intentFilter.addAction(AppConfig.BROADCAST_RECEIVER_DATA_UPDATE);
         registerReceiver(receiver, intentFilter);
+
+        // 更新关注数据
+        updateAttentionData();
     }
 
     @Override
@@ -90,6 +108,57 @@ public class HomeActivity extends ConvenientActivity<ActivityHomeBinding> {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.contentLayout, timeLineFragment);
         fragmentTransaction.commit();
+    }
+
+    /**
+     * 更新关注数据
+     */
+    private void updateAttentionData() {
+        new Thread(() -> {
+            List<String> urlParams = new ArrayList<>();
+            urlParams.add(TTFMApplication.getAuthModel().getToken());
+
+            Map<String, String> bodyParams = new HashMap<>();
+            bodyParams.put("username", TTFMApplication.getAuthModel().getUsername());
+
+            ConvenientHttpConnection connection = new ConvenientHttpConnection();
+            connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.ATTENTION_LOAD_FRIEND, null, urlParams, bodyParams,
+                    new OnHttpConnectionListener() {
+                        @Override
+                        public void onSuccess(String s) {
+                            try {
+                                JSONObject response = new JSONObject(s);
+                                String code = response.getString("code");
+                                if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
+                                    JSONArray array = response.getJSONArray("data");
+                                    List<AttentionModel> attentionModels = JSONUtil.jsonArray2List(array, AttentionModel.class);
+
+                                    // 将关注保存到数据库
+                                    DatabaseUtil.deleteAll(AttentionModel.class, null);
+                                    if (attentionModels != null && attentionModels.size() > 0) {
+                                        for (AttentionModel attentionModel : attentionModels)
+                                            DatabaseUtil.saveOrUpdate(attentionModel);
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(int i) {
+                        }
+
+                        @Override
+                        public void onTokenFailure() {
+                            HomeActivity.this.runOnUiThread(() -> TokenUtils.loginAgain(HomeActivity.this));
+                        }
+
+                        @Override
+                        public void onEnd() {
+                        }
+                    });
+        }).start();
     }
 
     @Override

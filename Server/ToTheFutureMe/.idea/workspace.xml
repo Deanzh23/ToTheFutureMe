@@ -53,11 +53,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AttentionService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AttentionService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/attention/service/AttentionService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="125" column="42" lean-forward="true" selection-start-line="125" selection-start-column="42" selection-end-line="125" selection-end-column="42" />
+            <state relative-caret-position="293">
+              <caret line="106" column="5" lean-forward="true" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/controller/AuthController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="64" column="31" lean-forward="false" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/service/AuthService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -214,7 +234,7 @@
               <item name="src" type="cbb8eebc:String" user="src" />
               <item name="com/dean/j2ee" type="cbb8eebc:String" user="com/dean/j2ee" />
               <item name="ttfm" type="cbb8eebc:String" user="ttfm" />
-              <item name="attention" type="cbb8eebc:String" user="attention" />
+              <item name="auth" type="cbb8eebc:String" user="auth" />
             </path>
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
@@ -222,7 +242,7 @@
               <item name="src" type="cbb8eebc:String" user="src" />
               <item name="com/dean/j2ee" type="cbb8eebc:String" user="com/dean/j2ee" />
               <item name="ttfm" type="cbb8eebc:String" user="ttfm" />
-              <item name="attention" type="cbb8eebc:String" user="attention" />
+              <item name="auth" type="cbb8eebc:String" user="auth" />
               <item name="controller" type="cbb8eebc:String" user="controller" />
             </path>
             <path>
@@ -537,12 +557,12 @@
       <workItem from="1515028440955" duration="584000" />
       <workItem from="1515054889945" duration="1287000" />
       <workItem from="1515137876617" duration="5533000" />
-      <workItem from="1515294418416" duration="2785000" />
+      <workItem from="1515294418416" duration="4349000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105524000" />
+    <option name="totallyTimeSpent" value="107088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="-77" width="1440" height="877" extended-state="6" />
@@ -559,7 +579,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40124223" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40124223" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4484472" sideWeight="0.49444443" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -571,7 +591,7 @@
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23402777" sideWeight="0.18509316" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23402777" sideWeight="0.81490684" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23402777" sideWeight="0.81490684" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -591,14 +611,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/service/AuthService.java</url>
-          <line>53</line>
-          <properties />
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -886,22 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/controller/AuthController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="27" column="32" lean-forward="true" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/service/AuthService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="75" column="88" lean-forward="true" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/letter/service/LetterService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -946,8 +942,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/attention/service/AttentionService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="125" column="42" lean-forward="true" selection-start-line="125" selection-start-column="42" selection-end-line="125" selection-end-column="42" />
+        <state relative-caret-position="293">
+          <caret line="106" column="5" lean-forward="true" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/controller/AuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="64" column="31" lean-forward="false" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dean/j2ee/ttfm/auth/service/AuthService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.dean.android.framework.convenient.activity.ConvenientActivity;
+import com.dean.android.framework.convenient.database.util.DatabaseUtil;
 import com.dean.android.framework.convenient.json.JSONUtil;
 import com.dean.android.framework.convenient.network.http.ConvenientHttpConnection;
 import com.dean.android.framework.convenient.network.http.listener.OnHttpConnectionListener;
@@ -105,21 +106,26 @@ public class AttentionListActivity extends ConvenientActivity<ActivityAttentionL
                     new OnHttpConnectionListener() {
                         @Override
                         public void onSuccess(String s) {
-                            AttentionListActivity.this.runOnUiThread(() -> {
-                                try {
-                                    JSONObject response = new JSONObject(s);
-                                    String code = response.getString("code");
-                                    if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
-                                        JSONArray array = response.getJSONArray("data");
-                                        attentionModels = JSONUtil.jsonArray2List(array, AttentionModel.class);
+                            try {
+                                JSONObject response = new JSONObject(s);
+                                String code = response.getString("code");
+                                if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
+                                    JSONArray array = response.getJSONArray("data");
+                                    attentionModels = JSONUtil.jsonArray2List(array, AttentionModel.class);
 
-                                        setFriendData();
+                                    // 将关注保存到数据库
+                                    DatabaseUtil.deleteAll(AttentionModel.class, null);
+                                    if (attentionModels != null && attentionModels.size() > 0) {
+                                        for (AttentionModel attentionModel : attentionModels)
+                                            DatabaseUtil.saveOrUpdate(attentionModel);
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                    onError(-100);
+
+                                    AttentionListActivity.this.runOnUiThread(() -> setFriendData());
                                 }
-                            });
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                onError(-100);
+                            }
                         }
 
                         @Override
