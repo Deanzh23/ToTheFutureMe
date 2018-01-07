@@ -1,6 +1,9 @@
 package com.dean.tothefutureme.attention.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -43,6 +46,17 @@ public class AttentionListActivity extends ConvenientActivity<ActivityAttentionL
 
     private List<AttentionModel> attentionModels;
 
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            // 数据更新，重新获取数据
+            if (AppConfig.BROADCAST_RECEIVER_ATTENTION_UPDATE.equals(action))
+                loadData();
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +68,9 @@ public class AttentionListActivity extends ConvenientActivity<ActivityAttentionL
         viewDataBinding.toolbar.setOnMenuItemClickListener(this);
 
         loadData();
+
+        IntentFilter intentFilter = new IntentFilter(AppConfig.BROADCAST_RECEIVER_ATTENTION_UPDATE);
+        registerReceiver(receiver, intentFilter);
     }
 
     @Override
@@ -136,4 +153,10 @@ public class AttentionListActivity extends ConvenientActivity<ActivityAttentionL
         viewDataBinding.messageLineTextView.setVisibility(SetUtil.isEmpty(attentionModels) ? View.VISIBLE : View.GONE);
     }
 
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(receiver);
+
+        super.onDestroy();
+    }
 }

@@ -99,7 +99,7 @@
                             app:civ_border_width="2dp"/>
 
                         <TextView
-                            android:id="@+id/addButton"
+                            android:id="@+id/addAttentionView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_above="@id/exitLoginButton"
@@ -122,7 +122,7 @@
                             android:layout_alignTop="@id/avatarImageView"
                             android:layout_marginLeft="12dp"
                             android:layout_marginRight="12dp"
-                            android:layout_toLeftOf="@id/addButton"
+                            android:layout_toLeftOf="@id/addAttentionView"
                             android:layout_toRightOf="@id/avatarImageView"
                             android:paddingBottom="6dp"
                             android:paddingTop="6dp">

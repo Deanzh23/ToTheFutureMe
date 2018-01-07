@@ -66,6 +66,10 @@ public class AppConfig {
      */
     public static final String ATTENTION_SEARCH_AUTH_BY_USERNAME = "attention/searchAuthByUsername";
     /**
+     * 添加关注人
+     */
+    public static final String ATTENTION_ADD_ATTENTION = "attention/addAttention";
+    /**
      * 图片上传
      */
     public static final String FILE = "file/upload";
@@ -98,6 +102,10 @@ public class AppConfig {
      * 信件已读更新广播标识
      */
     public static final String BROADCAST_RECEIVER_LETTER_READ_UPDATE = "broadcast_receiver_letter_read_update";
+    /**
+     * 关注信息数据更新广播标识
+     */
+    public static final String BROADCAST_RECEIVER_ATTENTION_UPDATE = "broadcast_receiver_attention_update";
 
     public static final String TAG_YUN_BA = "YunBa SDK";
     /**

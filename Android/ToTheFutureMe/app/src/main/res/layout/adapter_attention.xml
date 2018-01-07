@@ -13,15 +13,15 @@
         android:layout_height="match_parent"
         android:background="@android:color/white">
 
-        <ImageView
+        <com.dean.tothefutureme.custom.view.image.RoundImageView
             android:id="@+id/avatarImageView"
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="6dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="4dp"
-            android:background="@mipmap/ic_launcher"/>
+            android:layout_marginTop="6dp"
+            android:src="@mipmap/ic_launcher_round"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

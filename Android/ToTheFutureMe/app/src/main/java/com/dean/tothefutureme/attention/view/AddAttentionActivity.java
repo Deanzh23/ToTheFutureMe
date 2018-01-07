@@ -1,5 +1,7 @@
 package com.dean.tothefutureme.attention.view;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -19,6 +21,8 @@ import com.dean.android.framework.convenient.network.http.listener.OnHttpConnect
 import com.dean.android.framework.convenient.toast.ToastUtil;
 import com.dean.android.framework.convenient.util.TextUtils;
 import com.dean.android.framework.convenient.view.ContentView;
+import com.dean.android.framework.convenient.view.OnClick;
+import com.dean.android.fw.convenient.ui.view.loading.progress.ConvenientProgressDialog;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.attention.model.AttentionModel;
 import com.dean.tothefutureme.config.AppConfig;
@@ -41,6 +45,8 @@ import java.util.Map;
  */
 @ContentView(R.layout.activity_add_attention)
 public class AddAttentionActivity extends ConvenientActivity<ActivityAddAttentionBinding> implements TextView.OnEditorActionListener, TextWatcher {
+
+    private ProgressDialog waitDialog;
 
     private AttentionModel attentionModel;
 
@@ -105,6 +111,8 @@ public class AddAttentionActivity extends ConvenientActivity<ActivityAddAttentio
                                     String code = response.getString("code");
                                     boolean hasData = response.getBoolean("hasData");
 
+                                    attentionModel = null;
+
                                     if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
                                         if (hasData)
                                             attentionModel = JSONUtil.json2Object(response.getJSONObject("data"), AttentionModel.class);
@@ -130,7 +138,7 @@ public class AddAttentionActivity extends ConvenientActivity<ActivityAddAttentio
 
                         @Override
                         public void onEnd() {
-//                            AddAttentionActivity.this.runOnUiThread(() -> viewDataBinding.elasticityLoadingView.stop());
+                            AddAttentionActivity.this.runOnUiThread(() -> viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.contentLayout));
                         }
                     });
         }).start();
@@ -144,20 +152,75 @@ public class AddAttentionActivity extends ConvenientActivity<ActivityAddAttentio
      * @param hasData
      */
     private void setData(boolean hasData) {
-        handler.postDelayed(() -> {
-            viewDataBinding.noDataMessageTextView.setVisibility(hasData ? View.GONE : View.VISIBLE);
-            viewDataBinding.attentionLayout.setVisibility(hasData ? View.VISIBLE : View.GONE);
+        viewDataBinding.noDataMessageTextView.setVisibility(hasData ? View.GONE : View.VISIBLE);
+        viewDataBinding.attentionLayout.setVisibility(hasData ? View.VISIBLE : View.GONE);
 
-            viewDataBinding.noDataMessageTextView.setText(hasData ? "" : "没有此账号的用户");
-            if (hasData && attentionModel != null) {
-                BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + attentionModel.getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
-                        false);
-                viewDataBinding.nicknameTextView.setText(attentionModel.getNickname());
-                viewDataBinding.usernameTextView.setText(attentionModel.getUsername());
-            }
+        viewDataBinding.noDataMessageTextView.setText(hasData ? "" : "没有此账号的用户");
+        if (hasData && attentionModel != null) {
+            BitmapUtil.imageLoader(viewDataBinding.avatarImageView, AppConfig.BASE_URL + attentionModel.getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                    false);
+            viewDataBinding.nicknameTextView.setText(attentionModel.getNickname());
+            viewDataBinding.usernameTextView.setText(attentionModel.getUsername());
+        }
+    }
 
-            viewDataBinding.elasticityLoadingView.stopAndShowView(viewDataBinding.contentLayout);
-        }, 3000);
+    /**
+     * 添加关注人
+     */
+    @OnClick(R.id.addAttentionView)
+    public void onAddAttention() {
+        if (attentionModel == null)
+            return;
+
+        waitDialog = ConvenientProgressDialog.getInstance(this, "正在添加关注人，请稍后...", false);
+        waitDialog.show();
+
+        new Thread(() -> {
+            List<String> urlParams = new ArrayList<>();
+            urlParams.add(TTFMApplication.getAuthModel().getToken());
+            attentionModel.setWhoFriend(TTFMApplication.getAuthModel().getUsername());
+
+            ConvenientHttpConnection connection = new ConvenientHttpConnection();
+            connection.sendHttpPost(AppConfig.BASE_URL + AppConfig.ATTENTION_ADD_ATTENTION, null, urlParams,
+                    JSONUtil.object2Json(attentionModel).toString(), new OnHttpConnectionListener() {
+                        @Override
+                        public void onSuccess(String s) {
+                            try {
+                                JSONObject response = new JSONObject(s);
+                                String code = response.getString("code");
+
+                                AddAttentionActivity.this.runOnUiThread(() -> {
+                                    if (AppConfig.RESPONSE_SUCCESS.equals(code)) {
+                                        ToastUtil.showToast(AddAttentionActivity.this, "关注成功");
+
+                                        AddAttentionActivity.this.sendBroadcast(new Intent(AppConfig.BROADCAST_RECEIVER_ATTENTION_UPDATE));
+                                        AddAttentionActivity.this.finish();
+                                    }
+                                });
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(int i) {
+                            AddAttentionActivity.this.runOnUiThread(() -> ToastUtil.showToast(AddAttentionActivity.this, "添加失败 " + i));
+                        }
+
+                        @Override
+                        public void onTokenFailure() {
+                            AddAttentionActivity.this.runOnUiThread(() -> TokenUtils.loginAgain(AddAttentionActivity.this));
+                        }
+
+                        @Override
+                        public void onEnd() {
+                            AddAttentionActivity.this.runOnUiThread(() -> {
+                                if (waitDialog != null)
+                                    waitDialog.dismiss();
+                            });
+                        }
+                    });
+        }).start();
     }
 
     @Override

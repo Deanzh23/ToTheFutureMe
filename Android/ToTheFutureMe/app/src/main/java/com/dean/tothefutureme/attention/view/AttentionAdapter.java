@@ -3,8 +3,10 @@ package com.dean.tothefutureme.attention.view;
 import android.content.Context;
 
 import com.dean.android.framework.convenient.adapter.ConvenientAdapter;
+import com.dean.android.framework.convenient.bitmap.util.BitmapUtil;
 import com.dean.tothefutureme.R;
 import com.dean.tothefutureme.attention.model.AttentionModel;
+import com.dean.tothefutureme.config.AppConfig;
 import com.dean.tothefutureme.databinding.AdapterAttentionBinding;
 
 import java.util.List;
@@ -33,6 +35,9 @@ public class AttentionAdapter extends ConvenientAdapter<AdapterAttentionBinding>
     public void setItemView(AdapterAttentionBinding adapterAttentionBinding, int i) {
         AttentionModel attentionModel = attentionModels.get(i);
         adapterAttentionBinding.setAttentionModel(attentionModel);
+
+        BitmapUtil.imageLoader(adapterAttentionBinding.avatarImageView, AppConfig.BASE_URL + attentionModel.getAvatarUrl(), AppConfig.APP_IMAGE_PAT,
+                false);
     }
 
     @Override
